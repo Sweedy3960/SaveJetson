@@ -44,7 +44,7 @@ while(True):
     corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
     frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
     for i in corners:
-        rvecs, tvecs, = cv.aruco.estimatePoseSingleMarkers(corners,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
+        rvecs, tvecs, = cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
         Dict_markers.append(ids[i],[corners[i],rvecs,tvecs])
         #DEBUG
         #frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
