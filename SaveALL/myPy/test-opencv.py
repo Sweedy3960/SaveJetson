@@ -57,12 +57,7 @@ while(True):
                 print(Dict_corners)
 
                     
-        print("C1")
-        print(c1)
-        print("len c1")
-        print(len(c1))
-        print("c1 type")
-        print(type(c1))
+       
         print("-----------------")
         print(vector)
         print("len vector")
