@@ -1,0 +1,12 @@
+-- User guide Nvidia :  https://developer.nvidia.com/embedded/learn/jetson-nano-2gb-devkit-user-guide 
+-- Expand os On SD : https://www.pyimagesearch.com/2015/12/14/installing-opencv-on-your-raspberry-pi-zero/
+-- script worked on Pi: https://www.philipzucker.com/installing-opencv-3-aruco-raspberry-pi-3/
+-- help for setup jetson : https://raspberry-valley.azurewebsites.net/NVIDIA-Jetson-Nano/
+-- doc complete des jetson : https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/power_management_nano.html#wwpID0E02K0HA
+-- google doc de la libraire openCv : https://docs.google.com/document/d/1QU9KoBtjSM2kF6ITOjQ76xqL7H0TEtXriJX5kwi9Kgc/edit#
+-- Dowload center Nvidia pour Jetson : https://developer.nvidia.com/embedded/downloads#?search=Data%20Sheet
+-- Github sur jetson https://www.freecodecamp.org/news/10-important-git-commands-that-every-developer-should-know/
+-- Lesson sur jetson ~45H : https://www.youtube.com/watch?v=5INy0FvaWLw&list=PLGs0VKk2DiYxP-ElZ7-QXIERFFPkOuP4_
+-- Différence entres cartes "XAVIERS" : https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3261/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/power_management_jetson_xavier.html#wwpID0E0XO0HA
+-- Camera imx477 instal driver:https://www.arducam.com/docs/camera-for-jetson-nano/native-jetson-cameras-imx219-imx477/imx477-how-to-install-the-driver/#5-automatic-driver-installation--only--for-l4t3243-and-later-versions
+-- config I/O et MIPI CSI : https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3261/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/hw_setup_jetson_io.html#wwpID0E02D0HA
