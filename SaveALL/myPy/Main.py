@@ -13,7 +13,7 @@ def gstreamer_pipeline(
     capture_height=1050,
     display_width=500,
     display_height=500,
-    framerate=10,
+    framerate=5,
     flip_method=0,
 ):
     return (
@@ -42,7 +42,8 @@ while(True):
     ret,frame = img.read()
     gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
     corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
-    frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
+    #DEBUG
+    #frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
     for i in corners:
         rvecs, tvecs, = cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
         Dict_markers.append(ids[i],[corners[i],rvecs,tvecs])

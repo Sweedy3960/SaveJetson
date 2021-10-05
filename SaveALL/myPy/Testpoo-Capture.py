@@ -40,7 +40,7 @@ if __name__ == "__main__":
             capture1.setCap(capture1)
         rdy = input("Voullez vous enregistrer une image ? y/n")
         if rdy == "y":
-            img = cv.VideoCapture(capture1.gstreamer_pipeline(capture1),cv.CAP_GSTREAMER)
+            img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
             #DEBUG/VISUAL
             #cv.imshow("test", frame)
