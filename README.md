@@ -8,4 +8,4 @@ But final: envoyer une tramme contenant la distance entre les différents robots
 
 la position en X,Y peux être oublié si valeur retournée par Jetson contient "lutilisabilité" de la zone (zone déjà utilisée = 0)
 
--- Les sources sont dans le fichier datasheet/docs dans le source.txt
+-- Les sources sont dans le source.txt
