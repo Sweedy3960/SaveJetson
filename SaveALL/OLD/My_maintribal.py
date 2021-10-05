@@ -50,8 +50,7 @@ class marker:
     def __init__(self):
         self.x=0
         self.y=0
-        his.corners={}
-        his.id={}
+       
         #dessine sur lui meme (debug)
     def draw(self,frame):
         frame = cv.aruco.drawDetectedMarkers(frame,his.corners,his.id)
