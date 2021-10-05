@@ -1,0 +1,5 @@
+num = float(input("Gimme number: "))
+if num > 0 :
+	print("was positiv /n Thanks,bye")
+print("was negativ /n notthanks")
+

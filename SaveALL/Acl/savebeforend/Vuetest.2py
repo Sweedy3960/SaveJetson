@@ -1,0 +1,20 @@
+
+#modif pour tester différentes captures
+import cv2
+
+
+cap = cv2.VideoCapture((5000,5000,10,2,500,500), cv2.CAP_GSTREAMER)
+   
+cv2.imshow("CSI Camera", img)
+           
+keyCode = cv2.waitKey(30) & 0xFF
+            # Stop program esc
+if keyCode == 27:
+    cap.release()
+    cv2.destroyAllWindows()
+else:
+    print("Et non! try more")
+
+
+
+
