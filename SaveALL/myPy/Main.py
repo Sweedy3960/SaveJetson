@@ -52,6 +52,7 @@ while(True):
     #cv.imshow("that",frame)
     #DEBUG
     #print(Dict_markers)
+    print(Dict_markers)
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
 
