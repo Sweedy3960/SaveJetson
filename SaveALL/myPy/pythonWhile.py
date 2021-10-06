@@ -1,5 +1,5 @@
 while (1==1):
-	cnt=float(input("jusqua combien"))
+	cnt=float(input("jusqua combien?: "))
 	j=1
 	while j<=cnt:
 		print(round(j))

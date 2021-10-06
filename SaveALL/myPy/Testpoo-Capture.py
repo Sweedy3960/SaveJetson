@@ -35,20 +35,24 @@ if __name__ == "__main__":
     capture1=capture()
     img_cnt = 0
     while True:
-        mod = input("voullez vous modifier les dimensions de capture? y/n")
+        mod = input("voullez vous modifier les dimensions de capture? y/n: ")
         if mod == "y":
             capture1.setCap()
-        rdy = input("Voullez vous enregistrer une image ? y/n")
+        
+        rdy = input("Voullez vous enregistrer une image ? y/n: ")
         if rdy == "y":
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
-            #DEBUG/VISUAL
-            #cv.imshow("test", frame)
             png_name = "opencv_frame_{}.png".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
-        #------Pour quitter "q"---------
+           
+        again = input("Encore? y/n: ")
+        if again == "n":
+            print("bye")
+            break
+        
         if cv.waitKey(1) & 0xFF == ord('q'):
          break
 
