@@ -67,6 +67,7 @@ class imgProcess :
         return(self.frame)
 
 if __name__ == "__main__":
+    
     capture1=capture()
     img=imgProcess()
     Dict_markers = {}
