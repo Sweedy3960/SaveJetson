@@ -39,9 +39,9 @@ img = cv.VideoCapture(gstreamer_pipeline(flip_method=0), cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
     
-    #gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
+    gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
 
-    corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
+    corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(gray,DICTIONARY,parameters = PARAMETERS)
     frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
      
     
