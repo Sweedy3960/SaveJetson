@@ -3,7 +3,7 @@ import numpy as np
 #-----------------------------------------------------------------------------
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
-calib_path=""
+calib_path="/home/cpnv/Desktop/pypro/SaveJetson/SaveALL/myFi/"
 CAMERA_MATRIX = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
 DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 MARKER_EDGE =0.07
@@ -40,17 +40,15 @@ Dict_markers = {}
 img = cv.VideoCapture(gstreamer_pipeline(flip_method=0), cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
-    gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
-    corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
-    #DEBUG
-    #frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
+    #gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
+    corners,ids,rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
     for i in corners:
-        rvecs, tvecs, = cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
-        Dict_markers.append(ids[i],[corners[i],rvecs,tvecs])
+        rvecs, tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
         #DEBUG
-        #frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
+        frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
+        frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
     #DEBUG
-    #cv.imshow("that",frame)
+    cv.imshow("that",frame)
     #DEBUG
     #print(Dict_markers)
     print(Dict_markers)

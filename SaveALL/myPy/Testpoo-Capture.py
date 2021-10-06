@@ -3,15 +3,15 @@ import numpy as np
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
-        self.capture_width=1680,
-        self.capture_height=1050,
-        self.display_width=500,
-        self.display_height=500,
-        self.framerate=10,
-        self.flip_method=2,
+        self.capture_width=1680
+        self.capture_height=1050
+        self.display_width=500
+        self.display_height=500
+        self.framerate=10
+        self.flip_method=2
     def setCap(self):
-        self.capture_width=int(input("Largeur en pixels SVP :"))
-        self.capture_height=int(input("hauteur en pixels SVP :"))
+        self.capture_width = int(input("Largeur en pixels SVP :"))
+        self.capture_height = int(input("hauteur en pixels SVP :"))
     def gstreamer_pipeline(self):
         return (
             "nvarguscamerasrc ! "
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     while True:
         mod = input("voullez vous modifier les dimensions de capture? y/n")
         if mod == "y":
-            capture1.setCap(capture1)
+            capture1.setCap()
         rdy = input("Voullez vous enregistrer une image ? y/n")
         if rdy == "y":
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
