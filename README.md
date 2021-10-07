@@ -4,12 +4,12 @@
 
 
 Approche du projet Eurobot 2021-22 
-But final: envoyer une tramme contenant la distance entre les différents robots
+But final: envoyer une tramme contenant la distance entre les différents robots et/ou la position des robots adverses 
 
 -détécter les robots adverse et mesurer le rayons
 
--En éxtraire le centre et pourquoi pas la direction si orientation tu tag utilisable   
+-En éxtraire le centre et la direction 
 
-la position en X,Y peux être oublié si valeur retournée par Jetson contient "lutilisabilité" de la zone (zone déjà utilisée = 0)
+-valeur retournée par Jetson contient "lutilisabilité" de la zone (ex:zone déjà utilisée = 0)
 
 -- Les sources sont dans le source.txt
