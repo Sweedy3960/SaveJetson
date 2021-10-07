@@ -40,11 +40,12 @@ while(True):
     ret,frame = img.read()
     #gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
     corners,ids,rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
-    for i in corners:
-        rvecs, tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(corners,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
+    #Debug
+    #frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
+    for i in range(0,len(ids)):
+        rvecs, tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
         #DEBUG
-        frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
-        #frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
+        frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.10)
     #DEBUG
     cv.imshow("that",frame)
     #DEBUG
@@ -52,5 +53,5 @@ while(True):
     print(Dict_markers)
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
-
+img.release()
 cv.destroyAllWindows()
