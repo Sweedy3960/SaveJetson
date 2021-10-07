@@ -9,11 +9,11 @@ DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 MARKER_EDGE =0.07
 
 def gstreamer_pipeline(
-    capture_width=1680,
-    capture_height=1050,
-    display_width=500,
-    display_height=500,
-    framerate=10,
+    capture_width=1000,
+    capture_height=1000,
+    display_width=1000,
+    display_height=1000,
+    framerate=30,
     flip_method=0,
 ):
     return (
@@ -35,7 +35,7 @@ def gstreamer_pipeline(
         )
     )
 Dict_corners = {"c1.x":0,"c1.y":0}
-img = cv.VideoCapture(gstreamer_pipeline(flip_method=0), cv.CAP_GSTREAMER)
+img = cv.VideoCapture(gstreamer_pipeline(flip_method=2), cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
     

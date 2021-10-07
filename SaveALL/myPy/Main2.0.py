@@ -4,7 +4,7 @@ import numpy as np
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 MARKER_EDGE =0.07
-calib_path=""
+calib_path="/home/cpnv/Desktop/pypro/SaveJetson/SaveALL/myFi/"
 CAMERA_MATRIX = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
 DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 #---------------------------------------------------------------

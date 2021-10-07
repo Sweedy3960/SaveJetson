@@ -9,18 +9,17 @@ DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 MARKER_EDGE =0.07
 #-----------------------------------------------------------------------------
 def gstreamer_pipeline(
-    capture_width=1680,
-    capture_height=1050,
+    capture_width=3840,
+    capture_height=2160,
     display_width=500,
     display_height=500,
-    framerate=5,
-    flip_method=0,
+    flip_method=2,
 ):
     return (
         "nvarguscamerasrc ! "
         "video/x-raw(memory:NVMM), "
         "width=(int)%d, height=(int)%d, "
-        "format=(string)NV12, framerate=(fraction)%d/1 ! "
+        "format=(string)NV12, framerate=(fraction)21/1 ! "
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
@@ -28,7 +27,6 @@ def gstreamer_pipeline(
         % (
             capture_width,
             capture_height,
-            framerate,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
             flip_method,
             display_width,
             display_height,
@@ -37,16 +35,16 @@ def gstreamer_pipeline(
 #-----------------------------------------------------------------------------
 Dict_markers = {}
 
-img = cv.VideoCapture(gstreamer_pipeline(flip_method=0), cv.CAP_GSTREAMER)
+img = cv.VideoCapture(gstreamer_pipeline(),cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
     #gray= cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
     corners,ids,rejctedImgPoints = cv.aruco.detectMarkers(frame,DICTIONARY,parameters = PARAMETERS)
     for i in corners:
-        rvecs, tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(corners[i],MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
+        rvecs, tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(corners,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
         #DEBUG
         frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
-        frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
+        #frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
     #DEBUG
     cv.imshow("that",frame)
     #DEBUG

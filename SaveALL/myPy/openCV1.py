@@ -1,3 +1,4 @@
+import cv2 as cv
 dispH = 500
 dispW = 500 
 flip = 2
