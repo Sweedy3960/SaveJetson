@@ -47,6 +47,7 @@ if __name__ == "__main__":
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
+            img.release()
            
         again = input("Encore? y/n: ")
         if again == "n":

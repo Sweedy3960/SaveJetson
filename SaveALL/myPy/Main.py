@@ -9,8 +9,8 @@ DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 MARKER_EDGE =0.07
 #-----------------------------------------------------------------------------
 def gstreamer_pipeline(
-    capture_width=1920,
-    capture_height=1080,
+    capture_width=3264,
+    capture_height=1848,
     display_width=500,
     display_height=500,
     flip_method=2,
@@ -19,7 +19,7 @@ def gstreamer_pipeline(
         "nvarguscamerasrc ! "
         "video/x-raw(memory:NVMM), "
         "width=(int)%d, height=(int)%d, "
-        "format=(string)NV12, framerate=(fraction)30/1 ! "
+        "format=(string)NV12, framerate=(fraction)10/1 ! "
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
