@@ -49,16 +49,19 @@ class capture :
 
 class imgProcess :
     def __init__(self):
-        self.corners=[]
-        self.ids=[]
-        self.rejctedImgPoints=[]
-        self.ret=[]
+        #frame list [0]=ret= booléen vrai si val retournée
+        #[1]=image(numpy.ndarray)
+        self.frame=[]
+        #img = type videocapture
         self.img = cv.VideoCapture(capture1.gstreamer_pipeline(), cv.CAP_GSTREAMER)
+        #infomarker [0]=corners [1]=ids [2]=rejectedpoints
         self.infoMarkers = []
     def imgwork(self) :
-        self.ret,self.frame = self.img.read()
-        self.gray = cv.cvtColor(self.frame,cv.COLOR_BGR2GRAY)
+        self.frame = self.img.read()
+        #BGR to gray enleve les couleurs
+        self.gray = cv.cvtColor(self.frame[1],cv.COLOR_BGR2GRAY)
         self.infoMarkers = cv.aruco.detectMarkers(self.gray,DICTIONARY,parameters = PARAMETERS)
+        #si markers detect  vecteur de translation et rotation 
         for i in self.infoMarkers[0]:
             self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
             #DEBUG
@@ -66,17 +69,15 @@ class imgProcess :
             #self.frame = cv.aruco.drawAxis(self.frame, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
         #debug
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
-        #cv.imshow("that",self.frame)
+        cv.imshow("that",self.frame[1])
 
 
 if __name__ == "__main__":
     
     capture1=capture()
     img=imgProcess()
-    Dict_markers = {}
     while True:
         img.imgwork()
-  
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.img.release()
