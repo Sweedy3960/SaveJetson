@@ -45,49 +45,31 @@ class capture :
             )
         )
 
-    def setCap(self):
-        self.capture_width=int(input("Largeur en pixels SVP :"))
-        self.capture_height=int(input("hauteur en pixels SVP :"))
 
 class imgProcess :
     def __init__(self):
-        #frame list [0]=ret= booléen vrai si val retournée
         #[1]=image(numpy.ndarray)
         self.frame0=np.ndarray
         self.frame1=np.ndarray
+        self.frame=[self.frame0,self.frame1]
         #img = type videocapture
         self.cap0 = cv.VideoCapture(capture0.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap0.isOpened()
         self.cap1 = cv.VideoCapture(capture1.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap1.isOpened()
-        #infomarker [0]=corners [1]=ids [2]=rejectedpoints
-        self.infoMarkers0 = []
-        self.infoMarkers1 = []
-    def imgwork(self) :
         self.ret,self.frame0 = self.cap0.read()
         self.ret,self.frame1 = self.cap1.read()
+        stitcher = cv.Stitcher.create(mode= 0)
+        status,result = stitcher.stitch(self.frame)
+        if status != cv.Stitcher_OK:
+         print("ben non staus= %d" % status)
+        
+        cv.imshow("tada", result)
         #BGR to gray enleve les couleurs
         self.gray = cv.cvtColor(self.frame0,cv.COLOR_BGR2GRAY)
-        self.infoMarkers0 = cv.aruco.detectMarkers(self.gray,DICTIONARY,parameters = PARAMETERS)
-        #si markers detect  vecteur de translation et rotation 
-        for i in self.infoMarkers0[0]:
-            self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
-            #DEBUG
-            #print(img.rvecs)
-            self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
         self.gray1 = cv.cvtColor(self.frame1,cv.COLOR_BGR2GRAY)
-        self.infoMarkers1 = cv.aruco.detectMarkers(self.gray1,DICTIONARY,parameters = PARAMETERS)
-        #si markers detect  vecteur de translation et rotation 
-        for i in self.infoMarkers0[0]:
-            self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
-            #DEBUG
-            print(img.rvecs)
-            self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
-        for i in self.infoMarkers1[0]:
-            self.rvec, self.tvec, markerPoint= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
-            #DEBUG
-            print(img.rvec)
-            self.frame1 = cv.aruco.drawAxis(self.frame1, CAMERA_MATRIX, DIST_COEFFS, self.rvec, self.tvec,0.10)
+       
+       
         #debug
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         cv.imshow("cam0",self.frame0)
