@@ -57,20 +57,19 @@ class imgProcess :
         self.cap0.isOpened()
         self.cap1 = cv.VideoCapture(capture1.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap1.isOpened()
+        self.stitcher = cv.Stitcher.create(mode= 0)
+        
+        
+    def imgwork(self) : 
         self.ret,self.frame0 = self.cap0.read()
         self.ret,self.frame1 = self.cap1.read()
-        stitcher = cv.Stitcher.create(mode= 0)
-        
-        
-       
         #BGR to gray enleve les couleurs
-        for i in range(1):
-            self.frame.append(cv.cvtColor(self.frame[i],cv.COLOR_BGR2GRAY))
-
-        status,result = stitcher.stitch(self.frame)
+        self.frame.append(cv.cvtColor(self.frame0,cv.COLOR_BGR2GRAY))
+        self.frame.append(cv.cvtColor(self.frame1,cv.COLOR_BGR2GRAY))
+        status,self.result = self.stitcher.stitch([self.frame0,self.frame1])
         if status != cv.Stitcher_OK:
             print("ben non staus= %d" % status)
-        cv.imshow("tada", result)
+        
     
        
 
@@ -85,6 +84,7 @@ if __name__ == "__main__":
     while True:
         
         img.imgwork()
+        cv.imshow("tada", img.result)
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.cap0.release()
