@@ -51,7 +51,7 @@ class imgProcess :
         #[1]=image(numpy.ndarray)
         self.frame0=np.ndarray
         self.frame1=np.ndarray
-        self.frame=[self.frame0,self.frame1]
+        self.frame=[]
         #img = type videocapture
         self.cap0 = cv.VideoCapture(capture0.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap0.isOpened()
@@ -60,20 +60,19 @@ class imgProcess :
         self.ret,self.frame0 = self.cap0.read()
         self.ret,self.frame1 = self.cap1.read()
         stitcher = cv.Stitcher.create(mode= 0)
+        
+        
+       
+        #BGR to gray enleve les couleurs
+        for i in range(1):
+            self.frame.append(cv.cvtColor(self.frame[i],cv.COLOR_BGR2GRAY))
+
         status,result = stitcher.stitch(self.frame)
         if status != cv.Stitcher_OK:
-         print("ben non staus= %d" % status)
-        
+            print("ben non staus= %d" % status)
         cv.imshow("tada", result)
-        #BGR to gray enleve les couleurs
-        self.gray = cv.cvtColor(self.frame0,cv.COLOR_BGR2GRAY)
-        self.gray1 = cv.cvtColor(self.frame1,cv.COLOR_BGR2GRAY)
+    
        
-       
-        #debug
-        #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
-        cv.imshow("cam0",self.frame0)
-        cv.imshow("cam1",self.frame1)
 
 
 if __name__ == "__main__":
