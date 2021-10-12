@@ -23,14 +23,14 @@ class capture :
         self.capture_height=1848
         self.display_width=500
         self.display_height=500
-        self.flip_method=2
+        self.flip_method=0
        
     def gstreamer_pipeline(self):
         return (
             "nvarguscamerasrc sensor_id=%d ! "
             "video/x-raw(memory:NVMM), "
             "width=(int)%d, height=(int)%d, "
-            "format=(string)NV12, framerate=(fraction)10/1 !"
+            "format=(string)NV12, framerate=(fraction)5/1 !"
             "nvvidconv flip-method=%d ! "
             "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
             "videoconvert ! "
@@ -58,20 +58,30 @@ class imgProcess :
         self.cap1 = cv.VideoCapture(capture1.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap1.isOpened()
         self.stitcher = cv.Stitcher.create(mode= 0)
-        
+        self.informarkers0=[]
         
     def imgwork(self) : 
-        self.ret,self.frame0 = self.cap0.read()
-        self.ret,self.frame1 = self.cap1.read()
+        self.ret0,self.frame0 = self.cap0.read()
+        self.ret1,self.frame1 = self.cap1.read()
+        cv.imshow("cam0",self.frame0)
+        cv.imshow("cam1",self.frame1)
+    def togray(self):
         #BGR to gray enleve les couleurs
-        self.frame.append(cv.cvtColor(self.frame0,cv.COLOR_BGR2GRAY))
-        self.frame.append(cv.cvtColor(self.frame1,cv.COLOR_BGR2GRAY))
-        status,self.result = self.stitcher.stitch([self.frame0,self.frame1])
-        if status != cv.Stitcher_OK:
-            print("ben non staus= %d" % status)
+        self.frame0=(cv.cvtColor(self.frame0,cv.COLOR_BGR2GRAY))
+        self.frame1=(cv.cvtColor(self.frame1,cv.COLOR_BGR2GRAY))
         
-    
-       
+    def stitch(self):
+        self.status,self.result = self.stitcher.stitch([self.frame0,self.frame1])
+        if self.status != cv.Stitcher_OK:
+            print("ben non staus= %d" % self.status)
+        else:
+            cv.imshow("tada0 ", self.result)
+     
+    def draw(self):
+        self.result0=(cv.cvtColor(self.result,cv.COLOR_BGR2GRAY))
+        self.informarkers0 = cv.aruco.detectMarkers(self.result0,DICTIONARY,parameters = PARAMETERS)
+        self.result = cv.aruco.drawDetectedMarkers(self.result0, self.informarkers0[0],self.informarkers0[1])
+        cv.imshow("tada", self.result)
 
 
 if __name__ == "__main__":
@@ -84,7 +94,9 @@ if __name__ == "__main__":
     while True:
         
         img.imgwork()
-        cv.imshow("tada", img.result)
+        if cv.waitKey(1) & 0xFF ==ord("s"):
+            img.stitch()
+            img.draw()
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.cap0.release()
