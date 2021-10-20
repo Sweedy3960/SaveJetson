@@ -61,6 +61,7 @@ class imgProcess :
         self.infoMarkers0 = []
         self.Dict_stack = {}
         self.a=[]
+        self.tveclist=[]
     def imgwork(self) :
         self.ret,self.frame0 = self.cap0.read()
       
@@ -75,15 +76,19 @@ class imgProcess :
             self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
             for i in self.infoMarkers0[1]:
                 self.Dict_stack[str(i)]=(self.rvecs,self.tvecs)
-                self.a.append(self.Dict_stack[str(i)][1])
-
+                
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         cv.imshow("cam0",self.frame0)
     #origin tag 7
     def calcul(self):
-       
-        c = self.a[0]-self.a[1]
-        print(c)
+        self.a=list(self.Dict_stack.keys())
+
+        self.c=self.Dict_stack[self.a[0]][1]-self.Dict_stack[self.a[1]][1]
+        
+        result=(self.c[0][0]**2+self.c[0][1]**2+self.c[0][2]**2)**0.5
+        print(type(c))
+        print(result)
+        
         
 
 
