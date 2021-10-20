@@ -86,7 +86,7 @@ class imgProcess :
         self.c=self.Dict_stack[self.a[0]][1]-self.Dict_stack[self.a[1]][1]
         
         result=(self.c[0][0]**2+self.c[0][1]**2+self.c[0][2]**2)**0.5
-        print(type(c))
+        print(type(result))
         print(result)
         
         
