@@ -76,9 +76,11 @@ class imgProcess :
             #DEBUG
             #print(img.rvecs)
             self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
+            
             # frankva k = self.infoMarkers0[1][j]
             for i in self.infoMarkers0[1]: 
-            # frankva: self.Dict_stack[str(k)]=(self.rvecs,self.tvecs)
+            
+            #   frankva: self.Dict_stack[str(k)]=(self.rvecs,self.tvecs)
                 self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
                 
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
