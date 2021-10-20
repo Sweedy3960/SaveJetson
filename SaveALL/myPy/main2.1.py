@@ -75,10 +75,16 @@ class imgProcess :
             self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
             for i in self.infoMarkers0[1]:
                 self.Dict_stack[str(i)]=(self.rvecs,self.tvecs)
-    def 
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         cv.imshow("cam0",self.frame0)
-  
+    #origin tag 7
+    def calcul(self):
+        a=self.Dict_stack["7"][1]
+        b=self.Dict_stack["1"][1]
+        c=float
+        c=a-b
+        print(c)
+        
 
 
 if __name__ == "__main__":
@@ -89,6 +95,8 @@ if __name__ == "__main__":
     while True:
         
         img.imgwork()
+        if cv.waitKey(1) & 0xFF ==ord("c"):
+            img.calcul()
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.cap0.release()
