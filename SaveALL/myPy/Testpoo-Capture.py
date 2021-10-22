@@ -4,8 +4,8 @@ import numpy as np
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
-        self.capture_width=3260
-        self.capture_height=1848
+        self.capture_width=1640
+        self.capture_height=1232
         self.display_width=500
         self.display_height=500
         self.framerate=10
