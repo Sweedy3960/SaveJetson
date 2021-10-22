@@ -6,13 +6,13 @@ class capture :
     def __init__(self) :
         self.capture_width=1640
         self.capture_height=1232
-        self.display_width=500
-        self.display_height=500
+        self.display_width=1640
+        self.display_height=1232
         self.framerate=10
         self.flip_method=2
-    def setCap(self):
-        self.capture_width = int(input("Largeur en pixels SVP :"))
-        self.capture_height = int(input("hauteur en pixels SVP :"))
+    def setDisp(self):
+        self.disp_width =500
+        self.disp_height = 500
     def gstreamer_pipeline(self):
         return (
             "nvarguscamerasrc ! "
@@ -33,22 +33,29 @@ class capture :
             )
         )
 if __name__ == "__main__":
-    capture1=capture()
+    cap=[]
+    img=[]
+    cap.append(capture())
+    cap.append(capture())
     img_cnt = 0 
-    img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+    cap[0].setDisp()
+    img.append(cv.VideoCapture(cap[0].gstreamer_pipeline(),cv.CAP_GSTREAMER))
+    img.append(cv.VideoCapture(cap[1].gstreamer_pipeline(),cv.CAP_GSTREAMER))
     while True:
        
-        ret,frame = img.read()
-        cv.imshow("that",frame)
+        ret,frame = img[1].read()
+        ret1,frame1 = img[0].read()
+        cv.imshow("that",frame1)
         if cv.waitKey(1) & 0xFF == ord('p'):
-            png_name = "left_{}.png".format(img_cnt)
+            png_name = "left_{}.jpg".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
             
 
         if cv.waitKey(1) & 0xFF == ord('q'):
-         img.release()
+         img[0].release()
+         img[1].release()
          break
 
 cv.destroyAllWindows()
