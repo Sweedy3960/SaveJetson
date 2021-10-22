@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-import time 
+
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
@@ -34,9 +34,10 @@ class capture :
         )
 if __name__ == "__main__":
     capture1=capture()
-    img_cnt = 0
+    img_cnt = 0 
+    img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
     while True:
-        img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+       
         ret,frame = img.read()
         cv.imshow("that",frame)
         if cv.waitKey(1) & 0xFF == ord('p'):
