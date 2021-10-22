@@ -45,9 +45,10 @@ if __name__ == "__main__":
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
-            img.release()
+            
 
         if cv.waitKey(1) & 0xFF == ord('q'):
+         img.release()
          break
 
 cv.destroyAllWindows()
