@@ -22,7 +22,7 @@ import sys
 #GST_ARGUS: 1280 x 720 FR = 59.999999 fps Duration = 16666667 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
 #GST_ARGUS: 1280 x 720 FR = 120.000005 fps Duration = 8333333 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
 #modification d'un pipeline trouvé sur le net pour test de capture 
-class Vector2():
+class Vector2:
     def __init__(self, x: float, y: float) -> None:
         self.x = x
         self.y = y
@@ -37,7 +37,7 @@ class Vector2():
         return f"({self.x}, {self.y})"
 
 
-class Vector3():
+class Vector3:
     def __init__(self, x, y, z) -> None:
         self.x = x
         self.y = y
@@ -67,7 +67,7 @@ class Capture :
        
     def gstreamer_pipeline(self):
         print("Capture.gstreamer_pipeline", file=sys.stderr)
-        if not "x86_64":
+        if App.PROCESSOR != "x86_64":
             return (
                 "nvarguscamerasrc sensor_id=%d ! "
                 "video/x-raw(memory:NVMM), "
