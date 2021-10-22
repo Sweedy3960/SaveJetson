@@ -1,10 +1,11 @@
 import cv2 as cv
 import numpy as np
+import time 
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
-        self.capture_width=1680
-        self.capture_height=1050
+        self.capture_width=3260
+        self.capture_height=1848
         self.display_width=500
         self.display_height=500
         self.framerate=10
@@ -35,25 +36,16 @@ if __name__ == "__main__":
     capture1=capture()
     img_cnt = 0
     while True:
-        mod = input("voullez vous modifier les dimensions de capture? y/n: ")
-        if mod == "y":
-            capture1.setCap()
-        
-        rdy = input("Voullez vous enregistrer une image ? y/n: ")
-        if rdy == "y":
-            img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-            ret,frame = img.read()
-            png_name = "opencv_frame_{}.png".format(img_cnt)
+        img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+        ret,frame = img.read()
+        cv.imshow("that",frame)
+        if cv.waitKey(1) & 0xFF == ord('p'):
+            png_name = "left_{}.png".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
             img.release()
-           
-        again = input("Encore? y/n: ")
-        if again == "n":
-            print("bye")
-            break
-        
+
         if cv.waitKey(1) & 0xFF == ord('q'):
          break
 
