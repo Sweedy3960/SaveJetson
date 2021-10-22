@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import platform
+import sys
 #--------------------------------------------------------------
 
 
@@ -17,9 +18,42 @@ import platform
 #GST_ARGUS: 1280 x 720 FR = 59.999999 fps Duration = 16666667 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
 #GST_ARGUS: 1280 x 720 FR = 120.000005 fps Duration = 8333333 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
 #modification d'un pipeline trouvé sur le net pour test de capture 
-class capture :
+class Vector2():
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+    def norme(self):
+        return (self.x ** 2 + self.y ** 2) ** 0.5
     
-    def __init__(self):
+    def __add__(self, other):
+        return Vector2(self.x + other.x, self.y + other.y)
+    def __sub__(self, other):
+        return Vector2(self.x - other.x, self.y - other.y)
+    def __str__(self) -> str:
+        return f"({self.x}, {self.y})"
+
+
+class Vector3():
+    def __init__(self, x, y, z) -> None:
+        self.x = x
+        self.y = y
+        self.z = z
+    def norme(self):
+        return (self.x ** 2 + self.y ** 2 + self.z ** 2) ** 0.5
+    def __add__(self, other):
+        return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
+    def __sub__(self, other):
+        return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
+    def __str__(self) -> str:
+        return f"Vector3({self.x}, {self.y}, {self.z})"
+
+
+
+
+class Capture :
+    
+    def __init__(self) -> None:
+        print("Capture", file=sys.stderr)
         self.idCam = 0
         self.capture_width = 3264
         self.capture_height = 1848
@@ -28,6 +62,7 @@ class capture :
         self.flip_method = 2
        
     def gstreamer_pipeline(self):
+        print("Capture.gstreamer_pipeline", file=sys.stderr)
         if not "x86_64":
             return (
                 "nvarguscamerasrc sensor_id=%d ! "
@@ -51,8 +86,9 @@ class capture :
             return self.idCam
     
 
-class imgProcess :
-    def __init__(self, cap):
+class ImgProcess :
+    def __init__(self, cap: list) -> None:
+        print("ImgProcess", file=sys.stderr)
         #frame list [0]=ret= booléen vrai si val retournée
         #[1]=image(numpy.ndarray)
         self.axe = True
@@ -80,20 +116,23 @@ class imgProcess :
         for i in cap:
             self.infoMarkers.append(None)
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.frame}, {self.gray}, {self.cap}, {self.infoMarkers}"
     
-    def release_all(self):
+    def release_all(self) -> None:
+        print("ImgProcess.release_all", file=sys.stderr)
         for i in self.cap:
             i.release()
 
-    def enleve_couleur(self):
+    def enleve_couleur(self) -> None:
         #BGR to gray enleve les couleurs
+        print("ImgProcess.enleve_couleur", file=sys.stderr)
         for i in self.frame:
             for j in self.gray:
                 j = cv.cvtColor(i, cv.COLOR_BGR2GRAY)
 
-    def read_frame(self):
+    def read_frame(self) -> None:
+        print("ImgProcess.read_frame", file=sys.stderr)
         run = True
         while run:
             for i, j in enumerate(self.cap):
@@ -104,23 +143,29 @@ class imgProcess :
                     run = False
                
 
-    def read_markers(self):
+    def read_markers(self) -> None:
+        print("ImgProcess.read_markers", file=sys.stderr)
         for i, j in enumerate(self.frame):
-                self.infoMarkers[i] = cv.aruco.detectMarkers(j, app.DICTIONARY, parameters = app.PARAMETERS)
+                self.infoMarkers[i] = cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
 
 
-    def draw_axe(self):
+    def draw_axe(self) -> None:
+        print("ImgProcess.draw_axe", file=sys.stderr)
         #si markers detect  vecteur de translation et rotation 
         for i in self.infoMarkers:
             for j in i[0]:
-                (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(j, app.MARKER_EDGE, app.CAMERA_MATRIX, app.DIST_COEFFS)
+                (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(j, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
                 for k, l in enumerate(self.frame):
-                    self.frame[k] = cv.aruco.drawAxis(l, app.CAMERA_MATRIX, app.DIST_COEFFS, rvecs, tvecs, 0.10)
-    def draw_windows(self):
+                    self.frame[k] = cv.aruco.drawAxis(l, App.CAMERA_MATRIX, App.DIST_COEFFS, rvecs, tvecs, 0.10)
+    
+    def draw_windows(self) -> None:
+        print("ImgProcess.draw_windows", file=sys.stderr)
         for i in self.frame:
             for j in range(len(self.frame)):
                cv.imshow("cam" + str(j), i)
-    def calcul_dist2(self, id_cam):
+    
+    def calcul_dist2(self, id_cam: int) -> Vector2:
+        print("ImgProcess.calcul_dist2", file=sys.stderr)
         '''
         calcule la distance entre deux tag
         '''
@@ -130,13 +175,14 @@ class imgProcess :
             return 0
         pos = []
         for corner in self.infoMarkers[id_cam][0:2][0]:
-            (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, app.MARKER_EDGE, app.CAMERA_MATRIX, app.DIST_COEFFS)
+            (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
 
-            pos.append(vector2(tvecs[0][0][0], tvecs[0][0][1]))
+            pos.append(Vector2(tvecs[0][0][0], tvecs[0][0][1]))
         return (pos[0] - pos[1]).norme()
 
 
-    def calcul_dist3_list(self, id_cam):
+    def calcul_dist3_list(self, id_cam: int) -> Vector3:
+        print("ImgProcess.calcul_dist3_list", file=sys.stderr)
         '''
         calcule la distance entre deux tag
         '''
@@ -147,12 +193,13 @@ class imgProcess :
             return 0
         pos = []
         for corner in self.infoMarkers[id_cam][0:2][0]:
-            (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, app.MARKER_EDGE, app.CAMERA_MATRIX, app.DIST_COEFFS)
+            (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
 
-            pos.append(vector3(tvecs[0][0][0], tvecs[0][0][1], tvecs[0][0][2]))
+            pos.append(Vector3(tvecs[0][0][0], tvecs[0][0][1], tvecs[0][0][2]))
         return (pos[0] - pos[1]).norme()
 
-    def calcul_dist3(self, id_cam, id_tag1, id_tag2):
+    def calcul_dist3(self, id_cam: int, id_tag1: str, id_tag2: str) -> Vector3:
+        print("ImgProcess.calcul_dist3", file=sys.stderr)
         '''
         calcule la distance entre deux tag choisi par le id_tag
         '''
@@ -163,21 +210,23 @@ class imgProcess :
 
         return (pos[id_tag1] - pos[id_tag2]).norme()
 
-    def calcul_vect3(self, id_cam):
+    def calcul_vect3(self, id_cam: int) -> Vector3:
+        print("ImgProcess.calcul_vect3", file=sys.stderr)
         if self.infoMarkers[id_cam][1] is None:
             return {}
         else:
             pos = {}
             for i, id_mark in enumerate(self.infoMarkers[id_cam][1]):
                     corner = self.infoMarkers[id_cam][0][i]
-                    (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, app.MARKER_EDGE, app.CAMERA_MATRIX, app.DIST_COEFFS)
+                    (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(corner, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
 
-                    pos[str(int(id_mark))] = vector3(tvecs[0][0][0], tvecs[0][0][1], tvecs[0][0][2])
+                    pos[str(int(id_mark))] = Vector3(tvecs[0][0][0], tvecs[0][0][1], tvecs[0][0][2])
         
             return pos
 
             
-    def update(self) :
+    def update(self) -> None:
+        print("ImgProcess.update", file=sys.stderr)
         self.read_frame()
         self.enleve_couleur()
         self.read_markers()
@@ -189,7 +238,8 @@ class imgProcess :
             self.draw_windows()
 
 
-class app():
+class App():
+    print("App", file=sys.stderr)
     PROCESSOR = platform.processor()
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
@@ -198,27 +248,29 @@ class app():
     CALIB_PATH = "SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(CALIB_PATH + 'cameraMatrix.txt', delimiter=',')
     DIST_COEFFS  = np.loadtxt(CALIB_PATH + 'cameraDistortion.txt', delimiter=',')
-    def __init__(self):
+    def __init__(self) -> None:
+        print("App.__init__", file=sys.stderr)
         self.running = True
-        if app.PROCESSOR != "x86_64":
+        if App.PROCESSOR != "x86_64":
             self.capture1 = []
-            self.capture1.append(capture())
-            #self.capture1.append(capture())
+            self.capture1.append(Capture())
+            #self.capture1.append(Capture())
             self.capture1[0].idCam = 0
             #self.capture1[1].idCam = 1
             
         else:
             self.capture1 = []
-            self.capture1.append(capture())
-        self.img = imgProcess(self.capture1)
+            self.capture1.append(Capture())
+        self.img = ImgProcess(self.capture1)
 
-    def run(self):
+    def main(self) -> None:
         while self.running:
             self.update()
         self.img.release_all()
         cv.destroyAllWindows()
             
-    def update(self):
+    def update(self) -> None:
+        print("App.update", file=sys.stderr)
         self.img.update()
             #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
@@ -226,38 +278,12 @@ class app():
             self.running = False
 
 
-class vector2():
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    def norme(self):
-        return (self.x ** 2 + self.y ** 2) ** 0.5
-    def __add__(self, other):
-        return vector2(self.x + other.x, self.y + other.y)
-    def __sub__(self, other):
-        return vector2(self.x - other.x, self.y - other.y)
-    def __str__(self):
-        return f"({self.x}, {self.y})"
 
-
-class vector3():
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-    def norme(self):
-        return (self.x ** 2 + self.y ** 2 + self.z ** 2) ** 0.5
-    def __add__(self, other):
-        return vector3(self.x + other.x, self.y + other.y, self.z + other.z)
-    def __sub__(self, other):
-        return vector3(self.x - other.x, self.y - other.y, self.z - other.z)
-    def __str__(self):
-        return f"vector3({self.x}, {self.y}, {self.z})"
-
-
-def main():
-    app1 = app()
-    app1.run()
+def main() -> int:
+    app1 = App()
+    app1.main()
+    sys.exit(0)
+    return 0
 
     
 if __name__ == "__main__":
