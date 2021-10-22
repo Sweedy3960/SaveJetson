@@ -1,3 +1,4 @@
+
 import cv2 as cv
 import numpy as np
 import platform
@@ -57,7 +58,7 @@ class Vector3:
 class Capture :
     
     def __init__(self) -> None:
-        print("Capture", file=sys.stderr)
+        if App.DEBUG: print("Capture", file=sys.stderr)
         self.idCam = 0
         self.capture_width = 3264
         self.capture_height = 1848
@@ -66,7 +67,7 @@ class Capture :
         self.flip_method = 2
        
     def gstreamer_pipeline(self):
-        print("Capture.gstreamer_pipeline", file=sys.stderr)
+        if App.DEBUG: print("Capture.gstreamer_pipeline", file=sys.stderr)
         if App.PROCESSOR != "x86_64":
             return (
                 "nvarguscamerasrc sensor_id=%d ! "
@@ -92,7 +93,7 @@ class Capture :
 
 class ImgProcess :
     def __init__(self, cap: list) -> None:
-        print("ImgProcess", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess", file=sys.stderr)
         #frame list [0]=ret= booléen vrai si val retournée
         #[1]=image(numpy.ndarray)
         self.axe = True
@@ -124,19 +125,19 @@ class ImgProcess :
         return f"{self.frame}, {self.gray}, {self.cap}, {self.infoMarkers}"
     
     def release_all(self) -> None:
-        print("ImgProcess.release_all", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.release_all", file=sys.stderr)
         for i in self.cap:
             i.release()
 
     def enleve_couleur(self) -> None:
         #BGR to gray enleve les couleurs
-        print("ImgProcess.enleve_couleur", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.enleve_couleur", file=sys.stderr)
         for i in self.frame:
             for j in self.gray:
                 j = cv.cvtColor(i, cv.COLOR_BGR2GRAY)
 
     def read_frame(self) -> None:
-        print("ImgProcess.read_frame", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.read_frame", file=sys.stderr)
         run = True
         while run:
             for i, j in enumerate(self.cap):
@@ -148,13 +149,13 @@ class ImgProcess :
                
 
     def read_markers(self) -> None:
-        print("ImgProcess.read_markers", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.read_markers", file=sys.stderr)
         for i, j in enumerate(self.frame):
                 self.infoMarkers[i] = cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
 
 
     def draw_axe(self) -> None:
-        print("ImgProcess.draw_axe", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.draw_axe", file=sys.stderr)
         #si markers detect  vecteur de translation et rotation 
         for i in self.infoMarkers:
             for j in i[0]:
@@ -163,13 +164,13 @@ class ImgProcess :
                     self.frame[k] = cv.aruco.drawAxis(l, App.CAMERA_MATRIX, App.DIST_COEFFS, rvecs, tvecs, 0.10)
     
     def draw_windows(self) -> None:
-        print("ImgProcess.draw_windows", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.draw_windows", file=sys.stderr)
         for i in self.frame:
             for j in range(len(self.frame)):
                cv.imshow("cam" + str(j), i)
     
     def calcul_dist2(self, id_cam: int) -> Vector2:
-        print("ImgProcess.calcul_dist2", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.calcul_dist2", file=sys.stderr)
         '''
         calcule la distance entre deux tag
         '''
@@ -186,7 +187,7 @@ class ImgProcess :
 
 
     def calcul_dist3_list(self, id_cam: int) -> Vector3:
-        print("ImgProcess.calcul_dist3_list", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.calcul_dist3_list", file=sys.stderr)
         '''
         calcule la distance entre deux tag
         '''
@@ -203,7 +204,7 @@ class ImgProcess :
         return (pos[0] - pos[1]).norme()
 
     def calcul_dist3(self, id_cam: int, id_tag1: str, id_tag2: str) -> Vector3:
-        print("ImgProcess.calcul_dist3", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.calcul_dist3", file=sys.stderr)
         '''
         calcule la distance entre deux tag choisi par le id_tag
         '''
@@ -215,7 +216,7 @@ class ImgProcess :
         return (pos[id_tag1] - pos[id_tag2]).norme()
 
     def calcul_vect3(self, id_cam: int) -> Vector3:
-        print("ImgProcess.calcul_vect3", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.calcul_vect3", file=sys.stderr)
         if self.infoMarkers[id_cam][1] is None:
             return {}
         else:
@@ -230,7 +231,7 @@ class ImgProcess :
 
             
     def update(self) -> None:
-        print("ImgProcess.update", file=sys.stderr)
+        if App.DEBUG: print("ImgProcess.update", file=sys.stderr)
         self.read_frame()
         self.enleve_couleur()
         self.read_markers()
@@ -243,7 +244,10 @@ class ImgProcess :
 
 
 class App():
-    print("App", file=sys.stderr)
+
+    
+    DEBUG = False
+    if DEBUG: print("App", file=sys.stderr)
     PROCESSOR = platform.processor()
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
@@ -252,8 +256,9 @@ class App():
     CALIB_PATH = "SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(CALIB_PATH + 'cameraMatrix.txt', delimiter=',')
     DIST_COEFFS  = np.loadtxt(CALIB_PATH + 'cameraDistortion.txt', delimiter=',')
+    
     def __init__(self) -> None:
-        print("App.__init__", file=sys.stderr)
+        if App.DEBUG: print("App.__init__", file=sys.stderr)
         self.running = True
         if App.PROCESSOR != "x86_64":
             self.capture1 = []
@@ -274,7 +279,7 @@ class App():
         cv.destroyAllWindows()
             
     def update(self) -> None:
-        print("App.update", file=sys.stderr)
+        if App.DEBUG: print("App.update", file=sys.stderr)
         self.img.update()
             #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
