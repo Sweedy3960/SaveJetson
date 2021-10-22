@@ -81,7 +81,7 @@ class imgProcess :
            # for i in self.infoMarkers0[1]: 
             
             self.Dict_stack[str(k)]=(self.rvecs,self.tvecs)
-                #qqqqqqqqqqself.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
+                #self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
                 
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         cv.imshow("cam0",self.frame0)
