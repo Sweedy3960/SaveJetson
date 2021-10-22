@@ -5,8 +5,12 @@ import sys
 #--------------------------------------------------------------
 
 
-
-
+#Résultats terminal
+#App
+#App.__init__
+#Capture
+#ImgProcess
+#Capture.gstreamer_pipeline
 
 
 #---------------------------------------------------------------
