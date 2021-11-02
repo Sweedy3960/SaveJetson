@@ -5,8 +5,8 @@ PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 MARKER_EDGE =0.07
 calib_path="SaveALL/myFi/"
-CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrixf1.txt', delimiter=',')
-DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrixf1.txt', delimiter=',')
+CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix500x500.txt', delimiter=',')
+DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix500x500.txt', delimiter=',')
 #---------------------------------------------------------------
 #GST_ARGUS: Available Sensor modes :
 #GST_ARGUS: 3264 x 2464 FR = 21.000000 fps Duration = 47619048 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
@@ -71,10 +71,11 @@ class imgProcess :
         #si markers detect  vecteur de translation et rotation 
         h,  w =  self.gray.shape[:2]
         newcameramtx, roi = cv.getOptimalNewCameraMatrix(CAMERA_MATRIX, DIST_COEFFS, (w,h), 1, (w,h))
+        print(newcameramtx)
         dst = cv.undistort(self.gray, CAMERA_MATRIX, DIST_COEFFS, None, newcameramtx)
         for j, i in enumerate(self.infoMarkers0[0]):
        # for i in self.infoMarkers0[0]:
-            self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
+            self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(i,MARKER_EDGE, newcameramtx, DIST_COEFFS)
             #DEBUG
             #print(img.rvecs)
             self.frame0 = cv.aruco.drawAxis(self.frame0, CAMERA_MATRIX, DIST_COEFFS, self.rvecs, self.tvecs,0.10)
@@ -86,6 +87,7 @@ class imgProcess :
                 #self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
                 
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
+        cv.imshow("frame",self.gray)
         cv.imshow("cam0",dst)
     #origin tag 7
     def calcul(self):
