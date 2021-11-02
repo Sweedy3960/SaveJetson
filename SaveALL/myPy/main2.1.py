@@ -71,7 +71,6 @@ class imgProcess :
         #si markers detect  vecteur de translation et rotation 
         h,  w =  self.gray.shape[:2]
         newcameramtx, roi = cv.getOptimalNewCameraMatrix(CAMERA_MATRIX, DIST_COEFFS, (w,h), 1, (w,h))
-        print(newcameramtx)
         dst = cv.undistort(self.gray, CAMERA_MATRIX, DIST_COEFFS, None, newcameramtx)
         for j, i in enumerate(self.infoMarkers0[0]):
        # for i in self.infoMarkers0[0]:
