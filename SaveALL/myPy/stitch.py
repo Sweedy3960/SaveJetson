@@ -19,7 +19,7 @@ DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
 class capture :
     def __init__(self):
         self.idCam=0
-        self.capture_width=3264
+        self.capture_width=1632
         self.capture_height=1848
         self.display_width=500
         self.display_height=500
