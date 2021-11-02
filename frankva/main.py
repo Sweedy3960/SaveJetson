@@ -253,9 +253,9 @@ class App():
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
     MARKER_EDGE = 0.07
     #0.03
-    CALIB_PATH = "SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(CALIB_PATH + 'cameraMatrix.txt', delimiter=',')
-    DIST_COEFFS  = np.loadtxt(CALIB_PATH + 'cameraDistortion.txt', delimiter=',')
+    calib_path="SaveALL/myFi/"
+    CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix500x500.txt', delimiter=',')
+    DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix500x500.txt', delimiter=',')
     
     def __init__(self) -> None:
         if App.DEBUG: print("App.__init__", file=sys.stderr)

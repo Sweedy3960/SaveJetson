@@ -5,8 +5,8 @@ PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 MARKER_EDGE =0.07
 calib_path="SaveALL/myFi/"
-CAMERA_MATRIX = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
-DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
+CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix500x500.txt', delimiter=',')
+DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix500x500.txt', delimiter=',')
 #---------------------------------------------------------------
 #GST_ARGUS: Available Sensor modes :
 #GST_ARGUS: 3264 x 2464 FR = 21.000000 fps Duration = 47619048 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
