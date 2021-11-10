@@ -1,12 +1,11 @@
 import socket 
-ServRun=True
 client = None
 serv = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 data = None
 serv.bind(("",6789))
 serv.listen(1) 
-
-while ServRun ==True:
+data =b''
+while data != b"fin":
   
     if not client :
         print("pas de client") 
@@ -34,11 +33,10 @@ while ServRun ==True:
             print("erreur")
         else:
             print("Envoi ok") 
-    if data == b'fin':
-        reponse = "serveurclosed"
-        reponseEncoded=reponse.encode()
-        client.send(reponseEncoded) 
-        print("envoi de :"+str(reponseEncoded))
-        break
+  
+reponse = "serveurclosed"
+reponseEncoded=reponse.encode()
+client.send(reponseEncoded) 
+print("envoi de :"+str(reponseEncoded))
 client.close()
 serv.close()
