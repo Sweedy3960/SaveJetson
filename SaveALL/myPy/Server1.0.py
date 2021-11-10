@@ -14,3 +14,8 @@ class Serveur(self):
     def bind(self):
        self.ThatServ.bind(self.adress)
        return "serv binded"
+    def Listen(self):
+        self.ThatServ.listen(1)
+        return "listenning"
+    def ClienConnect(self):
+        ThatSe 
