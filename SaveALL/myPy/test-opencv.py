@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+import ServTest as serv
 
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
@@ -48,46 +49,32 @@ while(True):
     try :
 
         vector=np.transpose(corners)
-        for j in range(2):
-            print("a")
+        for j in range(2):    
             for i in range(np.size(ids)):
-                print("b")
+    
                 Dict_corners["c1.x"]=vector[0][0]
                 Dict_corners["c1.y"]=vector[1][0]
                 print(Dict_corners)
-
-                    
-       
-        print("-----------------")
-        print(vector)
-        print("len vector")
-        print(len(vector))
-        print("vector type")
-        print(type(vector))
         
         #test
         print("corners 1d?")
-        print(corners[0][0][0][0])
-        print(corners[0][0][0][1])
-        print(corners[0][0][1][0])
-        print("type de corners")
         print(type(corners))
         print("nb tot ?")
         print(len(corners))
         if(np.size(ids)>0):
             for i in range(np.size(ids)):
-                print("la")
                 print(np.size(ids))
                 rvecs, tvecs, = cv.aruco.estimatePoseSingleMarkers(corners,MARKER_EDGE, CAMERA_MATRIX, DIST_COEFFS)
-                frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)
-                print("rvecs 1d?")
-                print(rvecs)
-                print("type de rvecs")
-                print(type(rvecs))
-                print("nb tot ?")
-                print(len(rvecs))       
+                frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)   
     except:
       pass
+    try :
+        serv.reponse=rvecs
+        serv.serv.accept()
+       
+    except:
+        pass
+    
     cv.imshow("that",frame)
     print(str(corners))
     print("-----type de corner")
