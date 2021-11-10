@@ -61,9 +61,9 @@ class Capture :
         if App.DEBUG: print("Capture", file=sys.stderr)
         self.idCam = 0
         self.capture_width = 3264
-        self.capture_height = 1848
-        self.display_width = 500
-        self.display_height = 500
+        self.capture_height = 2464
+        self.display_width = 3264
+        self.display_height = 2464
         self.flip_method = 2
        
     def gstreamer_pipeline(self):
@@ -99,7 +99,7 @@ class ImgProcess :
         self.axe = True
         self.windows = True
         self.frame = []
-        
+
         for i in cap:
             self.frame.append(None)
         
@@ -112,7 +112,7 @@ class ImgProcess :
         self.cap = []
         for i in cap:
             #capture1.gstreamer_pipeline()
-            self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(), cv.CAP_GSTREAMER))
+            self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
             if not self.cap[-1].isOpened():
                 exit()
             
@@ -254,8 +254,8 @@ class App():
     MARKER_EDGE = 0.07
     #0.03
     calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix500x500.txt', delimiter=',')
-    DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix500x500.txt', delimiter=',')
+    CAMERA_MATRIX = np.loadtxt(calib_path+'matrix09.11.txt', delimiter=',')  
+    DIST_COEFFS  = np.loadtxt(calib_path+'disto09.11.txt', delimiter=',')
     
     def __init__(self) -> None:
         if App.DEBUG: print("App.__init__", file=sys.stderr)

@@ -4,16 +4,16 @@ import numpy as np
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 calib_path="SaveALL/myFi/"
-CAMERA_MATRIX = np.loadtxt(calib_path+'cameraMatrix.txt', delimiter=',')
-DIST_COEFFS  = np.loadtxt(calib_path+'cameraDistortion.txt', delimiter=',')
+CAMERA_MATRIX = np.loadtxt(calib_path+'matrix09.11.txt', delimiter=',')
+DIST_COEFFS  = np.loadtxt(calib_path+'disto09.11.txt', delimiter=',')
 MARKER_EDGE =0.07
 
 def gstreamer_pipeline(
-    capture_width=1000,
-    capture_height=1000,
-    display_width=1000,
-    display_height=1000,
-    framerate=30,
+    capture_width=3264,
+    capture_height=2464,
+    display_width=3264,
+    display_height=2464,
+    framerate=10,
     flip_method=0,
 ):
     return (
@@ -35,7 +35,7 @@ def gstreamer_pipeline(
         )
     )
 Dict_corners = {"c1.x":0,"c1.y":0}
-img = cv.VideoCapture(gstreamer_pipeline(flip_method=2), cv.CAP_GSTREAMER)
+img = cv.VideoCapture(gstreamer_pipeline(flip_method=2),cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
     

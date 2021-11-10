@@ -1,11 +1,11 @@
 import cv2 as cv
 import numpy as np
-import time 
+import time
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
-        self.capture_width=1632
-        self.capture_height=1232
+        self.capture_width=3264
+        self.capture_height=2464
         self.display_width=500
         self.display_height=500
         self.framerate=10
@@ -44,10 +44,10 @@ if __name__ == "__main__":
             time.sleep(0.1)
             img.release()
             time.sleep(0.1)
-            capture1.setCap(1632,1232)
+            capture1.setCap(3264,2464)
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
-            png_name = "left_{}.jpg".format(img_cnt)
+            png_name = "CapMesure_s1q{}.jpg".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
