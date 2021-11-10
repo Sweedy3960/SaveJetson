@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import time
+import ServTest 
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
