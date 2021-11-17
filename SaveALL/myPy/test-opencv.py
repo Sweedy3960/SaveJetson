@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-import ServTest as serv
 
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
@@ -36,7 +35,7 @@ def gstreamer_pipeline(
         )
     )
 Dict_corners = {"c1.x":0,"c1.y":0}
-img = cv.VideoCapture(gstreamer_pipeline(flip_method=2),cv.CAP_GSTREAMER)
+img = cv.VideoCapture("https://192.168.1.2:4343/video")
 while(True):
     ret,frame = img.read()
     
@@ -68,12 +67,7 @@ while(True):
                 frame = cv.aruco.drawAxis(frame, CAMERA_MATRIX, DIST_COEFFS, rvecs, tvecs,0.02)   
     except:
       pass
-    try :
-        serv.reponse=rvecs
-        serv.serv.accept()
-       
-    except:
-        pass
+   
     
     cv.imshow("that",frame)
     print(str(corners))

@@ -5,8 +5,8 @@ PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 MARKER_EDGE =0.07
 calib_path="SaveALL/myFi/"
-CAMERA_MATRIX = np.loadtxt(calib_path+'matrix09.11.txt', delimiter=',')
-DIST_COEFFS  = np.loadtxt(calib_path+'disto09.11.txt', delimiter=',')
+CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix02.11.txt', delimiter=',')
+DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix02.11.txt', delimiter=',')
 #---------------------------------------------------------------
 #GST_ARGUS: Available Sensor modes :
 #GST_ARGUS: 3264 x 2464 FR = 21.000000 fps Duration = 47619048 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
@@ -21,8 +21,8 @@ class capture :
         self.idCam=0
         self.capture_width=3264
         self.capture_height=2464
-        self.display_width=1000
-        self.display_height=1000
+        self.display_width=3264
+        self.display_height=2464
         self.flip_method=2
        
     def gstreamer_pipeline(self):
@@ -83,7 +83,8 @@ class imgProcess :
                 #self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
                 
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
-        cv.imshow("frame",self.frame0)
+        #cv.imshow("frame",self.frame0)
+                
     #origin tag 7
     def calcul(self):
         self.a=list(self.Dict_stack.keys())
@@ -105,8 +106,8 @@ if __name__ == "__main__":
     while True:
         
         img.imgwork()
-        if cv.waitKey(1) & 0xFF ==ord("c"):
-            img.calcul()
+       
+        img.calcul()
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.cap0.release()
