@@ -1,7 +1,19 @@
 import cv2 as cv 
 import numpy as np 
+
 while True :
+    map = cv.imread("/home/cpnv/Images/Trymap.png")
     img = cv.imread("/home/cpnv/Images/left_0.jpg")
+    rows = map.shape[0]
+    cols = map.shape[1]
+    channels = map.shape[2]
+    for i in range(rows):
+        for j  in range(cols):
+            corr=img[i,j]
+        print(corr)
+    
+    k = img[]
+   
     gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
     cv.imshow("gray",gray)
     imthresh31=gray

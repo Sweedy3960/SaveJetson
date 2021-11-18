@@ -18,10 +18,8 @@ x = cornera.item(0)
 y = cornera.item(1)
 while True:
     cv.imshow("that",img)
-    print(y)
-    print(x)
-    print(yb)
-    print(xb)
+    print(x,y)
+    print(xb,yb)
     print(ids)
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
