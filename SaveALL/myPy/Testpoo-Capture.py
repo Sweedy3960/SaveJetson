@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 import time
-import ServTest 
+
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
@@ -48,7 +48,7 @@ if __name__ == "__main__":
             capture1.setCap(3264,2464)
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
-            png_name = "CapMesure_s1q{}.jpg".format(img_cnt)
+            png_name = "map2nd{}.bmp".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1

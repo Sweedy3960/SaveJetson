@@ -11,8 +11,8 @@ MARKER_EDGE =0.07
 def gstreamer_pipeline(
     capture_width=3264,
     capture_height=2464,
-    display_width=3264,
-    display_height=2464,
+    display_width=100,
+    display_height=100,
     framerate=10,
     flip_method=0,
 ):
@@ -35,7 +35,7 @@ def gstreamer_pipeline(
         )
     )
 Dict_corners = {"c1.x":0,"c1.y":0}
-img = cv.VideoCapture("https://192.168.1.2:4343/video")
+img = cv.VideoCapture(gstreamer_pipeline(),cv.CAP_GSTREAMER)
 while(True):
     ret,frame = img.read()
     

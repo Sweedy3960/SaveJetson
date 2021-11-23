@@ -55,7 +55,7 @@ class imgProcess :
         #[1]=image(numpy.ndarray)
         self.frame0=np.ndarray
         #img = type videocapture
-        self.cap0 = cv.VideoCapture(capture0.gstreamer_pipeline(), cv.CAP_GSTREAMER)
+        self.cap0 = cv.VideoCapture("https://192.168.1.10:4343/video")
         self.cap0.isOpened()
         #infomarker [0]=corners [1]=ids [2]=rejectedpoints
         self.infoMarkers0 = []
