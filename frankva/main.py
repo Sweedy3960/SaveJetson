@@ -112,7 +112,7 @@ class ImgProcess :
         self.cap = []
         for i in cap:
             #capture1.gstreamer_pipeline()
-            self.cap.append(cv.VideoCapture("https://192.168.1.10:4343/video")
+            self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
             if not self.cap[-1].isOpened():
                 exit()
             

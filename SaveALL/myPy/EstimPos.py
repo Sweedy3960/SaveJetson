@@ -65,7 +65,8 @@ class app :
         self.readCap()
 
     def main (self):
-        self.createList()
-        while isRunning == True :
+        while self.isRunning == True :
             self.update()
 
+if __name__ == "__main__":
+    app.main()
