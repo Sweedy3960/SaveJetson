@@ -58,6 +58,6 @@ for i in pts:
 # show the original and warped images
 cv2.imshow("Original", image)
 for i in warped:
-	cv2.imshow("Warped",i)
+	cv2.imshow("Warped%d" %i,i)
 #cv2.imwrite("Wrapped1D.bmp",warped)
 cv2.waitKey(0)
