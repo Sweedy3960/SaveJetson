@@ -48,6 +48,7 @@ def four_point_transform(image, pts):
 
 L=3264
 H=2464
+warped=[]
 image = cv2.imread("/home/cpnv/Images/left_0.jpg")
 pts = [np.array(eval("[(0,0),(1632,0),(1632,1232),(1232,0)]"), dtype = "float32"),np.array(eval("[(1632,0),(3464,0),(3624,1232),(1632,1232)]"), dtype = "float32"),np.array(eval("[(1632,1232),(1232,3264),(3264,2464),(1632,2464)]"), dtype = "float32"),np.array(eval("[(1632,1232),(1232,3264),(0,2464),(0,1232)]"), dtype = "float32")]
 # apply the four point tranform to obtain a "birds eye view" of
@@ -56,6 +57,7 @@ for i in pts:
 	warped.append(four_point_transform(image, i))
 # show the original and warped images
 cv2.imshow("Original", image)
-cv2.imshow("Warped", warped)
-cv2.imwrite("Wrapped1D.bmp",warped)
+for i in warped:
+	cv2.imshow("Warped",i)
+#cv2.imwrite("Wrapped1D.bmp",warped)
 cv2.waitKey(0)
