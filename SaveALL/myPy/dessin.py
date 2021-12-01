@@ -1,5 +1,6 @@
 import cv2 as cv
 import numpy as np
+ 
 #-----------------------------------------------------------------------------
 PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)

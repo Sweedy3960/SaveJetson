@@ -96,8 +96,8 @@ class ImgProcess :
         if App.DEBUG: print("ImgProcess", file=sys.stderr)
         #frame list [0]=ret= booléen vrai si val retournée
         #[1]=image(numpy.ndarray)
-        self.axe = True
-        self.windows = True
+        self.axe = False
+        self.windows = False
         self.frame = []
 
         for i in cap:
@@ -159,7 +159,8 @@ class ImgProcess :
         #si markers detect  vecteur de translation et rotation 
         for i in self.infoMarkers:
             for j in i[0]:
-                (rvecs, tvecs, markerPoints) = cv.aruco.estimatePoseSingleMarkers(j, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
+                (rvecs, tvecs,
+                                                                                                                                                            markerPoints) = cv.aruco.estimatePoseSingleMarkers(j, App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
                 for k, l in enumerate(self.frame):
                     self.frame[k] = cv.aruco.drawAxis(l, App.CAMERA_MATRIX, App.DIST_COEFFS, rvecs, tvecs, 0.10)
     
@@ -254,8 +255,8 @@ class App():
     MARKER_EDGE = 0.07
     #0.03
     calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'matrix09.11.txt', delimiter=',')  
-    DIST_COEFFS  = np.loadtxt(calib_path+'disto09.11.txt', delimiter=',')
+    CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic30.11.txt', delimiter=',')  
+    DIST_COEFFS  = np.loadtxt(calib_path+'calib30.11.txt', delimiter=',')
     
     def __init__(self) -> None:
         if App.DEBUG: print("App.__init__", file=sys.stderr)
