@@ -5,8 +5,8 @@ PARAMETERS = cv.aruco.DetectorParameters_create()
 DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
 MARKER_EDGE =0.07
 calib_path="SaveALL/myFi/"
-CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic_matrix02.11.txt', delimiter=',')
-DIST_COEFFS  = np.loadtxt(calib_path+'distortion_matrix02.11.txt', delimiter=',')
+CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic30.11.txt', delimiter=',')  
+DIST_COEFFS  = np.loadtxt(calib_path+'calib30.11.txt', delimiter=',')
 #---------------------------------------------------------------
 #GST_ARGUS: Available Sensor modes :
 #GST_ARGUS: 3264 x 2464 FR = 21.000000 fps Duration = 47619048 ; Analog Gain range min 1.000000, max 10.625000; Exposure Range min 13000, max 683709000;
@@ -55,13 +55,15 @@ class imgProcess :
         #[1]=image(numpy.ndarray)
         self.frame0=np.ndarray
         #img = type videocapture
-        self.cap0 = cv.VideoCapture("https://192.168.1.10:4343/video")
+        self.cap0 = cv.VideoCapture(capture0.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap0.isOpened()
         #infomarker [0]=corners [1]=ids [2]=rejectedpoints
         self.infoMarkers0 = []
         self.Dict_stack = {}
         self.a=[]
         self.tveclist=[]
+        self.Centre_Id = 42
+        self.Centre_Tvec=0
     def imgwork(self) :
         self.ret,self.frame0 = self.cap0.read()
       
@@ -81,18 +83,22 @@ class imgProcess :
             
             self.Dict_stack[str(k)]=(self.rvecs,self.tvecs)
                 #self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
-                
+        self.a=list(self.Dict_stack.keys())
+              
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         #cv.imshow("frame",self.frame0)
-                
-    #origin tag 7
+
+
+
+
+            
     def calcul(self):
-        self.a=list(self.Dict_stack.keys())
-        self.c=self.Dict_stack[self.a[0]][1]-self.Dict_stack[self.a[1]][1]
-        #distance (diagonale si plusieur plan entre deux tag)
-        result=((self.c[0][0][0]**2+self.c[0][0][1]**2+self.c[0][0][2]**2)**0.5)*100
-        print(type(result))
-        print(result)
+        for i in enumerate(self.infoMarkers0[0]):
+            #distance (diagonale si plusieur plan entre deux tag)
+            self.c=self.Dict_stack[self.a[0]][1]-self.Dict_stack[self.a[1]][1]
+            result=((self.c[0][0][0]**2+self.c[0][0][1]**2+self.c[0][0][2]**2)**0.5)*100
+            print(type(result))
+            print(result)
         
         
 
@@ -103,13 +109,12 @@ if __name__ == "__main__":
     capture0.idCam=0
     img=imgProcess()
     while True:
-        
+        #print("alive")
         img.imgwork()
-       
+        #print("alive")
         img.calcul()
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             img.cap0.release()
             break
 cv.destroyAllWindows()
-    
