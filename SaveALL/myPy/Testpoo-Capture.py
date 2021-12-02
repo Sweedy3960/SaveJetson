@@ -45,10 +45,10 @@ if __name__ == "__main__":
             time.sleep(0.1)
             img.release()
             time.sleep(0.1)
-            capture1.setCap(3264,2464)
+            capture1.setCap(1000,1000)
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
-            png_name = "map2nd{}.bmp".format(img_cnt)
+            png_name = "map2ndahah{}.bmp".format(img_cnt)
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1

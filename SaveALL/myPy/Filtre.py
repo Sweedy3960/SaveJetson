@@ -2,9 +2,11 @@ import cv2 as cv
 import numpy as np
 cnt=0
 corr=[]
+img = cv.VideoCapture("https://192.168.1.2:4343/video")
 while True :
-    img = cv.imread("/home/cpnv/Documents/SaveJetson/map2nd2.bmp",1)
-    gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+    #img = cv.VideoCapture("https://192.168.1.2:4343/video")
+    ret,frame=img.read()
+    gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
     cv.imshow("gray",gray)
     #im2=cv.GaussianBlur(gray,(31,31),100)
     #cv.imshow("nette?",im2)

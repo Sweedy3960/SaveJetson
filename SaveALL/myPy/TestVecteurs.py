@@ -80,27 +80,28 @@ class imgProcess :
             
             k = self.infoMarkers0[1][j]
            # for i in self.infoMarkers0[1]: 
-            
+            k=str(k)
+            k=k.replace("[","")
+            k=k.replace("]","")
             self.Dict_stack[str(k)]=(self.rvecs,self.tvecs)
                 #self.Dict_stack[str(i)]=(self.rvecs,self.tvecs) 
         self.a=list(self.Dict_stack.keys())
               
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
         #cv.imshow("frame",self.frame0)
-
-
-
-
-            
+     
     def calcul(self):
-        for i in enumerate(self.infoMarkers0[0]):
+        for j, i in enumerate(self.a):
+            print(self.a)
             #distance (diagonale si plusieur plan entre deux tag)
-            self.c=self.Dict_stack[self.a[0]][1]-self.Dict_stack[self.a[1]][1]
+            print(self.Dict_stack[str(int(i))][1])
+            print(self.Dict_stack[str(self.Centre_Id)][1])
+            self.c=self.Dict_stack[int(i)][1]-self.Dict_stack[str(self.Centre_Id)][1]
             result=((self.c[0][0][0]**2+self.c[0][0][1]**2+self.c[0][0][2]**2)**0.5)*100
-            print(type(result))
-            print(result)
-        
-        
+            #récup de id 
+            print(self.a[j][1])
+            print("entre {} et {} est de {} cm".format(int(self.a[j]),int(self.a[j+1]),result))
+         
 
 
 if __name__ == "__main__":

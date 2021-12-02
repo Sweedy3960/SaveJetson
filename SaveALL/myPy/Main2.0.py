@@ -58,7 +58,7 @@ class imgProcess :
         #img = type videocapture
         self.cap0 = cv.VideoCapture(capture0.gstreamer_pipeline(), cv.CAP_GSTREAMER)
         self.cap0.isOpened()
-        self.cap1 = cv.VideoCapture("https://192.168.1.10:4343/video")
+        self.cap1 = cv.VideoCapture("https://192.168.1.2:4343/video")
         self.cap1.isOpened()
         #infomarker [0]=corners [1]=ids [2]=rejectedpoints
         self.infoMarkers0 = []
