@@ -112,15 +112,15 @@ class ImProc:
         for i,j in enumerate(self.thresh):
             self.infoMarkers[j]=cv.aruco.detectMarkers(i, App.DICTIONARY, parameters = App.PARAMETERS)
         for i in self.infoMarkers:
-            for j in i[1]
+            for j in i[1]:
                 k=str(j)
                 i[1][j]=k[1:-1]
             self.found[i]=len(i[1])    
     def TriTag(self):
         for i in self.infoMarkers:
             for j in i[1]:
-                tagin["tag{}".format(j)] = Tag(i,int(j))
-        return tagin
+                self.tagin["tag{}".format(j)] = Tag(i,int(j))
+        return self.tagin
 
 
 
@@ -144,12 +144,16 @@ class ImProc:
 class Tag:
     def __init__(self,infoMarkers:list,whoami:int):
         
-        if whoami == MIDL:
+        if whoami == App.MIDL:
             self.pos=(1450,1200)
+            self.marker_cenrte=0.1
+        
+        self.Id=infoMarkers[1][whoami]
         self.tvecs=None
         self.rvecs=None
         self.corn=infoMarkers[0]
-        self.Id=infoMarkers[1][whoami]
-
-    def GetVect(sefl):
         
+
+    def GetVect(self):
+        
+        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
