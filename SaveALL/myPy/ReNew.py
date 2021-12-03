@@ -114,8 +114,7 @@ class ImProc:
         for i in self.infoMarkers:
             for j in i[1]
                 k=str(j)
-                k=k.replace("[","")
-                k=k.replace("]","")
+                i[1][j]=k[1:-1]
             self.found[i]=len(i[1])    
     def TriTag(self):
         for i in self.infoMarkers:
