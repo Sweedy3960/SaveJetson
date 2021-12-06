@@ -94,7 +94,7 @@ class ImProc:
             
 
     def Gauss(self):
-        for i , j in enumerate(self.gray)
+        for i , j in enumerate(self.gray):
             self.gauss[j]=cv.GaussianBlur(i,(31,31),100)
       
     
@@ -155,5 +155,5 @@ class Tag:
         
 
     def GetVect(self):
-        
+
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
