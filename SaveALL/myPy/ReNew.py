@@ -45,7 +45,6 @@ class Capture :
         )
 class App:
     #Glob
-    DEBUG = False
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
     MARKER_EDGE = 0.07
@@ -95,47 +94,67 @@ class ImProc:
             self.ListId.append(None)
             self.gray.append(None)
             self.gauss.append(None)
+            self.trhesh.append(None)
             self.found.append(None)
+            self.netFil.append(None)
 
     def ReadFrames(self):
         for i,j in enumerate(self.cap):
-            ret,self.frame[j]=i.read()
+            ret,self.frame[i]=j.read()
            # for i in self.cap:
            #     for j in self.frame:
            #         j=i.read()
+            if self.Debug:
+                cv.imshow("fr{}".format(i), self.frame[i])
             
     def ToGray(self):
         for i,j in enumerate(self.frame):
-            self.gray[j]=cv.cvtColor(self.frame[i], cv.COLOR_BGR2GRAY)
+            self.gray[i]=cv.cvtColor(j, cv.COLOR_BGR2GRAY)
+        if self.Debug:
+                cv.imshow("GR{}".format(i), self.gray[i])
             
 
     def Gauss(self):
         for i , j in enumerate(self.gray):
-            self.gauss[j]=cv.GaussianBlur(i,(31,31),100)
+            self.gauss[i]=cv.GaussianBlur(j,(3,3),100)
+        if self.Debug:
+                cv.imshow("GS{}".format(i), self.gauss[i])
+            
       
     
     def Trhesh(self):
-        for i,j in enumerate(self.gauss):
-            cv.threshold(i,250,255,cv.THRESH_BINARY_INV|cv.THRESH_OTSU, self.thresh[j])
-
+        for i,j in enumerate(self.gray):
+            self.trhesh[i]=self.gray[i]
+            cv.threshold(j,250,255,cv.THRESH_BINARY_INV|cv.THRESH_OTSU, self.trhesh[i])
+        if self.Debug:
+            cv.imshow("th{}".format(i), self.trhesh[i])
     
     
     def NetFil(self):
-        for i, j in enumerate(self.thresh):
-            self.netFil[j]=cv.filter2D(i,-1,np.array([[1,1,1],[1,-8,1],[1,1,1]]),borderType=cv.BORDER_DEFAULT)
-
+        for i, j in enumerate(self.trhesh):
+            self.netFil[i]=cv.filter2D(j,-1,np.array([[1,1,1],[1,-8,1],[1,1,1]]),borderType=cv.BORDER_DEFAULT)
+        if self.Debug:
+            cv.imshow("Fil{}".format(i), self.netFil[i])
     def Detect(self):
-        for i,j in enumerate(self.thresh):
-            self.infoMarkers[j]=cv.aruco.detectMarkers(i, App.DICTIONARY, parameters = App.PARAMETERS)
-        for i in self.infoMarkers:
-            for j in i[1]:
-                k=str(j)
-                i[1][j]=k[1:-1]
-            self.found[i]=len(i[1])    
+        for i,j in enumerate(self.gray):
+            self.infoMarkers[i]=cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
+            print(self.infoMarkers[i])
+
+    def SortName(self):
+        #infomarker [corners][id][rejected points]
+        for i,j in enumerate(self.infoMarkers):
+            if None in j[i]:
+                for k in self.infoMarkers[i][1]:
+                    l=str(k)
+                    i[1][j]=l[1:-1]
+                    print(i)
+            #self.found[i]=len(i[1])  
+              
     def TriTag(self):
         for i in self.infoMarkers:
-            for j in i[1]:
-                self.tagin["tag{}".format(j)] = Tag(i,int(j),self.infoMarkers[0][j])
+            if self.infoMarkers[0][1] !=None:
+                for j in self.infoMarkers[1]:
+                    self.tagin["tag{}".format(j)] = Tag(i,int(j),self.infoMarkers[0][j])
         return self.tagin
     
 
@@ -151,8 +170,8 @@ class ImProc:
         self.ReadFrames()
         self.FrameWorking()
         self.Detect()
-        self.TriTag()
-        print(self.tagin)
+        self.SortName()
+        print(self.TriTag())
        
         #save Dictio {ID}:infomarker(propre à la caméra qui a détécté le tag)
         #save=self.TriTag()
