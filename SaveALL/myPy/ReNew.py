@@ -1,5 +1,19 @@
 import numpy as np 
 import cv2 as cv
+import sys
+class Vector2:
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+    def norme(self):
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+    
+    def __add__(self, other):
+        return Vector2(self.x + other.x, self.y + other.y)
+    def __sub__(self, other):
+        return Vector2(self.x - other.x, self.y - other.y)
+    def __str__(self) -> str:
+        return f"({self.x}, {self.y})"
 
 class Capture :
     def __init__(self):
@@ -37,6 +51,8 @@ class App:
     MARKER_EDGE = 0.07
     MARKER_MIDL = 0.10
     MIDL=42
+    SAMPLES_T=[]
+    ROBOTS_T=[]
     MARKER_SAMPLE=0.05
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic30.11.txt', delimiter=',')  
@@ -46,18 +62,18 @@ class App:
         self.capture1.append(Capture())
         self.img = ImProc(self.capture1)
         self.run=True
+   
+    def main(self):
+        while self.run:
+            self.Update()
+        self.img.Release_All()
+        cv.destroyAllWindows()
     def Update(self) -> None:
         self.img.Update()
             #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             self.img.Release_All()
             self.running = False
-    def main(self):
-        while self.run:
-            self.Update()
-        self.img.Release_All()
-        cv.destroyAllWindows()
-
 class ImProc:
 
     def __init__(self,cap: list):
@@ -119,10 +135,9 @@ class ImProc:
     def TriTag(self):
         for i in self.infoMarkers:
             for j in i[1]:
-                self.tagin["tag{}".format(j)] = Tag(i,int(j))
+                self.tagin["tag{}".format(j)] = Tag(i,int(j),self.infoMarkers[0][j])
         return self.tagin
-
-
+    
 
     def Release_All(self):
         for i in self.cap:
@@ -136,24 +151,38 @@ class ImProc:
         self.ReadFrames()
         self.FrameWorking()
         self.Detect()
+        self.TriTag()
+        print(self.tagin)
+       
         #save Dictio {ID}:infomarker(propre à la caméra qui a détécté le tag)
-        save=self.TriTag()
+        #save=self.TriTag()
 
          
 
 class Tag:
-    def __init__(self,infoMarkers:list,whoami:int):
+    def __init__(self,infoMarkers:list,whoami:int,corners):
         
         if whoami == App.MIDL:
             self.pos=(1450,1200)
-            self.marker_cenrte=0.1
+            self.marker_edge=0.1
+        elif whoami == App.ROBOTS_T:
+            self.marker_edge=0.07
+        else:
+            self.marker_edge=0.05
         
-        self.Id=infoMarkers[1][whoami]
+        self.Id=whoami
         self.tvecs=None
         self.rvecs=None
-        self.corn=infoMarkers[0]
-        
+        self.corn=corners
+    def FindV(self):
+        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
+    def FindD(self):
+        print(round(100 * self.calcul_dist2(0), 2), "cm")
 
-    def GetVect(self):
-
-        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,App.MARKER_EDGE, App.CAMERA_MATRIX, App.DIST_COEFFS)
+def main() -> int:
+    app1 = App()
+    app1.main()
+    sys.exit(0)
+    return 0
+if __name__ == "__main__":
+    main()
