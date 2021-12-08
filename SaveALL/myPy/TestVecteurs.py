@@ -88,7 +88,8 @@ class imgProcess :
         self.a=list(self.Dict_stack.keys())
               
         #self.frame = cv.aruco.drawDetectedMarkers(self.frame, self.infoMarkers[0],self.infoMarkers[1])
-        #cv.imshow("frame",self.frame0)
+        #cv.imshow("frame",self.frame0) 
+         
      
     def calcul(self):
         for j, i in enumerate(self.a):
