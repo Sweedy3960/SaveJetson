@@ -43,7 +43,7 @@ while(True):
 
     corners, ids, rejctedImgPoints = cv.aruco.detectMarkers(gray,DICTIONARY,parameters = PARAMETERS)
     frame = cv.aruco.drawDetectedMarkers(frame, corners,ids)
-     
+    print(ids)
     
     try :
 

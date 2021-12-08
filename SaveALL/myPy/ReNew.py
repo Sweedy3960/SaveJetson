@@ -143,11 +143,24 @@ class ImProc:
     def SortName(self):
         #infomarker [corners][id][rejected points]
         for i,j in enumerate(self.infoMarkers):
-            if None in j[i]:
-                for k in self.infoMarkers[i][1]:
-                    l=str(k)
-                    i[1][j]=l[1:-1]
-                    print(i)
+            if not None in j[1]:
+                #print("PAS NONE")
+                for l,k in enumerate(self.infoMarkers[i][1]):
+                   # print(k)
+                    print(self.infoMarkers[i][1][l])
+                    #faire remplacement sur une ligne puis remplacer 
+                    self.infoMarkers[i][1][l]=int(str(self.infoMarkers[i][1][l]).replace("[",""))
+                    self.infoMarkers[i][1][l]=int(str(self.infoMarkers[i][1][l]).replace("]",""))
+                    print(self.infoMarkers[i][1][l])
+                   
+                   
+                   # m=str(k)
+                   # #k=m[1:-1]
+                   # k=m.replace("["," ")
+                   # k=k.replace("]","")
+                   # print(k)
+                   # #self.infoMarkers[i][1][l]=list(int(k))
+                   # print(self.infoMarkers[i][1][l])
             #self.found[i]=len(i[1])  
               
     def TriTag(self):
@@ -163,9 +176,9 @@ class ImProc:
             i.release()
     def FrameWorking(self):
         self.ToGray()
-        self.Gauss()
-        self.Trhesh()
-        self.NetFil()
+        #self.Gauss()
+        #self.Trhesh()
+        #self.NetFil()
     def Update(self):
         self.ReadFrames()
         self.FrameWorking()
