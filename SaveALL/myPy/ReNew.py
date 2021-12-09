@@ -14,8 +14,9 @@ class Vector2:
         return Vector2(self.x - other.x, self.y - other.y)
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
+
 class Vector3:
-        def __init__(self, x, y, z) -> None:
+    def __init__(self, x, y, z) -> None:
         self.x = x
         self.y = y
         self.z = z
@@ -101,7 +102,9 @@ class ImProc:
         self.found=[]
         self.detected =False
         self.tagin={}
+        self.pos=[0,0]
         self.Debug=False
+        self.DebugD=True
         for i in cap:
             self.frame.append(None)
             self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
@@ -112,6 +115,7 @@ class ImProc:
             self.trhesh.append(None)
             self.found.append(None)
             self.netFil.append(None)
+            self.pos.append(None)
 
     def ReadFrames(self):
         for i,j in enumerate(self.cap):
@@ -194,10 +198,12 @@ class ImProc:
                 #print("42detected")
                 #print(self.tagin["tag42"].vect2d)
                 #print(self.tagin["{}".format(i)].vect2d)
-                z=(self.tagin["tag42"].vect2d)-(self.tagin["{}".format(i)].vect2d)
-                print(z)
-                o=Vector2.norme(z)
-                print(0)
+                self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
+                self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
+                x=((self.pos[0]**2)+(self.pos[1]**2)**0.5)
+                y=round(1000*(x))/10
+                if self.DebugD:
+                    print("entre tag42 "+"et {} est de ".format(i)+"{}cm".format(y))
                 
             #print("{}".format(i)+str(self.tagin[i].getpos()))
             
@@ -234,6 +240,8 @@ class Tag:
         self.tvecs=None
         self.rvecs=None
         self.corn=infoMarkers
+        self.x=0
+        self.y=0
         self.vect2d=None
         self.diffX=0
         self.diffY=0 
@@ -251,7 +259,9 @@ class Tag:
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
         #return(self.rvecs,self.tvecs)
     def FindD(self):
-        self.vect2d= Vector2(self.tvecs[0][0][0],self.tvecs[0][0][1])
+        self.x=self.tvecs[0][0][0]
+        self.y=self.tvecs[0][0][1]
+        self.vect2d= Vector2(self.x,self.y)
     def update(self):
         self.FindV()
         self.FindD()
