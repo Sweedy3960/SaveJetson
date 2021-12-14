@@ -33,10 +33,10 @@ class Vector3:
 class Capture :
     def __init__(self):
         self.idCam=0
-        self.capture_width=3264
-        self.capture_height=2464
-        self.display_width=3264
-        self.display_height=2464
+        self.capture_width=3840
+        self.capture_height=2160
+        self.display_width=3840
+        self.display_height=2160
         self.flip_method=2
        
     def gstreamer_pipeline(self):
@@ -69,8 +69,8 @@ class App:
     ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
     MARKER_SAMPLE=0.05
     calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'intrinsic30.11.txt', delimiter=',')  
-    DIST_COEFFS  = np.loadtxt(calib_path+'calib30.11.txt', delimiter=',')
+    CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
+    DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
     def __init__(self):
         self.capture1 = []
         self.capture1.append(Capture())
@@ -100,6 +100,7 @@ class ImProc:
         self.netFil=[]
         self.ListId=[]
         self.found=[]
+        self.perspts=[]
         self.detected =False
         self.tagin={}
         self.pos=[0,0]
@@ -189,7 +190,10 @@ class ImProc:
             for k,l in enumerate(j):
                 self.tagin["tag{}".format(l)] = Tag(self.infoMarkers[i][0],int(l),int(k))
         return self.tagin
-    
+    def getpersp(self):
+        for i,j in enumerate(self.frame):
+            j,self.perspts[i]
+
     def GetPos(self):
         a=list(self.tagin.keys())
         #print(a)
@@ -197,7 +201,7 @@ class ImProc:
             for i in a:
                 #print("42detected")
                 #print(self.tagin["tag42"].vect2d)
-                #print(self.tagin["{}".format(i)].vect2d)
+                #print(self.ta@gin["{}".format(i)].vect2d)
                 self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
                 self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
                 x=((self.pos[0]**2)+(self.pos[1]**2)**0.5)
@@ -206,7 +210,6 @@ class ImProc:
                     print("entre tag42 "+"et {} est de ".format(i)+"{}cm".format(y))
                 
             #print("{}".format(i)+str(self.tagin[i].getpos()))
-            
 
     def Release_All(self):
         for i in self.cap:
@@ -215,7 +218,7 @@ class ImProc:
         self.SortName()
         self.TriTag()
         self.GetPos()
-    def FrameWorking(self):
+    def FrameWorking(self): 
         self.ToGray()
         #self.Gauss()
         #self.Trhesh()
