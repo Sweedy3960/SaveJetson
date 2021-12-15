@@ -100,7 +100,6 @@ class ImProc:
         self.netFil=[]
         self.ListId=[]
         self.found=[]
-        self.perspts=[]
         self.detected =False
         self.tagin={}
         self.pos=[0,0]
@@ -167,6 +166,7 @@ class ImProc:
     def SortName(self):
         #infomarker [corners][id][rejected points]
         for i,j in enumerate(self.infoMarkers):
+            self.ListId[i].clear()
             for l,k in enumerate(self.infoMarkers[i][1]):
                    # print(k)
                     #print(self.infoMarkers[i][1][l])
@@ -175,6 +175,7 @@ class ImProc:
                 a=a.replace("]","")
                     #print(a) 
                 self.ListId[i].append(int(a))
+                #print(self.ListId)
                     #print(self.ListId)
                    # m=str(k)
                    # #k=m[1:-1]
@@ -184,16 +185,20 @@ class ImProc:
                    # #self.infoMarkers[i][1][l]=list(int(k))
                    # print(self.infoMarkers[i][1][l])
             #self.found[i]=len(i[1])  
-              
+    def SortCorn(self,listcam:int,posList:int):
+        #print("cam")
+        #print(listcam)
+        #print("pos")
+        #print(posList)
+        return (self.infoMarkers[listcam][0][posList])
+
     def TriTag(self):
         for i,j in enumerate(self.ListId):
             for k,l in enumerate(j):
-                self.tagin["tag{}".format(l)] = Tag(self.infoMarkers[i][0],int(l),int(k))
+                #print(k,l)
+                self.tagin["tag{}".format(l)] = Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k))
         return self.tagin
-    def getpersp(self):
-        for i,j in enumerate(self.frame):
-            j,self.perspts[i]
-
+    
     def GetPos(self):
         a=list(self.tagin.keys())
         #print(a)
@@ -205,7 +210,7 @@ class ImProc:
                 self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
                 self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
                 x=((self.pos[0]**2)+(self.pos[1]**2)**0.5)
-                y=round(1000*(x))/10
+                y=(100*x)
                 if self.DebugD:
                     print("entre tag42 "+"et {} est de ".format(i)+"{}cm".format(y))
                 
@@ -236,13 +241,18 @@ class ImProc:
          
 
 class Tag:
-    def __init__(self,infoMarkers:list,whoami:int,index:int):
+    def __init__(self,corners:list,ListId:list,whoami:int,index:int):
         self.posRe=(0,0)
         self.Facing=0
         self.Id=whoami
         self.tvecs=None
         self.rvecs=None
-        self.corn=infoMarkers
+        self.tl=None
+        self.tr=None
+        self.bl=None
+        self.br=None
+        #(self.tl,self.tr,self.br,self.bl)=infoMarkers
+        self.corners = corners
         self.x=0
         self.y=0
         self.vect2d=None
@@ -259,7 +269,7 @@ class Tag:
         
         self.update()
     def FindV(self):
-        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corn,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
+        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
         #return(self.rvecs,self.tvecs)
     def FindD(self):
         self.x=self.tvecs[0][0][0]
@@ -270,6 +280,7 @@ class Tag:
         self.FindD()
         if self.debug:
             print("{}".format(self.Id)+"{}".format(self.vect2d))
+            #print(self.corners)
     
 def main() -> int:
     app1 = App()
