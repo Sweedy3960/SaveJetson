@@ -15,6 +15,7 @@ class capture :
     def gstreamer_pipeline(self):
         return (
             "nvarguscamerasrc ! "
+            "video/x-raw(memory:NVMM), "
             "width=(int)%d, height=(int)%d, "
             "format=(string)NV12, framerate=(fraction)%d/1 ! "
             "nvvidconv flip-method=  %d ! "
@@ -34,12 +35,12 @@ if __name__ == "__main__":
     capture1=capture()
     img_cnt = 0 
     img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-    out= cv.VideoWriter("nofish00.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
+    out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
     while True:
         ret,frame = img.read()
         if ret==True:
             out.write(frame)
-           # cv.imshow("frame",frame)
+            cv.imshow("frame",frame)
             if cv.waitKey(1)&0xFF==ord('q'):
                 break
     img.release()

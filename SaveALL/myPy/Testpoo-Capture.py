@@ -42,9 +42,9 @@ if __name__ == "__main__":
         ret,frame = img.read()
         cv.imshow("that",frame)
         if cv.waitKey(1) & 0xFF == ord('p'):
-            time.sleep(0.1)
+            time.sleep(1)
             img.release()
-            time.sleep(0.1)
+            time.sleep(1)
             capture1.setCap(3840,2160)
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
             ret,frame = img.read()
@@ -52,15 +52,15 @@ if __name__ == "__main__":
             cv.imwrite(png_name, frame)
             print("{} written!".format(png_name))
             img_cnt+=1
-            time.sleep(0.1)
+            time.sleep(1)
             img.release()
-            time.sleep(0.1)
+            time.sleep(1)
             capture1.setCap(500,500)
             img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
 
         if cv.waitKey(1) & 0xFF == ord('q'):
          img.release()
-         break
+         breakqqqqqq
 
 cv.destroyAllWindows()
     
