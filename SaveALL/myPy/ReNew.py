@@ -1,6 +1,9 @@
 import numpy as np 
 import cv2 as cv
 import sys
+import time
+
+
 class Vector2:
     def __init__(self, x: float, y: float) -> None:
         self.x = x
@@ -67,7 +70,7 @@ class App:
     MIDL=42
     SAMPLES_T=[47,13,36,17]
     ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
-    MARKER_SAMPLE=0.05
+    MARKER_SAMPLE=0.07
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
     DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
@@ -102,9 +105,11 @@ class ImProc:
         self.found=[]
         self.detected =False
         self.tagin={}
-        self.pos=[0,0]
+        self.pos=[0,0,0]
         self.Debug=False
-        self.DebugD=True
+        self.DebugD=False
+        self.capVidD=False
+        self.imgcnt=0
         for i in cap:
             self.frame.append(None)
             self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
@@ -115,11 +120,11 @@ class ImProc:
             self.trhesh.append(None)
             self.found.append(None)
             self.netFil.append(None)
-            self.pos.append(None)
-
+        self.out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
     def ReadFrames(self):
         for i,j in enumerate(self.cap):
             ret,self.frame[i]=j.read()
+
            # for i in self.cap:
            #     for j in self.frame:
            #         j=i.read()
@@ -131,7 +136,9 @@ class ImProc:
             self.gray[i]=cv.cvtColor(j, cv.COLOR_BGR2GRAY)
         if self.Debug:
                 cv.imshow("GR{}".format(i), self.gray[i])
-            
+
+       
+
 
     def Gauss(self):
         for i , j in enumerate(self.gray):
@@ -204,27 +211,51 @@ class ImProc:
         #print(a)
         if "tag"+str(App.MIDL) in a:
             for i in a:
+                
                 #print("42detected")
                 #print(self.tagin["tag42"].vect2d)
-                #print(self.ta@gin["{}".format(i)].vect2d)
-                self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
-                self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
-                x=((self.pos[0]**2)+(self.pos[1]**2)**0.5)
-                y=(100*x)
+                #print(self.tagin["{}".format(i)].vect2d)
+                self.pos[0]=(self.tagin["tag42"].vect2d-self.tagin["{}".format(i)].vect2d).norme()
+                #cv.imwrite("that{}".fromat(i),self.gray[0])
+               #//self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
+               #//self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
+               #//self.pos[2]=(self.tagin["tag42"].z)-(self.tagin["{}".format(i)].z)
+               #//x=((self.pos[0]**2)+(self.pos[1]**2)+(self.pos[2]**2)**0.5)
+               #y=round(100*x,2)
                 if self.DebugD:
-                    print("entre tag42 "+"et {} est de ".format(i)+"{}cm".format(y))
+                    print("entre 42 et {}".format(i)+"il y a {}".format(round((100*self.pos[0]),2)))
+                    
+    def DrawAxes(self)   :
+        a=list(self.tagin.keys())
+        #print(a)
+        if "tag"+str(App.MIDL) in a:
+            for i in a:
+                
+                self.gray[0] = cv.aruco.drawAxis(self.gray[0], App.CAMERA_MATRIX, App.DIST_COEFFS, self.tagin["{}".format(i)].rvecs,self.tagin["{}".format(i)].tvecs,0.10)
+                
+    def capVid(self):
+
+            self.out.write(self.gray[0])#qcv.imwrite("Thataa",self.gray[0])
+            cv.imwrite("mes{}.bmp".format(time.time()), self.gray[0])
+            
                 
             #print("{}".format(i)+str(self.tagin[i].getpos()))
-
+    def __del__(self):
+        print("coucou je delete man ")
+        self.Release_All()
     def Release_All(self):
         for i in self.cap:
             i.release()
+            self.out.release()
     def TagWork(self):
         self.SortName()
         self.TriTag()
         self.GetPos()
     def FrameWorking(self): 
         self.ToGray()
+        self.DrawAxes()
+        if self.capVidD:
+            self.capVid()
         #self.Gauss()
         #self.Trhesh()
         #self.NetFil()
@@ -241,7 +272,7 @@ class ImProc:
          
 
 class Tag:
-    def __init__(self,corners:list,ListId:list,whoami:int,index:int):
+    def __init__(self,corners:list,ListId:list,whoami:int,index:int,):
         self.posRe=(0,0)
         self.Facing=0
         self.Id=whoami
@@ -255,37 +286,47 @@ class Tag:
         self.corners = corners
         self.x=0
         self.y=0
+        self.z=0
         self.vect2d=None
         self.diffX=0
         self.diffY=0 
         self.debug=True
         if self.Id == App.MIDL:
             self.posRe=(1450,1200)
-            self.marker_edge=0.1
+            self.marker_edge= App.MARKER_MIDL
         elif whoami == App.ROBOTS_T:
-            self.marker_edge=0.07
+            self.marker_edge=App.MARKER_EDGE
         else:
-            self.marker_edge=0.05
+            self.marker_edge=App.MARKER_EDGE
         
         self.update()
     def FindV(self):
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
+         
         #return(self.rvecs,self.tvecs)
+    def angles(self):
+        mat_rota,jacob=cv.Rodrigues(self.rvecs)
+        
     def FindD(self):
         self.x=self.tvecs[0][0][0]
         self.y=self.tvecs[0][0][1]
-        self.vect2d= Vector2(self.x,self.y)
+        self.z=self.tvecs[0][0][2]
+        self.vect2d= Vector3(self.x,self.y,self.z)
     def update(self):
         self.FindV()
         self.FindD()
         if self.debug:
-            print("{}".format(self.Id)+"{}".format(self.vect2d))
-            #print(self.corners)
+            print("tag{} ".format(self.Id)+"Tvec {}".format(self.vect2d)+"rvecs {}".format(self.rvecs))
+            print("corners")
+            print(self.corners)
+            print("sa taille")
+            print(self.marker_edge)
     
 def main() -> int:
     app1 = App()
     app1.main()
     sys.exit(0)
+   
     return 0
 if __name__ == "__main__":
     main()

@@ -257,6 +257,7 @@ class App():
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
     DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
+
     
     def __init__(self) -> None:
         if App.DEBUG: print("App.__init__", file=sys.stderr)
