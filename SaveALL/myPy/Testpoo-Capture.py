@@ -5,18 +5,19 @@ import time
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
     def __init__(self) :
+        self.idCam=0
         self.capture_width=3264
         self.capture_height=2464
         self.display_width=500
         self.display_height=500
-        self.framerate=10
-        self.flip_method=2
+        self.framerate=20
+        self.flip_method=0
     def setCap(self,w,h):
         self.display_width=w
         self.display_height=h
     def gstreamer_pipeline(self):
         return (
-            "nvarguscamerasrc ! "
+            "nvarguscamerasrc sensor_id=%d ! "
             "video/x-raw(memory:NVMM), "
             "width=(int)%d, height=(int)%d, "
             "format=(string)NV12, framerate=(fraction)%d/1 ! "
@@ -25,6 +26,7 @@ class capture :
             "videoconvert ! "
             "video/x-raw, format=(string)BGR ! appsink"
             % (
+                self.idCam,
                 self.capture_width,
                 self.capture_height,
                 self.framerate,
@@ -35,32 +37,48 @@ class capture :
         )
 if __name__ == "__main__":
     capture1=capture()
+    capture2=capture()
+    capture2.idCam=1
     img_cnt = 0 
-    img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+    imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+    imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
     while True:
        
-        ret,frame = img.read()
+        ret,frame = imgL.read()
+        ret,frame0=imgR.read()
         cv.imshow("that",frame)
+        cv.imshow("this",frame0)
         if cv.waitKey(1) & 0xFF == ord('p'):
             time.sleep(1)
-            img.release()
+            imgL.release()
+            imgR.release()
             time.sleep(1)
             capture1.setCap(3840,2160)
-            img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-            ret,frame = img.read()
-            png_name = "mesuretestq{}.jpg".format(img_cnt)
+            capture2.setCap(3840,2160)
+            imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+            imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+            ret,frame = imgL.read()
+            ret,frame0=imgR.read()
+            png_name = "mesurecalibR{}.jpg".format(img_cnt)
+            png_name0 = "mesurecalibL{}.jpg".format(img_cnt)
             cv.imwrite(png_name, frame)
+            cv.imwrite(png_name0, frame0)
+
             print("{} written!".format(png_name))
             img_cnt+=1
             time.sleep(1)
-            img.release()
+            imgR.release()
+            imgL.release()
             time.sleep(1)
             capture1.setCap(500,500)
-            img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+            capture2.setCap(500,500)
+            imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+            imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
 
         if cv.waitKey(1) & 0xFF == ord('q'):
-         img.release()
-         breakqqqqqq
+            imgR.release()
+            imgL.release()
+            break
 
 cv.destroyAllWindows()
     

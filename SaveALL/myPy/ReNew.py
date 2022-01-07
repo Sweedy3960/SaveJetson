@@ -2,6 +2,7 @@ import numpy as np
 import cv2 as cv
 import sys
 import time
+import math
 
 
 class Vector2:
@@ -47,7 +48,7 @@ class Capture :
             "nvarguscamerasrc sensor_id=%d ! "
             "video/x-raw(memory:NVMM), "
             "width=(int)%d, height=(int)%d, "
-            "format=(string)NV12, framerate=(fraction)10/1 !"
+            "format=(string)NV12, framerate=(fraction)15/1 !"
             "nvvidconv flip-method=%d ! "
             "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
             "videoconvert ! "
@@ -109,7 +110,7 @@ class ImProc:
         self.Debug=False
         self.DebugD=False
         self.capVidD=False
-        self.imgcnt=0
+        self.cntcap=0
         for i in cap:
             self.frame.append(None)
             self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
@@ -120,7 +121,7 @@ class ImProc:
             self.trhesh.append(None)
             self.found.append(None)
             self.netFil.append(None)
-        self.out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
+        #disself.out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
     def ReadFrames(self):
         for i,j in enumerate(self.cap):
             ret,self.frame[i]=j.read()
@@ -208,57 +209,109 @@ class ImProc:
     
     def GetPos(self):
         a=list(self.tagin.keys())
+        b=list
         #print(a)
         if "tag"+str(App.MIDL) in a:
             for i in a:
-                
-                #print("42detected")
+                print("relations entre 42 et {}".format(i))
+                b=self.RelativePos(self.tagin["tag42"].rvecs,self.tagin["tag42"].tvecs,self.tagin["{}".format(i)].rvecs,self.tagin["{}".format(i)].tvecs)
+                #print("Rvec Comp")
+                #print(b[0])
+                #print("Tvec Comp")
+               # print(b[1])
+                print("diff en X:{}".format((b[1][0]*100))+"cm")
+                print("diff en Y:{}".format((b[1][1]*100))+"cm")
+                #print("42detected")sa
                 #print(self.tagin["tag42"].vect2d)
                 #print(self.tagin["{}".format(i)].vect2d)
-                self.pos[0]=(self.tagin["tag42"].vect2d-self.tagin["{}".format(i)].vect2d).norme()
+                #self.pos[0]=(self.tagin["tag42"].vect2d-self.tagin["{}".format(i)].vect2d).norme()
                 #cv.imwrite("that{}".fromat(i),self.gray[0])
                #//self.pos[0]=(self.tagin["tag42"].x)-(self.tagin["{}".format(i)].x)
                #//self.pos[1]=(self.tagin["tag42"].y)-(self.tagin["{}".format(i)].y)
                #//self.pos[2]=(self.tagin["tag42"].z)-(self.tagin["{}".format(i)].z)
                #//x=((self.pos[0]**2)+(self.pos[1]**2)+(self.pos[2]**2)**0.5)
                #y=round(100*x,2)
-                if self.DebugD:
-                    print("entre 42 et {}".format(i)+"il y a {}".format(round((100*self.pos[0]),2)))
+                #if self.DebugD:
+                #    print("entre 42 et {}".format(i)+"il y a {}".format(round((100*self.pos[0]),2)))
                     
     def DrawAxes(self)   :
         a=list(self.tagin.keys())
         #print(a)
         if "tag"+str(App.MIDL) in a:
             for i in a:
-                
                 self.gray[0] = cv.aruco.drawAxis(self.gray[0], App.CAMERA_MATRIX, App.DIST_COEFFS, self.tagin["{}".format(i)].rvecs,self.tagin["{}".format(i)].tvecs,0.10)
-                
-    def capVid(self):
 
-            self.out.write(self.gray[0])#qcv.imwrite("Thataa",self.gray[0])
-            cv.imwrite("mes{}.bmp".format(time.time()), self.gray[0])
-            
-                
+    def RelativePos(self,rvec1,tvec1,rvec2,tvec2):
+        info=list
+        #print(tvec1,tvec2)
+        composedRvec=None
+        composedTvec=None
+        rvec1,tvec1=rvec1.reshape((3,1)),tvec1.reshape((3,1))
+        rvec2,tvec2=rvec2.reshape((3,1)),tvec2.reshape((3,1))
+        #print(tvec1,tvec2)
+        #inverse le deuxieme marker 
+        invRvec, invTvec=self.InvPersp(rvec1,tvec1)
+        #print(invTvec,tvec2)
+        info= cv.composeRT(rvec2,tvec2,invRvec,invTvec)
+        composedRvec=info[0]
+        composedTvec=info[1]
+        #print(composedRvec)
+        #print(composedTvec)
+        #print(type(composedRvec))
+    
+        composedRvec=composedRvec.reshape((3,1))
+        composedTvec=composedTvec.reshape((3,1))
+        return composedRvec,composedTvec
+
+    def DiffPos(self,composedRvec,composedTvec,Rvec,Tvec):
+        info=[0,0]
+        if composedRvec is not None and composedTvec is not None:
+            cv.composeRT(composedRvec,composedTvec,Rvec,Tvec,info[0],info[1])
+            TcompR,TcompT = info[0],info[1]
+            return TcompR,TcompT
+
+
+    def InvPersp(self,rvec1,tvec1):
+        R,_=cv.Rodrigues(rvec1)
+        R=np.matrix(R).T
+        invTvec=np.dot(R,np.matrix(-tvec1))
+        invRvec,_=cv.Rodrigues(R)
+        #print(invTvec,invRvec)
+        return invRvec,invTvec
+
+    def capVid(self):
+            #self.out.write(self.gray[0])#qcv.imwrite("Thataa",self.gray[0])
+            cv.imwrite("mes{}.bmp".format(time.time()), self.gray[0]) 
+            print(time.time())
             #print("{}".format(i)+str(self.tagin[i].getpos()))
+
     def __del__(self):
-        print("coucou je delete man ")
+        print("coucou je deconstruit")
         self.Release_All()
+
     def Release_All(self):
         for i in self.cap:
             i.release()
             self.out.release()
+
     def TagWork(self):
         self.SortName()
         self.TriTag()
         self.GetPos()
+
     def FrameWorking(self): 
         self.ToGray()
         self.DrawAxes()
-        if self.capVidD:
-            self.capVid()
+        self.cntcap=self.cntcap +1
+        if self.capVidD :
+            if self.cntcap ==10:
+                self.capVid()
+                self.cntcap=0
+
         #self.Gauss()
         #self.Trhesh()
         #self.NetFil()
+
     def Update(self):
         self.ReadFrames()
         self.FrameWorking()
@@ -278,15 +331,15 @@ class Tag:
         self.Id=whoami
         self.tvecs=None
         self.rvecs=None
-        self.tl=None
-        self.tr=None
-        self.bl=None
-        self.br=None
+        self.mat_rota=None
         #(self.tl,self.tr,self.br,self.bl)=infoMarkers
         self.corners = corners
         self.x=0
         self.y=0
         self.z=0
+        self.yall=0
+        self.pitch=0
+        self.roll=0
         self.vect2d=None
         self.diffX=0
         self.diffY=0 
@@ -302,25 +355,58 @@ class Tag:
         self.update()
     def FindV(self):
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
-         
+        (self.rvecs-self.tvecs).any()
         #return(self.rvecs,self.tvecs)
-    def angles(self):
-        mat_rota,jacob=cv.Rodrigues(self.rvecs)
+    def anglesCam(self):
+        self.mat_rota,jacob=cv.Rodrigues(self.rvecs)
+        #[X]
+        roll=math.degrees(math.atan2(self.mat_rota[2][1],self.mat_rota[2][2]))
+        #[Y]
+        pitch=math.degrees(math.atan2(-self.mat_rota[2][0],(((self.mat_rota[2][1]**2)+(self.mat_rota[2][2]**2))**0.5)))
+        #[Z]
+        yall=math.degrees(math.atan2(self.mat_rota[1][0],self.mat_rota[0][0]))
+        return yall,pitch,roll
+   
+    def poscam(self):
+        campos=-self.mat_rota*self.tvecs
+        return campos
+    def getYallPitchRoll(self):
+        #MatRot=np.zeros(shape=(3,3))
+        #cv.Rodrigues(self.rvecs,MatRot,jacobian=0)
+        #ypr=cv.RQDecomp3x3(MatRot)
         
+
+        self.mat_rota=cv.Rodrigues(self.rvecs)[0]
+        #print(self.mat_rota)
+        #print(self.tvecs)
+        #P=np.hstack((self.mat_rota,np.matrix(self.tvecs)))
+        #eulerRad= -cv.decomposeProjectionMatrix(P)[6]
+        #eulerDeg= 180*eulerRad/math.pi
+        #pitch,yaw,roll = [math.radians(_) for _ in eulerRad]
+        ##yaw= 180*eulerRad[1,0]/math.pi
+        ##pitch= 180*((eulerRad[0,0]+math.pi/2)*math.cos(eulerRad[1,0]))/math.pi
+        ##roll= 180*((-(math.pi/2)-eulerRad[0,0])*math.sin(eulerRad[1,0])+eulerRad[2,0])/math.pi
+        #pitch=math.degrees(math.asin(math.sin(pitch)))
+        #yaw=-math.degrees(math.asin(math.sin(roll)))
+        #roll=math.degrees(math.asin(math.sin(yaw)))
+        #return F"({yaw},{pitch},{roll})"
     def FindD(self):
         self.x=self.tvecs[0][0][0]
         self.y=self.tvecs[0][0][1]
         self.z=self.tvecs[0][0][2]
         self.vect2d= Vector3(self.x,self.y,self.z)
+
     def update(self):
         self.FindV()
         self.FindD()
+        self.yall, self.pitch, self.roll =self.anglesCam()
         if self.debug:
-            print("tag{} ".format(self.Id)+"Tvec {}".format(self.vect2d)+"rvecs {}".format(self.rvecs))
-            print("corners")
-            print(self.corners)
-            print("sa taille")
-            print(self.marker_edge)
+            print("tag{} ".format(self.Id)+"/n Tvec {}".format(self.vect2d)+"rvecs {}".format(self.rvecs))
+            print("corners{}".format(self.corners))
+            print("sa taille{}".format(self.marker_edge))
+            print("yall[Z]:{}".format(self.yall)+"pitch[Y]:{}".format(self.pitch)+"roll[X]:{}".format(self.roll))
+            #print(self.getYallPitchRoll())
+            #self.poscam()
     
 def main() -> int:
     app1 = App()
