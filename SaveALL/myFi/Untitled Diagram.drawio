@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-01-08T18:22:49.352Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="hzQ4G67HA600z_yQ39eI" version="16.2.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-08T19:13:06.681Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="pkQaZx4VXLlf3L67ZQz6" version="16.2.2" type="github">
   <diagram name="Page-1" id="9f46799a-70d6-7492-0946-bef42562c5a5">
-    <mxGraphModel dx="2358" dy="1909" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1615" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -223,7 +223,7 @@
         <mxCell id="KPDE7Ow0xTLEw27j_yYb-58" value="+&amp;nbsp;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;NetFil&lt;/span&gt;(type): type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;labelBackgroundColor=default;fontColor=#000000;" vertex="1" parent="78961159f06e98e8-56">
           <mxGeometry y="566" width="200" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="KPDE7Ow0xTLEw27j_yYb-60" value="+&amp;nbsp;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;Detect&lt;/span&gt;(type): type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;labelBackgroundColor=default;fontColor=#000000;" vertex="1" parent="78961159f06e98e8-56">
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-60" value="+&amp;nbsp;&lt;span&gt;&amp;nbsp;&lt;/span&gt;&lt;span&gt;Detect&lt;/span&gt;(None): bool" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;labelBackgroundColor=default;fontColor=#000000;" vertex="1" parent="78961159f06e98e8-56">
           <mxGeometry y="592" width="200" height="26" as="geometry" />
         </mxCell>
         <mxCell id="KPDE7Ow0xTLEw27j_yYb-59" value="+&amp;nbsp;&lt;span style=&quot;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;&quot;&gt;SortName&lt;/span&gt;(type): type" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;labelBackgroundColor=default;fontColor=#000000;" vertex="1" parent="78961159f06e98e8-56">
@@ -389,13 +389,40 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="KPDE7Ow0xTLEw27j_yYb-132" value="img.update()" style="swimlane;childLayout=stackLayout;horizontal=1;fillColor=none;horizontalStack=1;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;strokeColor=none;stackBorder=10;stackSpacing=-12;resizable=1;align=center;points=[];fontColor=#000000;labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;startSize=23;" vertex="1" parent="1">
-          <mxGeometry x="410" y="1560" width="248" height="100" as="geometry" />
+          <mxGeometry x="420" y="1560" width="590" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="KPDE7Ow0xTLEw27j_yYb-133" value="self.update()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
-          <mxGeometry x="10" y="33" width="120" height="57" as="geometry" />
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-133" value=" self.ReadFrames()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
+          <mxGeometry x="10" y="33" width="150" height="57" as="geometry" />
         </mxCell>
-        <mxCell id="KPDE7Ow0xTLEw27j_yYb-135" value="self.update()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
-          <mxGeometry x="118" y="33" width="120" height="57" as="geometry" />
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-135" value="   self.FrameWorking()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
+          <mxGeometry x="148" y="33" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-136" value="   self.Detect()?" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
+          <mxGeometry x="288" y="33" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-137" value="  self.TagWork()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-132">
+          <mxGeometry x="428" y="33" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-139" value="  Nothing" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="848" y="1660" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-138" value="   self.Detect()?" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1830" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-140" value="  self.TagWork()" style="swimlane;childLayout=stackLayout;horizontal=1;fillColor=none;horizontalStack=1;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;strokeColor=none;stackBorder=10;stackSpacing=-12;resizable=1;align=center;points=[];fontColor=#000000;labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;startSize=23;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1560" width="590" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-141" value=" self.ReadFrames()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-140">
+          <mxGeometry x="10" y="33" width="150" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-142" value="   self.FrameWorking()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-140">
+          <mxGeometry x="148" y="33" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-143" value="   self.Detect()?" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-140">
+          <mxGeometry x="288" y="33" width="152" height="57" as="geometry" />
+        </mxCell>
+        <mxCell id="KPDE7Ow0xTLEw27j_yYb-144" value="  self.TagWork()" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];labelBackgroundColor=default;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="KPDE7Ow0xTLEw27j_yYb-140">
+          <mxGeometry x="428" y="33" width="152" height="57" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
