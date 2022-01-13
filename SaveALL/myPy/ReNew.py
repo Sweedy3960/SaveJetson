@@ -416,7 +416,7 @@ class ImProc:
         #save Dictio {ID}:infomarker(propre à la caméra qui a détécté le tag)
         #save=self.TriTag()
 
-         
+         fdshjkfgsdhgfisd
 
 class Tag:
     def __init__(self,corners:list,ListId:list,whoami:int,index:int,):
