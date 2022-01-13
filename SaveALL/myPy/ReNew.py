@@ -174,7 +174,7 @@ class ImProc:
     def Detect(self):
         for i,j in enumerate(self.gray):
             self.infoMarkers[i]=cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
-            #print(self.infoMarkers[i])
+            print(self.infoMarkers[0][1])
             try:
                 if self.infoMarkers[i][1] == None:
                     return 0
@@ -311,10 +311,10 @@ class ImProc:
         self.planTvec=a[1].ravel().reshape(3)
         for i in self.WcoinsTable:
             self.planptsimg=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
-            #cv.circle(self.gray[0],(self.planptsimg[0],self.planptsimg[1]),10,(255,0,0),cv.FILLED,cv.LINE_8)
-            #self.gray[0]=cv.putText(self.gray[0],str(i),(self.planptsimg[0],self.planptsimg[1]),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
+            cv.circle(self.gray[0],(self.planptsimg[0],self.planptsimg[1]),10,(255,0,0),cv.FILLED,cv.LINE_8)
+            self.gray[0]=cv.putText(self.gray[0],str(i),(self.planptsimg[0],self.planptsimg[1]),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
         if self.DebugPRojection:
-            cv.imwrite("Table?.png",self.gray[0])
+            cv.imwrite("Table?.png",self.gray[0])  
     def recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec):
         foundx=False
         foundy=False
@@ -334,22 +334,22 @@ class ImProc:
             a,_=cv.projectPoints((xw,yw,zw),self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
             x0=a[0][0][0]
             y0=a[0][0][1]
-            #print("working")
-            if x0 ==cx:
+            print("working")
+            if x0 > (cx-2) and x0<(cx+2):
                 #print("foundx")
                 foundx=True
             elif x0 > cx:
-                xw=xw-1
+                xw=xw-10
             else:
-                xw=xw+1
+                xw=xw+10
 
-            if y0 ==cy:
+            if y0 >(cy-2)and y0>(cy+2):
                 foundx=True
                 #print("foundy")
             elif x0 > cx:
-                yw=yw-1
+                yw=yw-10
             else:
-                yw=yw+1
+                 yw=yw+10
             #print([x0,y0])
             #print(cx,cy)
         return[xw,yw]
