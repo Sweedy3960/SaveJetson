@@ -4,6 +4,8 @@ import sys
 import time
 import math
 
+from numpy.lib.function_base import interp
+
 
 class Vector2:
     def __init__(self, x: float, y: float) -> None:
@@ -71,6 +73,7 @@ class App:
     MIDL=42
     SAMPLES_T=[47,13,36,17]
     ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
+    W_Center =np.array([(1450,1200,0),(1450,1300,0),(1550,1300,0),(1550,1200,0)], dtype="double")
     MARKER_SAMPLE=0.07
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
@@ -110,7 +113,13 @@ class ImProc:
         self.Debug=False
         self.DebugD=False
         self.capVidD=False
+        self.DebugPRojection=True
+        self.planMrot=None
+        self.planTvec=None
+        self.planptsimg=None
         self.cntcap=0
+        self.WcoinsTable=[(0,0,0),(0,2000,0),(3000,2000,0),(3000,0,0)]
+        self.CcoinsTable=[]
         for i in cap:
             self.frame.append(None)
             self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
@@ -171,6 +180,7 @@ class ImProc:
                     return 0
             except:
                 return 1
+    
     def SortName(self):
         #infomarker [corners][id][rejected points]
         for i,j in enumerate(self.infoMarkers):
@@ -219,8 +229,13 @@ class ImProc:
                 #print(b[0])
                 #print("Tvec Comp")
                # print(b[1])
-                print("diff en X:{}".format((b[1][0]*100))+"cm")
-                print("diff en Y:{}".format((b[1][1]*100))+"cm")
+                
+                #*********************************************************
+                #b=self.Planestimation()
+                #print("laaa")
+                #print(b)
+                #b=self.RelativePos(b[0],b[1],self.tagin["{}".format(i)].rvecs,self.tagin["{}".format(i)].tvecs)
+                #*************************
                 #print("42detected")sa
                 #print(self.tagin["tag42"].vect2d)
                 #print(self.tagin["{}".format(i)].vect2d)
@@ -233,6 +248,8 @@ class ImProc:
                #y=round(100*x,2)
                 #if self.DebugD:
                 #    print("entre 42 et {}".format(i)+"il y a {}".format(round((100*self.pos[0]),2)))
+                print("diff en X:{}".format((b[1][0]*100))+"cm")
+                print("diff en Y:{}".format((b[1][1]*100))+"cm")
                     
     def DrawAxes(self)   :
         a=list(self.tagin.keys())
@@ -284,6 +301,63 @@ class ImProc:
             cv.imwrite("mes{}.bmp".format(time.time()), self.gray[0]) 
             print(time.time())
             #print("{}".format(i)+str(self.tagin[i].getpos()))
+    def Getplan(self):
+        ret,rvec,tvec = cv.solvePnP(App.W_Center,self.tagin["tag42"].corners,App.CAMERA_MATRIX,App.DIST_COEFFS)
+        return [rvec,tvec]
+
+    def projecttablepoint(self):
+        a=self.Getplan()
+        self.planMrot,_=cv.Rodrigues(a[0])
+        self.planTvec=a[1].ravel().reshape(3)
+        for i in self.WcoinsTable:
+            self.planptsimg=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
+            #cv.circle(self.gray[0],(self.planptsimg[0],self.planptsimg[1]),10,(255,0,0),cv.FILLED,cv.LINE_8)
+            #self.gray[0]=cv.putText(self.gray[0],str(i),(self.planptsimg[0],self.planptsimg[1]),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
+        if self.DebugPRojection:
+            cv.imwrite("Table?.png",self.gray[0])
+    def recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec):
+        foundx=False
+        foundy=False
+        #coordonée dans img
+        cx=int(centrepix[0])
+        cy=int(centrepix[1])
+        #position fixtive dans limage
+        x0=0
+        y0=0
+        #coordonée irl
+        xw=1500
+        yw=1000
+        zw=0
+
+        
+        while foundx==False and foundy==False:
+            a,_=cv.projectPoints((xw,yw,zw),self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
+            x0=a[0][0][0]
+            y0=a[0][0][1]
+            #print("working")
+            if x0 < (cx+2) and x0 > (cx-2):
+                #print("foundx")
+                foundx=True
+            elif x0 > cx:
+                xw=xw-1
+            else:
+                xw=xw+1
+
+            if y0 < (cy+2) and y0 > (cy-2):
+                foundx=True
+                #print("foundy")
+            elif x0 > cx:
+                yw=yw-1
+            else:
+                yw=yw+1
+            #print([x0,y0])
+            #print(cx,cy)
+        return[xw,yw]
+        
+
+
+
+
 
     def __del__(self):
         print("coucou je deconstruit")
@@ -297,11 +371,19 @@ class ImProc:
     def TagWork(self):
         self.SortName()
         self.TriTag()
-        self.GetPos()
+        self.projecttablepoint()
+        #self.GetPos()
+        b= list(self.tagin.keys())
+        b.remove("tag42")
+        #print(b)
+        for i in b:
+            a= self.recherchecentreTag(self.planptsimg,self.tagin[i].centrepix,self.planMrot,self.planTvec)
+            self.tagin[i].irlcord=a
+            print(self.tagin[i].Id,self.tagin[i].irlcord)
+        
 
     def FrameWorking(self): 
         self.ToGray()
-        self.DrawAxes()
         self.cntcap=self.cntcap +1
         if self.capVidD :
             if self.cntcap ==10:
@@ -334,16 +416,16 @@ class Tag:
         self.mat_rota=None
         #(self.tl,self.tr,self.br,self.bl)=infoMarkers
         self.corners = corners
-        self.x=0
-        self.y=0
-        self.z=0
+        self.centrepix=[int(((corners[0][0][0]+corners[0][1][0]+corners[0][2][0]+corners[0][3][0])*0.25)),int(((corners[0][0][1]+corners[0][1][1]+corners[0][2][1]+corners[0][3][1])*0.25))]
+
+        self.irlcord=(0,0)
         self.yall=0
         self.pitch=0
-        self.roll=0
+        self.roll=0    
         self.vect2d=None
         self.diffX=0
         self.diffY=0 
-        self.debug=True
+        self.debug=False
         if self.Id == App.MIDL:
             self.posRe=(1450,1200)
             self.marker_edge= App.MARKER_MIDL
@@ -405,6 +487,7 @@ class Tag:
             print("corners{}".format(self.corners))
             print("sa taille{}".format(self.marker_edge))
             print("yall[Z]:{}".format(self.yall)+"pitch[Y]:{}".format(self.pitch)+"roll[X]:{}".format(self.roll))
+            #print("position irl{}".format(self.irlcord))
             #print(self.getYallPitchRoll())
             #self.poscam()
     
