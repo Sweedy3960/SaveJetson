@@ -73,7 +73,7 @@ class App:
     MIDL=42
     SAMPLES_T=[47,13,36,17]
     ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
-    W_Center =np.array([(1450,1200,0),(1450,1300,0),(1550,1300,0),(1550,1200,0)], dtype="double")
+    W_Center =np.array([(1450,1200,530),(1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
     MARKER_SAMPLE=0.07
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
@@ -113,7 +113,7 @@ class ImProc:
         self.Debug=False
         self.DebugD=False
         self.capVidD=False
-        self.DebugPRojection=True
+        self.DebugPRojection=False
         self.planMrot=None
         self.planTvec=None
         self.planptsimg=None
@@ -253,7 +253,7 @@ class ImProc:
                     
     def DrawAxes(self)   :
         a=list(self.tagin.keys())
-        #print(a)
+        #print(a)c
         if "tag"+str(App.MIDL) in a:
             for i in a:
                 self.gray[0] = cv.aruco.drawAxis(self.gray[0], App.CAMERA_MATRIX, App.DIST_COEFFS, self.tagin["{}".format(i)].rvecs,self.tagin["{}".format(i)].tvecs,0.10)
@@ -310,11 +310,19 @@ class ImProc:
         self.planMrot,_=cv.Rodrigues(a[0])
         self.planTvec=a[1].ravel().reshape(3)
         for i in self.WcoinsTable:
-            self.planptsimg=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
-            cv.circle(self.gray[0],(self.planptsimg[0],self.planptsimg[1]),10,(255,0,0),cv.FILLED,cv.LINE_8)
-            self.gray[0]=cv.putText(self.gray[0],str(i),(self.planptsimg[0],self.planptsimg[1]),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
+            self.planptsimg,_=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
+            b=self.planptsimg[0][0][0]
+            c=self.planptsimg[0][0][1]
+            #print("la x")
+            #print(b)
+            #print("la y")
+            #print(c)
+            z=self.gray[0]
+            #print(z)
+            z= cv.circle(z,(int(b),int(c)),2,(255,0,0),thickness=3,lineType= cv.FILLED)
+            z=cv.putText(z,str(i),(int(b),int(c)),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
         if self.DebugPRojection:
-            cv.imwrite("Table?.png",self.gray[0])  
+            cv.imwrite("Table{}.png".format(time.time()),z)  
     def recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec):
         foundx=False
         foundy=False
@@ -325,35 +333,38 @@ class ImProc:
         x0=0
         y0=0
         #coordonée irl
-        xw=1500
-        yw=1000
+        xw=0
+        yw=0
         zw=0
 
         
-        while foundx==False and foundy==False:
+        while foundx==False or foundy==False:
             a,_=cv.projectPoints((xw,yw,zw),self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
             x0=a[0][0][0]
             y0=a[0][0][1]
-            print("working")
+            #print("working")
             if x0 > (cx-2) and x0<(cx+2):
-                #print("foundx")
+                if self.DebugPRojection:
+                    print("foundx")
                 foundx=True
             elif x0 > cx:
-                xw=xw-10
+                xw=xw-1
             else:
-                xw=xw+10
+                xw=xw+1
 
-            if y0 >(cy-2)and y0>(cy+2):
-                foundx=True
-                #print("foundy")
-            elif x0 > cx:
-                yw=yw-10
+            if y0 >(cy-2) and y0<(cy+2):
+                foundy=True
+                if self.DebugPRojection:
+                    print("foundy")
+            elif y0 > cy:
+                yw=yw-1
             else:
-                 yw=yw+10
-            #print([x0,y0])
-            #print(cx,cy)
+                yw=yw+1
+                if self.DebugPRojection:
+                    print([x0,y0])
+                    print(cx,cy) 
+                    print([xw,yw])
         return[xw,yw]
-        
 
 
 
@@ -378,6 +389,7 @@ class ImProc:
         #print(b)
         for i in b:
             a= self.recherchecentreTag(self.planptsimg,self.tagin[i].centrepix,self.planMrot,self.planTvec)
+            print(a)
             self.tagin[i].irlcord=a
             print(self.tagin[i].Id,self.tagin[i].irlcord)
         
@@ -417,7 +429,6 @@ class Tag:
         #(self.tl,self.tr,self.br,self.bl)=infoMarkers
         self.corners = corners
         self.centrepix=[int(((corners[0][0][0]+corners[0][1][0]+corners[0][2][0]+corners[0][3][0])*0.25)),int(((corners[0][0][1]+corners[0][1][1]+corners[0][2][1]+corners[0][3][1])*0.25))]
-
         self.irlcord=(0,0)
         self.yall=0
         self.pitch=0
