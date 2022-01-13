@@ -335,7 +335,7 @@ class ImProc:
             x0=a[0][0][0]
             y0=a[0][0][1]
             #print("working")
-            if x0 < (cx+2) and x0 > (cx-2):
+            if x0 ==cx:
                 #print("foundx")
                 foundx=True
             elif x0 > cx:
@@ -343,7 +343,7 @@ class ImProc:
             else:
                 xw=xw+1
 
-            if y0 < (cy+2) and y0 > (cy-2):
+            if y0 ==cy:
                 foundx=True
                 #print("foundy")
             elif x0 > cx:
