@@ -1,10 +1,11 @@
+import string
 import numpy as np 
 import cv2 as cv
 import sys
 import time
 
 """
-( -> None : inutile pour l'éxécution pour passage souris)
+( "-> None " : inutile pour l'éxécution, pour passage souris GUI)
 Classe capture:
 création d'un pipeline pour la capture d'image.
 utilisation de GStreamer, qui est une bibliothèque logicielle de manipulation de sons et d'images à la base écrite en C
@@ -63,13 +64,13 @@ propriété:
     MARKER_EDGE = 0.07                                                          const float taille du coté du marker
     MARKER_MIDL = 0.10                                                          const float taille du coté du marker
     MIDL=42                                                                     const int Id du marker centrale
-    SAMPLES_T=[47,13,36,17]
-    ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
-    W_Center =np.array([(1450,1200,530),
+    SAMPLES_T=[47,13,36,17]                                                     const list id des tag disponibles pour les échantillons
+    ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]                                             const list id des tag disponibles pour les robots  
+    W_Center =np.array([(1450,1200,530),                                        const ndarray contenant les coordonée real [W]orld (type double)
     (1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
-    MARKER_SAMPLE=0.07
-    calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
+    MARKER_SAMPLE=0.07                                                          const int taille du marker centrale
+    calib_path="SaveALL/myFi/"                                                  const string chemin d'accès au fichier contenant les .txt des paramètres de la caméra
+    CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')     const contenant les vlaeurs extraite des fichiers .txt des paramètres caméra
     DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
 methode:
     __init__(self)      constructeur
@@ -126,7 +127,47 @@ class App:
         if cv.waitKey(1) & 0xFF == ord('q'):
             self.img.Release_All()
             self.running = False
-
+"""
+Class ImProc :
+classe Image Process, "traitement" des info de l'image. de manière à pourvoir utilisé deux caméra,
+toutes les fonction sont apliquée à une liste contenant toujours les deux "images",
+peut bien évidement être améliorer car pour l'instant cette version n'as pas été testée 
+propriété:
+    self.frame = []                                                                     list des frames(data image) 
+    self.gray = []                                                                      list des frames en teinte de gris                                        
+    self.infoMarkers = []                                                               list contenant le "retour" de la fonction cv.aruco.detectMarkers: [corners][id][rejectedPoints]
+    self.cap=[]                                                                         list contenant les pipeline de capture(objets,1 pipeline par camera) 
+    self.ListId=[]                                                                      list des Id trouvé, utilisé pour le "stockage" des data Tag en temps que key du dictionary Tagin
+    self.tagin={}                                                                       Dictionnary des tag trouvé sur la table [key] = contenu --> [tag1] = Objet/instance de class Tag 
+    self.planMrot=None                                                                  matrice de rotation du plan 
+    self.planTvec=None                                                                  vecteur de rotation du plan
+    self.planptsimg=None                                                                point dans l'image (retour de la fonction cv.projectPoint(Wcoord,MatRota,Tvec,CamMAtrix,CamDisto) )
+    self.WcoinsTable=[(0,0,0),(0,2000,0),(3000,2000,0),(3000,0,0)]                      Cordonée des coins de la table Dans le monde réel (pour projection dans notre plan) 
+    self.CcoinsTable=[]                                                                 coorcodonée des coins de la table projetée sur le plan dan limage
+    for i in cap:                                                                       itération servant à l'utilisation de plusieur caméra
+        self.frame.append(None)
+        self.cap.append(cv.VideoCapture(i.gstreamer_pipeline(),cv.CAP_GSTREAMER))
+        self.infoMarkers.append(None)  
+        self.ListId.append([])
+        self.gray.append(None)
+methode:
+    __init__(self)      constructeur
+    main(self)          éxécution principale 
+    __del__(self)       déconstructeur  
+    ReadFrames(self)    récupétation images 
+    ToGray(self)        couleurs->teinte de gris
+    Detect(self)        détéction des Tag
+    SortName(self)      Tri des id 
+    SortCorn(self,listcam:int,posList:int)  tris des cordonée 
+    TriTag(self)        récupération des tag ttrouvé
+    Getplan(self)       création du plan 
+    projecttablepoint(self)  projection des coins de la table dans le plan sur limage
+    recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec)   recherche des cordonée du tag 
+    Release_All(self)    release des pipeline de capture
+    TagWork(self)        retire le tag du centre des tag trouvé et recherche leur cordonée 
+    FrameWorking(self)   anciennement utilusé quand pliseurs filtres de seuil, netteté etc 
+    Update(self)        mise a jours de image process 
+"""
 
 class ImProc:
 
@@ -136,18 +177,10 @@ class ImProc:
         self.infoMarkers = []
         self.cap=[]
         self.ListId=[]
-        self.found=[]
-        self.detected =False
         self.tagin={}
-        self.pos=[0,0,0]
-        self.Debug=False
-        self.DebugD=False
-        self.capVidD=False
-        self.DebugPRojection=False
         self.planMrot=None
         self.planTvec=None
         self.planptsimg=None
-        self.cntcap=0
         self.WcoinsTable=[(0,0,0),(0,2000,0),(3000,2000,0),(3000,0,0)]
         self.CcoinsTable=[]
         for i in cap:
@@ -156,7 +189,6 @@ class ImProc:
             self.infoMarkers.append(None)  
             self.ListId.append([])
             self.gray.append(None)
-            self.found.append(None)
         
     """
     déconstructeur:
@@ -170,14 +202,11 @@ class ImProc:
     def ReadFrames(self):
         for i,j in enumerate(self.cap):
             ret,self.frame[i]=j.read()
-            if self.Debug:
-                cv.imshow("fr{}".format(i), self.frame[i])
             
     def ToGray(self):
         for i,j in enumerate(self.frame):
             self.gray[i]=cv.cvtColor(j, cv.COLOR_BGR2GRAY)
-        if self.Debug:
-                cv.imshow("GR{}".format(i), self.gray[i])
+
     def Detect(self):
         for i,j in enumerate(self.gray):
             self.infoMarkers[i]=cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
@@ -221,9 +250,6 @@ class ImProc:
             z= cv.circle(z,(int(b),int(c)),2,(255,0,0),thickness=3,lineType= cv.FILLED)
             z=cv.putText(z,str(i),(int(b),int(c)),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
             self.CcoinsTable.append(b,c)
-        if self.DebugPRojection:
-            cv.imwrite("Table{}.png".format(time.time()),z)  
-
 
     def recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec):
         foundx=False
@@ -340,7 +366,7 @@ class Tag:
             #print(self.getYallPitchRoll())
             #self.poscam()
     
-def main() -> int:
+def main() -> string:
     app1 = App()
     app1.main()
     sys.exit(0)
