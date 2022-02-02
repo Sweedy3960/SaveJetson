@@ -5,7 +5,7 @@ import sys
 import time
 
 """
-( "-> None " : inutile pour l'éxécution, pour passage souris GUI)
+( "-> None " : inutile pour l'éxécution, pour passage souris infobulle)
 Classe capture:
 création d'un pipeline pour la capture d'image.
 utilisation de GStreamer, qui est une bibliothèque logicielle de manipulation de sons et d'images à la base écrite en C
