@@ -313,11 +313,6 @@ class ImProc:
 
     def FrameWorking(self): 
         self.ToGray()
-        self.cntcap=self.cntcap +1
-        if self.capVidD :
-            if self.cntcap ==10:
-                self.capVid()
-                self.cntcap=0
 
   
     def Update(self):

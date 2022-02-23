@@ -4,7 +4,6 @@ import sys
 import time
 import math
 
-from numpy.lib.function_base import interp
 
 
 class Vector2:
@@ -38,7 +37,7 @@ class Vector3:
 
 class Capture :
     def __init__(self):
-        self.idCam=0
+        self.idCam=1
         self.capture_width=3840
         self.capture_height=2160
         self.display_width=3840
@@ -74,7 +73,7 @@ class App:
     SAMPLES_T=[47,13,36,17]
     ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
     W_Center =np.array([(1450,1200,530),(1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
-    MARKER_SAMPLE=0.07
+    MARKER_SAMPLE=0.05
     calib_path="SaveALL/myFi/"
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
     DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
@@ -319,8 +318,11 @@ class ImProc:
             #print(c)
             z=self.gray[0]
             #print(z)
-            z= cv.circle(z,(int(b),int(c)),2,(255,0,0),thickness=3,lineType= cv.FILLED)
-            z=cv.putText(z,str(i),(int(b),int(c)),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
+            try:
+                z= cv.circle(z,(int(b),int(c)),2,(255,0,0),thickness=3,lineType= cv.FILLED)
+                z=cv.putText(z,str(i),(int(b),int(c)),fontFace=cv.FONT_HERSHEY_DUPLEX,fontScale=3.0,color=(125,245,55),thickness=3)
+            except:
+                pass
         if self.DebugPRojection:
             cv.imwrite("Table{}.png".format(time.time()),z)  
     def recherchecentreTag(self,plantimg,centrepix,Mrot,Tvec):
@@ -416,7 +418,6 @@ class ImProc:
         #save Dictio {ID}:infomarker(propre à la caméra qui a détécté le tag)
         #save=self.TriTag()
 
-         fdshjkfgsdhgfisd
 
 class Tag:
     def __init__(self,corners:list,ListId:list,whoami:int,index:int,):
