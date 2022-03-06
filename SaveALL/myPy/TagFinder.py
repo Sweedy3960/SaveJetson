@@ -99,12 +99,13 @@ class App:
     CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
     DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
 
-    """
-    Constructeur:
-        creation d'une liste contenant des insatnce de la classe capture --> des pipelines 
-        creation d'une instance de la classe improc avec comme paramètre la liste de pipeline
-    """
+ 
     def __init__(self) -> None: 
+        """
+        Constructeur:
+            creation d'une liste contenant des insatnce de la classe capture --> des pipelines 
+            creation d'une instance de la classe improc avec comme paramètre la liste de pipeline
+        """
         self.capture1 = []
         #for i in NB_CAM :
         self.capture1.append(Capture())
