@@ -1,0 +1,698 @@
+Added Component: Designator=K1(SOT323)
+Added Component: Designator=K2(SOT323)
+Added Component: Designator=K3(SOT323)
+Added Component: Designator=K4(SOT323)
+Added Component: Designator=R1(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R2(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R3(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R4(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R5(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R6(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R7(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R8(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R9(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R10(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R11(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=X1(HDR10X1_M)
+Add component (AddParameter): Name = "Category"; Value = "Headers and Wire Housings"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "https://datasheet.ciiva.com/738/6130xx11121-738550.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://datasheet.ciiva.com/738/6130xx11121-738550.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "https://datasheet.ciiva.com/7631/1442175-7631321.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://datasheet.ciiva.com/7631/1442175-7631321.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3Description"; Value = "https://datasheet.ciiva.com/48700/001088187-da-01-en-wr-phd-tht-stiftleiste-61301011121-48700876.pdf?src-supplier=Conrad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3URL"; Value = "https://datasheet.ciiva.com/48700/001088187-da-01-en-wr-phd-tht-stiftleiste-61301011121-48700876.pdf?src-supplier=Conrad"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Male Pin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Copper Alloy,Copper"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Mating Length"; Value = "0.236inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Gold"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Type"; Value = "Male Pin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current Rating"; Value = "3A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "Header10x1_M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Flammability Rating"; Value = "UL94 V-0"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Height"; Value = "11.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Housing Material"; Value = "PBT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Insulation Resistance"; Value = "1GR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Length"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Electronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "61301011121"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "125°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-40°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Contacts"; Value = "10"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Positions"; Value = "10"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Orientation"; Value = "Straight"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package Quantity"; Value = "1000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=0.89000, 10=0.87400, 50=0.73900, 100=0.67200, 1000=0.42700, 10000=0.42700 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 2"; Value = "1=0.89000, 10=0.87400, 50=0.80600, 100=0.73900, 200=0.67200 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "REACH SVHC"; Value = "Unknown"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Series"; Value = "WR-PHD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "MEION_Connectors.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "1900"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 2"; Value = "4313"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "Solder"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage Rating"; Value = "250V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Width"; Value = "25.4mm"; VariantName = "[No Variations]"
+Added Component: Designator=X2(HDR8X1_M)
+Add component (AddParameter): Name = "Category"; Value = "Connectors"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Male Pin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Copper"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Mating Length"; Value = "0.236inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Gold"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "Header8x1_M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Electronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "61300811121"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Contacts"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Positions"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "0.1inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=0.37000, 10=0.31500, 50=0.21900, 100=0.19900, 1000=0.18100, 10000=0.18100 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 2"; Value = "1=0.37000, 10=0.31500, 25=0.26320, 50=0.21900, 100=0.19900, 1000=0.18100 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "REACH SVHC"; Value = "Unknown"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "MEION_Connectors.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "4202"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 2"; Value = "10891"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "Solder"; VariantName = "[No Variations]"
+Added Component: Designator=X3(HDR6X1_M)
+Add component (AddParameter): Name = "Category"; Value = "Headers and Wire Housings"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "http://www.mouser.com/ds/2/445/6130xx11121-538006.pdf?src-supplier=Mouser"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.mouser.com/ds/2/445/6130xx11121-538006.pdf?src-supplier=Mouser"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3Description"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink3URL"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Male Pin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Copper Alloy,Copper"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Mating Length"; Value = "0.236inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Gold"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current Rating"; Value = "3A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "Header6x1_M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Housing Material"; Value = "PBT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Lead Free"; Value = "Lead Free"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Electronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "61300611121"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "125°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-40°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Contacts"; Value = "6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Positions"; Value = "6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "0.1inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=0.33000, 10=0.27900, 50=0.19400, 100=0.17600, 1000=0.16000, 10000=0.16000 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 2"; Value = "1=0.33000, 10=0.27900, 25=0.23200, 50=0.19400, 100=0.17600, 1000=0.16000 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "REACH SVHC"; Value = "Unknown"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "MEION_Connectors.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "7278"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 2"; Value = "46170"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Voltage Rating"; Value = "250V"; VariantName = "[No Variations]"
+Added Component: Designator=X4(HDR8X1_M)
+Add component (AddParameter): Name = "Category"; Value = "Connectors"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Color"; Value = "Black"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.farnell.com/cad/1737268.pdf?src-supplier=Element14"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/6130xx11121.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Connector Type"; Value = "Male Pin"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Material"; Value = "Copper"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Mating Length"; Value = "0.236inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Contact Plating"; Value = "Gold"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "Header8x1_M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Gender"; Value = "Male"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Wurth Electronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "61300811121"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Through Hole"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Contacts"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Positions"; Value = "8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Rows"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Bulk"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "0.1inch"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=0.37000, 10=0.31500, 50=0.21900, 100=0.19900, 1000=0.18100, 10000=0.18100 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 2"; Value = "1=0.37000, 10=0.31500, 25=0.26320, 50=0.21900, 100=0.19900, 1000=0.18100 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "REACH SVHC"; Value = "Unknown"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "MEION_Connectors.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "4202"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 2"; Value = "10891"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Termination"; Value = "Solder"; VariantName = "[No Variations]"
+Added Component: Designator=X5(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X6(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X7(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X8(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X9(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X10(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X11(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X12(691210910003)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910003.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910003"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X13(691210910003)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910003.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910003"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X14(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X15(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X16(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X17(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X18(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X19(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X20(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X21(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=X22(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=IO4 Pin=K1-1
+Added Pin To Net: NetName=+5V Pin=K1-3
+Added Pin To Net: NetName=IO2 Pin=K2-1
+Added Pin To Net: NetName=+5V Pin=K2-3
+Added Pin To Net: NetName=IO8 Pin=K3-1
+Added Pin To Net: NetName=+5V Pin=K3-3
+Added Pin To Net: NetName=SS/IO10 Pin=K4-1
+Added Pin To Net: NetName=+5V Pin=K4-3
+Added Pin To Net: NetName=IO4 Pin=R1-1
+Added Pin To Net: NetName=GND Pin=R1-2
+Added Pin To Net: NetName=IO2 Pin=R2-1
+Added Pin To Net: NetName=GND Pin=R2-2
+Added Pin To Net: NetName=NetR5_2 Pin=R5-2
+Added Pin To Net: NetName=+5V Pin=R7-1
+Added Pin To Net: NetName=NetR7_2 Pin=R7-2
+Added Pin To Net: NetName=+5V Pin=R8-1
+Added Pin To Net: NetName=+5V Pin=R9-1
+Added Pin To Net: NetName=NetR9_2 Pin=R9-2
+Added Pin To Net: NetName=MISO/IO12 Pin=R10-1
+Added Pin To Net: NetName=NetR10_2 Pin=R10-2
+Added Pin To Net: NetName=SCK/IO13 Pin=R11-1
+Added Pin To Net: NetName=NetR11_2 Pin=R11-2
+Added Pin To Net: NetName=IO8 Pin=X1-1
+Added Pin To Net: NetName=IO9 Pin=X1-2
+Added Pin To Net: NetName=SS/IO10 Pin=X1-3
+Added Pin To Net: NetName=MOSI/IO11 Pin=X1-4
+Added Pin To Net: NetName=MISO/IO12 Pin=X1-5
+Added Pin To Net: NetName=SCK/IO13 Pin=X1-6
+Added Pin To Net: NetName=GND Pin=X1-7
+Added Pin To Net: NetName=AREF Pin=X1-8
+Added Pin To Net: NetName=AD4/SDA Pin=X1-9
+Added Pin To Net: NetName=AD5/SCL Pin=X1-10
+Added Pin To Net: NetName=RX/IO0 Pin=X2-1
+Added Pin To Net: NetName=TX/IO1 Pin=X2-2
+Added Pin To Net: NetName=IO2 Pin=X2-3
+Added Pin To Net: NetName=IO3 Pin=X2-4
+Added Pin To Net: NetName=IO4 Pin=X2-5
+Added Pin To Net: NetName=IO5 Pin=X2-6
+Added Pin To Net: NetName=IO6 Pin=X2-7
+Added Pin To Net: NetName=IO7 Pin=X2-8
+Added Pin To Net: NetName=AD0 Pin=X3-1
+Added Pin To Net: NetName=AD1 Pin=X3-2
+Added Pin To Net: NetName=AD2 Pin=X3-3
+Added Pin To Net: NetName=AD3 Pin=X3-4
+Added Pin To Net: NetName=AD4/SDA Pin=X3-5
+Added Pin To Net: NetName=AD5/SCL Pin=X3-6
+Added Pin To Net: NetName=+5V Pin=X4-2
+Added Pin To Net: NetName=RESET Pin=X4-3
+Added Pin To Net: NetName=+3V3 Pin=X4-4
+Added Pin To Net: NetName=+5V Pin=X4-5
+Added Pin To Net: NetName=GND Pin=X4-6
+Added Pin To Net: NetName=GND Pin=X4-7
+Added Pin To Net: NetName=VIN Pin=X4-8
+Added Pin To Net: NetName=GND Pin=X5-1
+Added Pin To Net: NetName=+5V Pin=X5-2
+Added Pin To Net: NetName=IO4 Pin=X6-1
+Added Pin To Net: NetName=IO4 Pin=X6-2
+Added Pin To Net: NetName=GND Pin=X7-2
+Added Pin To Net: NetName=GND Pin=X8-2
+Added Pin To Net: NetName=IO2 Pin=X9-1
+Added Pin To Net: NetName=IO2 Pin=X9-2
+Added Pin To Net: NetName=GND Pin=X10-2
+Added Pin To Net: NetName=GND Pin=X11-2
+Added Pin To Net: NetName=GND Pin=X12-1
+Added Pin To Net: NetName=+5V Pin=X12-2
+Added Pin To Net: NetName=IO3 Pin=X12-3
+Added Pin To Net: NetName=GND Pin=X13-1
+Added Pin To Net: NetName=+5V Pin=X13-2
+Added Pin To Net: NetName=IO5 Pin=X13-3
+Added Pin To Net: NetName=GND Pin=X14-2
+Added Pin To Net: NetName=GND Pin=X15-2
+Added Pin To Net: NetName=NetR5_2 Pin=X16-1
+Added Pin To Net: NetName=GND Pin=X16-2
+Added Pin To Net: NetName=GND Pin=X17-2
+Added Pin To Net: NetName=NetR7_2 Pin=X18-1
+Added Pin To Net: NetName=GND Pin=X18-2
+Added Pin To Net: NetName=GND Pin=X19-2
+Added Pin To Net: NetName=NetR9_2 Pin=X20-1
+Added Pin To Net: NetName=GND Pin=X20-2
+Added Pin To Net: NetName=NetR10_2 Pin=X21-1
+Added Pin To Net: NetName=GND Pin=X21-2
+Added Pin To Net: NetName=NetR11_2 Pin=X22-1
+Added Pin To Net: NetName=GND Pin=X22-2
+Added Pin To Net: NetName=NetK1_2 Pin=K1-2
+Added Pin To Net: NetName=NetK1_2 Pin=X7-1
+Added Pin To Net: NetName=NetK1_2 Pin=X8-1
+Added Net: Name=NetK1_2
+Added Pin To Net: NetName=NetK2_2 Pin=K2-2
+Added Pin To Net: NetName=NetK2_2 Pin=X10-1
+Added Pin To Net: NetName=NetK2_2 Pin=X11-1
+Added Net: Name=NetK2_2
+Added Pin To Net: NetName=NetK3_2 Pin=K3-2
+Added Pin To Net: NetName=NetK3_2 Pin=R3-1
+Added Pin To Net: NetName=NetK3_2 Pin=R4-1
+Added Net: Name=NetK3_2
+Added Pin To Net: NetName=NetK4_2 Pin=K4-2
+Added Pin To Net: NetName=NetK4_2 Pin=R5-1
+Added Pin To Net: NetName=NetK4_2 Pin=R6-1
+Added Net: Name=NetK4_2
+Added Pin To Net: NetName=NetR3_2 Pin=R3-2
+Added Pin To Net: NetName=NetR3_2 Pin=X14-1
+Added Net: Name=NetR3_2
+Added Pin To Net: NetName=NetR4_2 Pin=R4-2
+Added Pin To Net: NetName=NetR4_2 Pin=X15-1
+Added Net: Name=NetR4_2
+Added Pin To Net: NetName=NetR6_2 Pin=R6-2
+Added Pin To Net: NetName=NetR6_2 Pin=X17-1
+Added Net: Name=NetR6_2
+Added Pin To Net: NetName=NetR8_2 Pin=R8-2
+Added Pin To Net: NetName=NetR8_2 Pin=X19-1
+Added Net: Name=NetR8_2
+Added Class: Name=ArduinoShield
+Added Room: Name=ArduinoShield

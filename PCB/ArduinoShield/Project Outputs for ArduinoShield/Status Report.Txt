@@ -1,0 +1,14 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 13:21:47 On 10.03.2022
+
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [ArduinoShield.PrjPcb]
+   Generated File[ArduinoShield.xlsx]
+
+
+Files Generated   : 1
+Documents Printed : 0
+
+Finished Output Generation At 13:21:50 On 10.03.2022

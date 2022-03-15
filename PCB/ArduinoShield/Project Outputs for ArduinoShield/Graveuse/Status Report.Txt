@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [ArduinoShield.PcbDoc]
+   Generated File[ArduinoShield-Plated.TXT]
+   Generated File[ArduinoShield-BoardEdgeRout.TXT]
+   Generated File[ArduinoShield.LDP]
+   Generated File[ArduinoShield.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 13:21:44 On 10.03.2022

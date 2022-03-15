@@ -1,0 +1,34 @@
+Removed Pin From Net: NetName=GND Pin=X7-2
+Removed Pin From Net: NetName=GND Pin=X8-2
+Removed Pin From Net: NetName=GND Pin=X10-2
+Removed Pin From Net: NetName=GND Pin=X11-2
+Change Component Comment : Designator=R1 Old Comment=VALUE New Comment=10k
+Change Component Comment : Designator=R2 Old Comment=VALUE New Comment=10k
+Added Component: Designator=R12(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R13(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R14(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Component: Designator=R15(0603)
+Add component (AddParameter): Name = "Supplier 1"; Value = "CPNV"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=R12-2
+Added Pin To Net: NetName=GND Pin=R13-2
+Added Pin To Net: NetName=GND Pin=R14-2
+Added Pin To Net: NetName=GND Pin=R15-2
+Added Pin To Net: NetName=NetR12_1 Pin=R12-1
+Added Pin To Net: NetName=NetR12_1 Pin=X10-2
+Added Net: Name=NetR12_1
+Added Pin To Net: NetName=NetR13_1 Pin=R13-1
+Added Pin To Net: NetName=NetR13_1 Pin=X11-2
+Added Net: Name=NetR13_1
+Added Pin To Net: NetName=NetR14_1 Pin=R14-1
+Added Pin To Net: NetName=NetR14_1 Pin=X7-2
+Added Net: Name=NetR14_1
+Added Pin To Net: NetName=NetR15_1 Pin=R15-1
+Added Pin To Net: NetName=NetR15_1 Pin=X8-2
+Added Net: Name=NetR15_1
+Added Member To Class: ClassName=ArduinoShield Member=Component R12 220R
+Added Member To Class: ClassName=ArduinoShield Member=Component R13 220R
+Added Member To Class: ClassName=ArduinoShield Member=Component R14 220R
+Added Member To Class: ClassName=ArduinoShield Member=Component R15 220R
