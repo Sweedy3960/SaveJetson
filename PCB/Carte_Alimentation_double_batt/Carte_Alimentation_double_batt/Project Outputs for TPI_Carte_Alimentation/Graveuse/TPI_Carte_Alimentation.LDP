@@ -1,0 +1,4 @@
+Layer Pairs Export File for PCB: G:\Eurobot\Carte_Alimentation_double_batt\Carte_Alimentation_double_batt\TPI_Carte_Alimentation.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=tpi_carte_alimentation-roundholes-plated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Plated_Slot_Holes|DrillFile=tpi_carte_alimentation-slotholes-plated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=tpi_carte_alimentation-roundholes-nonplated.txt|DrillLayers=gtl,gbl

@@ -1,0 +1,15 @@
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 10:46:15 On 27.02.2020
+
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [TPI_Carte_Alimentation.PrjPcb]
+   Generated File[TPI_Carte_Alimentation.xls]
+   Generated File[TPI_Carte_Alimentation.xls]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 10:46:18 On 27.02.2020

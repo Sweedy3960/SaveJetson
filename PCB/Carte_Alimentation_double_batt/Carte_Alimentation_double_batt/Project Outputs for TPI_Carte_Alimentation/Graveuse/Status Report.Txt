@@ -1,0 +1,15 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [TPI_Carte_Alimentation.PcbDoc]
+   Generated File[TPI_Carte_Alimentation-RoundHoles-Plated.TXT]
+   Generated File[TPI_Carte_Alimentation-RoundHoles-NonPlated.TXT]
+   Generated File[TPI_Carte_Alimentation-SlotHoles-Plated.TXT]
+   Generated File[TPI_Carte_Alimentation-BoardEdgeRout.TXT]
+   Generated File[TPI_Carte_Alimentation.LDP]
+   Generated File[TPI_Carte_Alimentation.DRR]
+
+
+Files Generated   : 6
+Documents Printed : 0
+
+Finished Output Generation At 20:22:08 On 28.02.2022

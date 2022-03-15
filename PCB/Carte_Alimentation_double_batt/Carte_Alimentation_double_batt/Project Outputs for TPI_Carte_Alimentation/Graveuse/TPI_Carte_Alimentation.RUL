@@ -1,0 +1,5 @@
+DRC Rules Export File for PCB: G:\Eurobot\Carte_Alimentation_double_batt\Carte_Alimentation_double_batt\TPI_Carte_Alimentation.PcbDoc
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=7.87
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
