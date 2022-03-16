@@ -37,10 +37,24 @@ class Capture :
                 self.display_height,
             )
         )
-class TagIGId(enum):
-    ALLY0=
+class ROBIGId(Enum):
+    ROB0=1
+    ROB1=2
+    ROB2=3
+    ROB3=4
+    ROB4=5
+    ROB5=6
+    ROB6=7
+    ROB7=8
+    ROB8=9
+    ROB9=10
+    RED=47
+    BLUE=13
+    GREEN=36
+    ROCK=17
+    MIDL=42
 
-class TagIgSize(enum):
+class TagIgSize(Enum):
     MARKER_ROBOT = 0.07
     MARKER_MIDL = 0.10
     MARKER_SAMPLE=0.05
@@ -49,27 +63,20 @@ class App:
     #création des paramètre nécéssaires à la détéction 
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
-
     NB_CAM=2
-    #Id du Tag centrale
-    MIDL=42
-    #Plage d'id des tag pour échantillons 
-    SAMPLES_T=[47,13,36,17]
-    #Plage d'id des tag pour robots 
-    ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
     #Position [W]ordl des coins du tag du centre 
     W_Center =np.array([(1450,1200,530),(1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
     #Chemins d'accès au fichier de calibration (modifie si nécéssaire)
     calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
-    DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
-
- 
+    CAMERA_MATRIX_HQ = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
+    DIST_COEFFS_HQ  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
+    CAMERA_MATRIX_FI = np.loadtxt(calib_path+'FishMat.txt', delimiter=',')  
+    DIST_COEFFS_FI  = np.loadtxt(calib_path+'FishDist.txt', delimiter=',')
     def __init__(self) -> None: 
-       
+    
         self.capture1 = []
-        #for i in NB_CAM :
-        self.capture1.append(Capture())
+        for i in App.NB_CAM:
+            self.capture1.append(Capture())
         self.img = ImProc(self.capture1)
         self.run=True
   
@@ -128,7 +135,6 @@ class ImProc:
     def Detect(self):
         for i,j in enumerate(self.gray):
             self.infoMarkers[i]=cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
-            print(self.infoMarkers[0][1])
             try:
                 if self.infoMarkers[i][1] == None:
                     return 0
@@ -142,6 +148,7 @@ class ImProc:
                 a=(str(self.infoMarkers[i][1][l]).replace("[",""))
                 a=a.replace("]","")
                 self.ListId[i].append(int(a))
+              
 
     def SortCorn(self,listcam:int,posList:int):
         return (self.infoMarkers[listcam][0][posList])
@@ -262,23 +269,15 @@ class Tag:
             self.marker_edge=App.MARKER_EDGE
         else:
             self.marker_edge=App.MARKER_EDGE
-        
         self.update()
+
     def FindV(self):
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
-        (self.rvecs-self.tvecs).any()
-        #return(self.rvecs,self.tvecs)
+       
 
     def update(self):
         self.FindV()
-        if self.debug:
-            print("tag{} ".format(self.Id)+"/n Tvec {}".format(self.vect2d)+"rvecs {}".format(self.rvecs))
-            print("corners{}".format(self.corners))
-            print("sa taille{}".format(self.marker_edge))
-            #print("position irl{}".format(self.irlcord))
-            #print(self.getYallPitchRoll())
-            #self.poscam()
-    
+
 def main() -> string:
     app1 = App()
     app1.main()
