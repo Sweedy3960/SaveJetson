@@ -57,6 +57,8 @@ class App:
     DIST_COEFFS_HQ  = np.loadtxt(CALIB_PATH+'cam12distvid.txt', delimiter=',')
     CAMERA_MATRIX_FI = np.loadtxt(CALIB_PATH+'FishMat.txt', delimiter=',')  
     DIST_COEFFS_FI  = np.loadtxt(CALIB_PATH+'FishDist.txt', delimiter=',')
+    MAT= [CAMERA_MATRIX_HQ,CAMERA_MATRIX_FI]
+    DIST=[DIST_COEFFS_HQ,DIST_COEFFS_FI]
     def __init__(self) -> None: 
     
         self.capture1 = []
@@ -87,9 +89,9 @@ class ImProc:
         self.cap=[]
         self.ListId=[]
         self.tagin={}
-        self.planMrot=None
-        self.planTvec=None
-        self.planptsimg=None
+        self.planMrot=[]
+        self.planTvec=[]
+        self.planptsimg=[]
         self.WcoinsTable=[(0,0,0),(0,2000,0),(3000,2000,0),(3000,0,0)]
         self.CcoinsTable=[]
         for i in cap:
@@ -145,13 +147,18 @@ class ImProc:
         return self.tagin
 
     def Getplan(self):
-        ret,rvec,tvec = cv.solvePnP(App.W_Center,self.tagin["tag42"].corners,App.CAMERA_MATRIX,App.DIST_COEFFS)
+        rvec=[]
+        tvec=[]
+        for i in range(App.NB_CAM):
+            ret,rvec[i],tvec[i] = cv.solvePnP(App.W_Center,self.tagin["tag42"].corners,App.MAT[i],App.DIST[i])
         return [rvec,tvec]
 
     def projecttablepoint(self):
         a=self.Getplan()
-        self.planMrot,_=cv.Rodrigues(a[0])
-        self.planTvec=a[1].ravel().reshape(3)
+        for i,j in enumerate(a[0]):
+            self.planMrot[i],_=cv.Rodrigues(j[i])
+            self.planTvec[i]=a[1][i].ravel().reshape(3)
+            ########################################
         for i in self.WcoinsTable:
             self.planptsimg,_=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
             b=self.planptsimg[0][0][0]
