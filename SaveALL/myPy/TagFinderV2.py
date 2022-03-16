@@ -7,8 +7,8 @@ import time
 from enum import Enum
 
 class Capture :
-    def __init__(self):
-        self.idCam=0
+    def __init__(self,_idCam):
+        self.idCam=_idCam
         self.capture_width=3840
         self.capture_height=2160
         self.display_width=3840
@@ -37,46 +37,31 @@ class Capture :
                 self.display_height,
             )
         )
-class ROBIGId(Enum):
-    ROB0=1
-    ROB1=2
-    ROB2=3
-    ROB3=4
-    ROB4=5
-    ROB5=6
-    ROB6=7
-    ROB7=8
-    ROB8=9
-    ROB9=10
-    RED=47
-    BLUE=13
-    GREEN=36
-    ROCK=17
-    MIDL=42
-
-class TagIgSize(Enum):
-    MARKER_ROBOT = 0.07
-    MARKER_MIDL = 0.10
-    MARKER_SAMPLE=0.05
 
 class App:
     #création des paramètre nécéssaires à la détéction 
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
     NB_CAM=2
+    #Id du Tag centrale
+    MIDL=42
+    #Plage d'id des tag pour échantillons 
+    SAMPLES_T=[47,13,36,17]
+    #Plage d'id des tag pour robots 
+    ROBOTS_T=[1,2,3,4,5,6,7,8,9,10]
     #Position [W]ordl des coins du tag du centre 
     W_Center =np.array([(1450,1200,530),(1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
     #Chemins d'accès au fichier de calibration (modifie si nécéssaire)
-    calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX_HQ = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
-    DIST_COEFFS_HQ  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
-    CAMERA_MATRIX_FI = np.loadtxt(calib_path+'FishMat.txt', delimiter=',')  
-    DIST_COEFFS_FI  = np.loadtxt(calib_path+'FishDist.txt', delimiter=',')
+    CALIB_PATH="SaveALL/myFi/"
+    CAMERA_MATRIX_HQ = np.loadtxt(CALIB_PATH+'cam12matvid.txt', delimiter=',')  
+    DIST_COEFFS_HQ  = np.loadtxt(CALIB_PATH+'cam12distvid.txt', delimiter=',')
+    CAMERA_MATRIX_FI = np.loadtxt(CALIB_PATH+'FishMat.txt', delimiter=',')  
+    DIST_COEFFS_FI  = np.loadtxt(CALIB_PATH+'FishDist.txt', delimiter=',')
     def __init__(self) -> None: 
     
         self.capture1 = []
         for i in App.NB_CAM:
-            self.capture1.append(Capture())
+            self.capture1.append(Capture(i))
         self.img = ImProc(self.capture1)
         self.run=True
   
