@@ -1,0 +1,37 @@
+Change Component Comment : Designator=R3 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R4 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R5 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R6 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R7 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R8 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R9 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R10 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R11 Old Comment=100? New Comment=120R
+Added Component: Designator=X23(691210910002)
+Add component (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=X23-1
+Added Pin To Net: NetName=VIN Pin=X23-2
+Added Member To Class: ClassName=ArduinoShield Member=Component K4 BC546B
+Added Member To Class: ClassName=ArduinoShield Member=Component X23 SCREW_2X1
+Added Room: Name=ArduinoShield
