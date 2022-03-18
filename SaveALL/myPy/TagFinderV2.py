@@ -7,8 +7,8 @@ import time
 from enum import Enum
 
 class Capture :
-    def __init__(self):
-        self.idCam=0
+    def __init__(self,_idCam):
+        self.idCam=_idCam
         self.capture_width=3840
         self.capture_height=2160
         self.display_width=3840
@@ -37,19 +37,11 @@ class Capture :
                 self.display_height,
             )
         )
-class TagIGId(enum):
-    ALLY0=
-
-class TagIgSize(enum):
-    MARKER_ROBOT = 0.07
-    MARKER_MIDL = 0.10
-    MARKER_SAMPLE=0.05
 
 class App:
     #création des paramètre nécéssaires à la détéction 
     PARAMETERS = cv.aruco.DetectorParameters_create()
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
-
     NB_CAM=2
     #Id du Tag centrale
     MIDL=42
@@ -60,16 +52,18 @@ class App:
     #Position [W]ordl des coins du tag du centre 
     W_Center =np.array([(1450,1200,530),(1550,1200,530),(1550,1300,530),(1450,1300,530)], dtype="double")
     #Chemins d'accès au fichier de calibration (modifie si nécéssaire)
-    calib_path="SaveALL/myFi/"
-    CAMERA_MATRIX = np.loadtxt(calib_path+'cam12matvid.txt', delimiter=',')  
-    DIST_COEFFS  = np.loadtxt(calib_path+'cam12distvid.txt', delimiter=',')
-
- 
+    CALIB_PATH="SaveALL/myFi/"
+    CAMERA_MATRIX_HQ = np.loadtxt(CALIB_PATH+'cam12matvid.txt', delimiter=',')  
+    DIST_COEFFS_HQ  = np.loadtxt(CALIB_PATH+'cam12distvid.txt', delimiter=',')
+    CAMERA_MATRIX_FI = np.loadtxt(CALIB_PATH+'FishMat.txt', delimiter=',')  
+    DIST_COEFFS_FI  = np.loadtxt(CALIB_PATH+'FishDist.txt', delimiter=',')
+    MAT= [CAMERA_MATRIX_HQ,CAMERA_MATRIX_FI]
+    DIST=[DIST_COEFFS_HQ,DIST_COEFFS_FI]
     def __init__(self) -> None: 
-       
+    
         self.capture1 = []
-        #for i in NB_CAM :
-        self.capture1.append(Capture())
+        for i in App.NB_CAM:
+            self.capture1.append(Capture(i))
         self.img = ImProc(self.capture1)
         self.run=True
   
@@ -95,9 +89,9 @@ class ImProc:
         self.cap=[]
         self.ListId=[]
         self.tagin={}
-        self.planMrot=None
-        self.planTvec=None
-        self.planptsimg=None
+        self.planMrot=[]
+        self.planTvec=[]
+        self.planptsimg=[]
         self.WcoinsTable=[(0,0,0),(0,2000,0),(3000,2000,0),(3000,0,0)]
         self.CcoinsTable=[]
         for i in cap:
@@ -128,7 +122,6 @@ class ImProc:
     def Detect(self):
         for i,j in enumerate(self.gray):
             self.infoMarkers[i]=cv.aruco.detectMarkers(j, App.DICTIONARY, parameters = App.PARAMETERS)
-            print(self.infoMarkers[0][1])
             try:
                 if self.infoMarkers[i][1] == None:
                     return 0
@@ -142,6 +135,7 @@ class ImProc:
                 a=(str(self.infoMarkers[i][1][l]).replace("[",""))
                 a=a.replace("]","")
                 self.ListId[i].append(int(a))
+              
 
     def SortCorn(self,listcam:int,posList:int):
         return (self.infoMarkers[listcam][0][posList])
@@ -153,13 +147,18 @@ class ImProc:
         return self.tagin
 
     def Getplan(self):
-        ret,rvec,tvec = cv.solvePnP(App.W_Center,self.tagin["tag42"].corners,App.CAMERA_MATRIX,App.DIST_COEFFS)
+        rvec=[]
+        tvec=[]
+        for i in range(App.NB_CAM):
+            ret,rvec[i],tvec[i] = cv.solvePnP(App.W_Center,self.tagin["tag42"].corners,App.MAT[i],App.DIST[i])
         return [rvec,tvec]
 
     def projecttablepoint(self):
         a=self.Getplan()
-        self.planMrot,_=cv.Rodrigues(a[0])
-        self.planTvec=a[1].ravel().reshape(3)
+        for i,j in enumerate(a[0]):
+            self.planMrot[i],_=cv.Rodrigues(j[i])
+            self.planTvec[i]=a[1][i].ravel().reshape(3)
+            ########################################
         for i in self.WcoinsTable:
             self.planptsimg,_=cv.projectPoints(i,self.planMrot,self.planTvec,App.CAMERA_MATRIX,App.DIST_COEFFS)
             b=self.planptsimg[0][0][0]
@@ -262,23 +261,15 @@ class Tag:
             self.marker_edge=App.MARKER_EDGE
         else:
             self.marker_edge=App.MARKER_EDGE
-        
         self.update()
+
     def FindV(self):
         self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
-        (self.rvecs-self.tvecs).any()
-        #return(self.rvecs,self.tvecs)
+       
 
     def update(self):
         self.FindV()
-        if self.debug:
-            print("tag{} ".format(self.Id)+"/n Tvec {}".format(self.vect2d)+"rvecs {}".format(self.rvecs))
-            print("corners{}".format(self.corners))
-            print("sa taille{}".format(self.marker_edge))
-            #print("position irl{}".format(self.irlcord))
-            #print(self.getYallPitchRoll())
-            #self.poscam()
-    
+
 def main() -> string:
     app1 = App()
     app1.main()

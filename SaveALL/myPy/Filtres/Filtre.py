@@ -14,6 +14,7 @@ while True :
     cv.threshold(gray,250,255,cv.THRESH_BINARY_INV|cv.THRESH_OTSU,imthresh31)
     im3=cv.filter2D(imthresh31,-1,np.array([[1,1,1],[1,-8,1],[1,1,1]]),borderType=cv.BORDER_DEFAULT)
     im2=cv.GaussianBlur(im3,(3,3),1)
+    
     im2=cv.filter2D(im2,-1,np.array([[1,1,1],[1,-8,1],[1,1,1]]),borderType=cv.BORDER_DEFAULT)
     cv.imshow("trhesh31",imthresh31)
     cv.imshow("flitered",im3)
