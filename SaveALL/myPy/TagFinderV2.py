@@ -223,6 +223,8 @@ class ImProc:
         rvec=[]
         tvec=[]
         for i in range(App.NB_CAM):
+            rvec.append(None)
+            tvec.append(None)
             ret,rvec[i],tvec[i] = cv.solvePnP(App.W_Center,self.tagin["tag42_{}".format(i)].corners,App.MAT[i],App.DIST[i])
         return [rvec,tvec]
 
