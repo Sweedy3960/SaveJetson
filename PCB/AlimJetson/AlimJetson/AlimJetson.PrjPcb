@@ -117,20 +117,20 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Parameter1]
-Name=Designer
-Value=Apprenti
+Name=Titre
+Value=AlimJetson
 
 [Parameter2]
-Name=Ingenieur
-Value=Enseignant
+Name=Numero
+Value=Eurob
 
 [Parameter3]
-Name=Numero
-Value=EAANN
+Name=Ingenieur
+Value=QDS
 
 [Parameter4]
-Name=Titre
-Value=Titre du projet
+Name=Designer
+Value=ACL
 
 [Configuration1]
 Name=Sources
