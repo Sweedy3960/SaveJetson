@@ -62,10 +62,10 @@ for i,j in enumerate(igHQ):
         for k,l in enumerate(IgId.ROB):
             if j==k:
                 nbRob+=1
-                if nbCenter>1:
-                    tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,l)"
-                else:
-                    tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,l)"
+                        if nbCenter>1:
+                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,l, TagIgSize.)"
+                        else:
+                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,l)"
         if j == IgId.GREEN:  
             nbGreen+=1
             if nbCenter>1:
