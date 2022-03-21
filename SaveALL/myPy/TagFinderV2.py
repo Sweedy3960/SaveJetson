@@ -110,7 +110,7 @@ class ImProc:
         self.infoMarkers = []
         self.cap = []
         self.ListId = []
-        self.tagin = {}
+        self.tagin = []
         self.planMrot = []
         self.planTvec = []
         self.planptsimg = []
@@ -162,80 +162,11 @@ class ImProc:
 
     def SortCorn(self, listcam: int, posList: int):
         return (self.infoMarkers[listcam][0][posList])
-    def checkFromCamera(self):
-        if nbCenter > 1:
-            self.tagin["tag{}".format(l)] = Tag(self.SortCorn(int(i), int(
-                k)), self.ListId, int(l), int(k), cam0, l, TagIgSize.MARKER_ROBOT)
-        else:
-            self.tagin["tag{}".format(l)] = Tag(self.SortCorn(
-                int(i), int(k)), self.ListId, int(l), int(k), cam1, l)
 
     def TriTag(self):
-        nbRob = 0
-        nbRock = 0
-        nbRed = 0
-        nbGreen = 0
-        nbBlue = 0
-        nbCenter = 0
-        cam0 = 0
-        cam1 = 1
-        for i in self.ListId[1]:
-            self.ListId[0].insert(len(self.ListId[0]), i)
-        for i, j in enumerate(self.ListId[0]):
-            for k, l in enumerate(IgId.ROB):
-                if j == k:
-                    nbRob += 1
-                    if nbCenter > 1:
-                        self.tagin["tag{}".format(l)] = Tag(self.SortCorn(int(i), int(
-                            k)), self.ListId, int(l), int(k), cam0, l, TagIgSize.MARKER_ROBOT)
-                    else:
-                        self.tagin["tag{}".format(l)] = Tag(self.SortCorn(
-                            int(i), int(k)), self.ListId, int(l), int(k), cam1, l)
-            if j == IgId.GREEN:
-                nbGreen += 1
-                if nbCenter > 1:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbGreen)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam0, nbGreen)
-                else:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbGreen)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam1, nbGreen)
-
-            if j == IgId.RED:
-                nbRed += 1
-                if nbCenter > 1:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbRed)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam0, nbRed)
-                else:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbRed)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam1, nbRed)
-
-            if j == IgId.BLUE:
-                nbBlue += 1
-                if nbCenter > 1:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbBlue)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam0, nbBlue)
-                else:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbBlue)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam1, nbBlue)
-
-            if j == IgId.ROCK:
-                nbRock += 1
-                if nbCenter > 1:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbRock)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam0, nbRock)
-                else:
-                    self.tagin["tag{}".format(j)+"_{}".format(nbRock)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam1, nbRock)
-
-            if j == IgId.MIDL:
-                nbCenter += 1
-                if nbCenter > 1:
-                    self.tagin["tag{}".format(j)+"_{}".format(cam0)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam0, nbRock)
-                else:
-                    self.tagin["tag{}".format(j)+"_{}".format(cam1)] = Tag(
-                        self.SortCorn(int(i), int(k)), self.ListId, int(l), int(k), cam1, nbRock)
-
+        for i in self.infoMarkers:
+            for j,k in enumerate(i[0]):
+                self.tagin.append(Tag(k,i[1][j]))
         return self.tagin
 
     def Getplan(self):
