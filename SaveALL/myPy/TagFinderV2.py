@@ -7,6 +7,12 @@ import time
 
 
 class Capture:
+    ''' pipeline de capture video gstreamer
+        résolution:
+        3840x2160px,
+        id de la caméra,
+        orientation
+    '''
     def __init__(self, _idCam):
         self.idCam = _idCam
         self.capture_width = 3840
@@ -39,6 +45,7 @@ class Capture:
 
 
 class IgId():
+    '''Tag in game, tag possible d'être perçus par l'app d'uanrt le match'''
     ROB0 = 1
     ROB1 = 2
     ROB2 = 3
@@ -269,7 +276,7 @@ class ImProc:
 
 
 class Tag:
-    def __init__(self, corners: list, ListId: list, whoami: int, index: int, cam: int, number: int, taille: float):
+    def __init__(self,):
         self.posRe = (0, 0)
         self.Facing = 0
         self.Id = whoami
