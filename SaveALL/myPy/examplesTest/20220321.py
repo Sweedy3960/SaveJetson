@@ -1,5 +1,4 @@
-infomarker=[[["l1.1","l1.2"],["l2","l2.2"],["l3","l3.2"]],[["l1.1.2","l1.1.2"],["l2.2","l2.2.2"],["l3.2","l3.2.2"]]]
-ls=[]
+import cv2 as cv
 
 class tag:
     def __init__(self,_id,_corns) -> None:
@@ -13,5 +12,6 @@ for i in infomarker:
     
 print(ls)
 for i in ls:
+    print("n1")
     print(i.id)
     print(i.corns)
