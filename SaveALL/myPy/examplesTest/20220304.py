@@ -53,6 +53,11 @@ cam0=0
 cam1=1
 sorted=[]
 tagin={}
+def center(nbCenter):
+     if nbCenter>1:
+                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,l, TagIgSize.)"
+                        else:
+                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,l)"
 
 for i in igF:
         igHQ.insert(len(igHQ),i)
@@ -62,38 +67,19 @@ for i,j in enumerate(igHQ):
         for k,l in enumerate(IgId.ROB):
             if j==k:
                 nbRob+=1
-                        if nbCenter>1:
-                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,l, TagIgSize.)"
-                        else:
-                            tagin["tag{}".format(l)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,l)"
+            center(nbCenter)       
         if j == IgId.GREEN:  
-            nbGreen+=1
-            if nbCenter>1:
-                tagin["tag{}".format(j)+"_{}".format(nbGreen)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,nbGreen)"
-            else:
-                tagin["tag{}".format(j)+"_{}".format(nbGreen)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,nbGreen)"
-
+            nbGreen+=1   
+            center(nbCenter)     
         if j == IgId.RED:  
-            nbRed+=1
-            if nbCenter>1:
-                tagin["tag{}".format(j)+"_{}".format(nbRed)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,nbRed)"
-            else:
-                tagin["tag{}".format(j)+"_{}".format(nbRed)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,nbRed)"
-                
+            nbRed+=1   
+            center(nbCenter)   
         if j == IgId.BLUE:  
             nbBlue+=1
-            if nbCenter>1:
-                tagin["tag{}".format(j)+"_{}".format(nbBlue)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,nbBlue)"
-            else:
-                tagin["tag{}".format(j)+"_{}".format(nbBlue)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,nbBlue)"
-                
+            center(nbCenter)              
         if j == IgId.ROCK:  
-            nbRock+=1  
-            if nbCenter>1:
-                tagin["tag{}".format(j)+"_{}".format(nbRock)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam0,nbRock)"
-            else:
-                tagin["tag{}".format(j)+"_{}".format(nbRock)] = "Tag(self.SortCorn(int(i),int(k)),self.ListId,int(l),int(k),cam1,nbRock)"
-                 
+            nbRock+=1
+            center(nbCenter)         
         if j == IgId.MIDL:
             nbCenter+=1
         
