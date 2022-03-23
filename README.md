@@ -10,6 +10,7 @@ But final: envoyer une tramme contenant la position des robots adverses
 -- Les sources sont dans le source.txt
 
 **//todo://** 
+
 -info avancement serv
 
 -validation dual cam imx477 et imx219 en simultané 
