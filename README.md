@@ -11,17 +11,17 @@ But final: envoyer une tramme contenant la position des robots adverses
 
 **//todo://** 
 
--info avancement serv
+- info avancement serv
 
--validation dual cam imx477 et imx219 en simultané 
+- validation dual cam imx477 et imx219 en simultané 
 
--validation nouvelle méthode de traitement de liste 
+- validation nouvelle méthode de traitement de liste 
 
 - modif fct getplan()
 
--si validation tester TagFinderv2
+- si validation tester TagFinderv2
 
--TagFinderV2 version lib(local2) a tester
+- TagFinderV2 version lib(local2) a tester
 
--Test sur TABLE
+- Test sur TABLE
 
