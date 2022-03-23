@@ -3,7 +3,7 @@ import string
 import numpy as np
 import cv2 as cv
 import sys
-import time
+
 
 
 class Capture:
@@ -65,9 +65,9 @@ class IgId():
 
 
 class TagIgSize():
-    MARKER_ROBOT = 0.07
-    MARKER_MIDL = 0.10
-    MARKER_SAMPLE = 0.05
+    ROBOT = 0.07
+    MIDL = 0.10
+    SAMPLE = 0.05
 
 
 class App:
@@ -173,7 +173,7 @@ class ImProc:
     def TriTag(self):
         for i in self.infoMarkers:
             for j,k in enumerate(i[0]):
-                self.tagin.append(Tag(k,i[1][j]))
+                self.tagin.append(Tag(k,i[1][j],i))
         return self.tagin
 
     def Getplan(self):
@@ -183,7 +183,7 @@ class ImProc:
             rvec.append(None)
             tvec.append(None)
             ret, rvec[i], tvec[i] = cv.solvePnP(
-                App.W_Center, self.tagin["tag42_{}".format(i)].corners, App.MAT[i], App.DIST[i])
+                App.W_Center,""" extraire tag 42 fonction de la cam""", App.MAT[i], App.DIST[i])
         return [rvec, tvec]
 
     def projecttablepoint(self):
@@ -276,27 +276,26 @@ class ImProc:
 
 
 class Tag:
-    def __init__(self,):
-        self.posRe = (0, 0)
-        self.Facing = 0
-        self.Id = whoami
+    def __init__(self,_id,_corns,_cam):
+        self.Id = _id
+        self.cam = _cam
         self.tvecs = None
         self.rvecs = None
         self.mat_rota = None
-        self.corners = corners
-        self.centrepix = [int(((corners[0][0][0]+corners[0][1][0]+corners[0][2][0]+corners[0][3][0])*0.25)),
-                          int(((corners[0][0][1]+corners[0][1][1]+corners[0][2][1]+corners[0][3][1])*0.25))]
+        self.corners = _corns
+        self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
+                          int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
         self.irlcord = (0, 0)
         self.debug = False
-        self.edge = taille
+       
 
-        if self.Id == App.MIDL:
+        if self.Id == IgId.MIDL:
             self.posRe = (1450, 1200)
-            self.marker_edge = App.MARKER_MIDL
-        elif whoami == App.ROBOTS_T:
-            self.marker_edge = App.MARKER_EDGE
+            self.marker_edge = TagIgSize.MIDL
+        elif self.Id in IgId.ROB:
+            self.marker_edge = TagIgSize.ROBOT
         else:
-            self.marker_edge = App.MARKER_EDGE
+            self.marker_edge = TagIgSize.SAMPLE
         self.update()
 
     def FindV(self):
