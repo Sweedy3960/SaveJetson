@@ -1,5 +1,7 @@
 import cv2 as cv
-
+from cv2 import imshow
+img=cv.imread("/images/q2mptest.png")
+imshow("test",img)
 class tag:
     def __init__(self,_id,_corns) -> None:
         self.id=_id
