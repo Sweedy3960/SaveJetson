@@ -117,7 +117,7 @@ class ImProc:
         self.infoMarkers = []
         self.cap = []
         self.ListId = []
-        self.tagin = []
+        self.tagin = {}
         self.planMrot = []
         self.planTvec = []
         self.planptsimg = []
@@ -173,13 +173,14 @@ class ImProc:
     def TriTag(self):
         for i in self.infoMarkers:
             for j,k in enumerate(i[0]):
-                self.tagin.append(Tag(k,i[1][j],i))
+                  self.tagin[str(k)+"_"+str(i)]=Tag(k,i[1][j],i)
+      
         return self.tagin
 
     def Getplan(self):
         rvec = []
         tvec = []
-        for i in range(App.NB_CAM):
+        for j,i in enumerate(i[0]):
             rvec.append(None)
             tvec.append(None)
             ret, rvec[i], tvec[i] = cv.solvePnP(
