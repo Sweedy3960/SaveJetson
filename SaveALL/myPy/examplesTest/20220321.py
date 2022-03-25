@@ -32,16 +32,28 @@ for i in infomarker:
         ls.append(None)
         '''
 new=[infomarker[0][0]+(infomarker[0][0]),[infomarker[0][1]+(infomarker[0][1])]]
+<<<<<<< HEAD
 '''
+=======
+
+>>>>>>> local
 print(new) 
 def tri():
     for i in infomarker:
         for j,k in enumerate(i[0]):
+<<<<<<< HEAD
+=======
+        
+>>>>>>> local
             ls[str(k)+"_"+str(i)]=tag(k,i[1][j],i)
       
 tri()
 
+<<<<<<< HEAD
 '''
+=======
+
+>>>>>>> local
 print(ls)
 '''
 for i in ls:
