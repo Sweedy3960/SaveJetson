@@ -55,23 +55,20 @@ class Tag:
     planMrot = [0, 0]
     planTvec = [0, 0]
     def __init__(self,_id,_corns,_cam):
-        self.Id = _id
+        self.id = _id
         self.cam = _cam
         self.tvecs = None
         self.rvecs = None
-        self.mat_rota = None
         self.corners = _corns
         self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
                           int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
         self.irlcord = (0, 0)
-        self.debug = False
-       
 
-        if self.Id == IgId.MIDL:
+        if self.id == IgId.MIDL:
             self.posRe = (1450, 1200)
             self.marker_edge = TagIgSize.MIDL
-            self.getplan()
-        elif self.Id in IgId.ROB:
+            self.getPlan()
+        elif self.id in IgId.ROB:
             self.marker_edge = TagIgSize.ROBOT
         else:
             self.marker_edge = TagIgSize.SAMPLE
@@ -81,7 +78,7 @@ class Tag:
         self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
             self.corners, self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
 
-    def getplan(self): 
+    def getPlan(self): 
         ret, rvec, tvec = cv.solvePnP(App.W_Center,self.corners, App.MAT[self.cam], App.DIST[self.cam])
         Tag.planMrot[self.cam], _ = cv.Rodrigues(rvec)
         Tag.planTvec[self.cam] = tvec.ravel().reshape(3)
@@ -208,7 +205,6 @@ class ImProc:
         self.gray = []
         self.infoMarkers = []
         self.cap = []
-        self.ListId = []
         self.tagin = {}
         self.planMrot = []
         self.planTvec = []
@@ -222,7 +218,6 @@ class ImProc:
             self.cap.append(cv.VideoCapture(
                 i.gstreamer_pipeline(), cv.CAP_GSTREAMER))
             self.infoMarkers.append(None)
-            self.ListId.append([])
             self.gray.append(None)
 
     def __del__(self):
@@ -252,23 +247,15 @@ class ImProc:
             except:
                 return 1
 
-    def SortName(self):
-        for i, j in enumerate(self.infoMarkers):
-            self.ListId[i].clear()
-            for l, k in enumerate(self.infoMarkers[i][1]):
-                a = (str(self.infoMarkers[i][1][l]).replace("[", ""))
-                a = a.replace("]", "")
-                self.ListId[i].append(int(a))
-
+  
     def SortCorn(self, listcam: int, posList: int):
         return (self.infoMarkers[listcam][0][posList])
 
     def TriTag(self):
+        self.tagin.clear()
         for i in self.infoMarkers:
             for j,k in enumerate(i[0]):
                 self.tagin.append(Tag(k,i[1][j],i))
-        return self.tagin
-
 
     def Release_All(self):
         for i in self.cap:
@@ -276,8 +263,10 @@ class ImProc:
             self.out.release()
 
     def TagWork(self):
-        self.SortName()
         self.TriTag()
+        '''
+        modif data serv tcp to send
+        '''
 
     def FrameWorking(self):
         self.ToGray()
