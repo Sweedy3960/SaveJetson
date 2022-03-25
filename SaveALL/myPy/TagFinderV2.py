@@ -60,6 +60,7 @@ class Tag:
         self.tvecs = None
         self.rvecs = None
         self.corners = _corns
+        print(self.corners[0])
         self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
                           int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
         self.irlcord = (0, 0)
@@ -75,11 +76,11 @@ class Tag:
         self.update()
 
     def findV(self):
-        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
-            self.corners, self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
+        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
 
     def getPlan(self): 
-        ret, rvec, tvec = cv.solvePnP(App.W_Center,self.corners, App.MAT[self.cam], App.DIST[self.cam])
+
+        ret, rvec, tvec = cv.solvePnP(App.W_Center,self.corners[0], App.MAT[self.cam], App.DIST[self.cam])
         Tag.planMrot[self.cam], _ = cv.Rodrigues(rvec)
         Tag.planTvec[self.cam] = tvec.ravel().reshape(3)
         
@@ -99,6 +100,8 @@ class Tag:
         xw = 0
         yw = 0
         zw = 0
+        print(self.id)
+        print(Tag.planMrot[self.cam], Tag.planTvec[self.cam])
         while foundx == False or foundy == False:
                 a, _ = cv.projectPoints(
                     (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
@@ -127,7 +130,8 @@ class Tag:
                         print(cx, cy)
                         print([xw, yw])
         self.irlcord = (xw, yw)
-
+    def __str__(self):
+        return "Tag" + self.id + self.irlcord
 
     def update(self):
         self.getWpos()
@@ -179,7 +183,7 @@ class App:
     def __init__(self) -> None:
 
         self.capture1 = []
-        for i in App.NB_CAM:
+        for i in range(App.NB_CAM):
             self.capture1.append(Capture(i))
         self.img = ImProc(self.capture1)
         self.run = True
@@ -205,7 +209,7 @@ class ImProc:
         self.gray = []
         self.infoMarkers = []
         self.cap = []
-        self.tagin = {}
+        self.tagin = []
         self.planMrot = []
         self.planTvec = []
         self.planptsimg = []
@@ -253,10 +257,16 @@ class ImProc:
 
     def TriTag(self):
         self.tagin.clear()
-        for i in self.infoMarkers:
-            for j,k in enumerate(i[0]):
-                self.tagin.append(Tag(k,i[1][j],i))
-
+        for idCam,infoCam in enumerate(self.infoMarkers):
+            for index,id in enumerate(infoCam[1]):
+                self.tagin.append(Tag(id, infoCam[0][index], idCam))
+            
+    def Tri(self):
+        a=[]
+        for i ,j in enumerate( self.tagin):
+            if j.id == IgId.MIDL:
+                a.append(self.tagin.pop(i))
+        self.tagin.insert(0,a)
     def Release_All(self):
         for i in self.cap:
             i.release()
@@ -264,9 +274,12 @@ class ImProc:
 
     def TagWork(self):
         self.TriTag()
+        self.Tri()
         '''
         modif data serv tcp to send
         '''
+        for tag in self.tagin:
+            print(tag)
 
     def FrameWorking(self):
         self.ToGray()
