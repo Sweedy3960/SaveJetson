@@ -1,5 +1,6 @@
 import enum
 import string
+from cv2 import MIXED_CLONE
 import numpy as np
 import cv2 as cv
 import sys
@@ -15,10 +16,16 @@ class Capture:
     '''
     def __init__(self, _idCam):
         self.idCam = _idCam
-        self.capture_width = 3840
-        self.capture_height = 2160
-        self.display_width = 3840
-        self.display_height = 2160
+        if self.idCam == 0:
+            self.capture_width = 3840
+            self.capture_height = 2160
+            self.display_width = 3840
+            self.display_height = 2160
+        elif self.idCam == 1:
+            self.capture_width = 3264
+            self.capture_height = 2464
+            self.display_width = 3264
+            self.display_height = 2464
         self.flip_method = 2
 
     def gstreamer_pipeline(self):
@@ -43,6 +50,91 @@ class Capture:
             )
         )
 
+
+class Tag:
+    planMrot = [0, 0]
+    planTvec = [0, 0]
+    def __init__(self,_id,_corns,_cam):
+        self.Id = _id
+        self.cam = _cam
+        self.tvecs = None
+        self.rvecs = None
+        self.mat_rota = None
+        self.corners = _corns
+        self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
+                          int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
+        self.irlcord = (0, 0)
+        self.debug = False
+       
+
+        if self.Id == IgId.MIDL:
+            self.posRe = (1450, 1200)
+            self.marker_edge = TagIgSize.MIDL
+            self.getplan()
+        elif self.Id in IgId.ROB:
+            self.marker_edge = TagIgSize.ROBOT
+        else:
+            self.marker_edge = TagIgSize.SAMPLE
+        self.update()
+
+    def findV(self):
+        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
+            self.corners, self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
+
+    def getplan(self): 
+        ret, rvec, tvec = cv.solvePnP(App.W_Center,self.corners, App.MAT[self.cam], App.DIST[self.cam])
+        Tag.planMrot[self.cam], _ = cv.Rodrigues(rvec)
+        Tag.planTvec[self.cam] = tvec.ravel().reshape(3)
+        
+
+    def getWpos(self):
+        if self.id == IgId.MIDL:
+            return (1450, 1200)
+        foundx = False
+        foundy = False
+        #coordonée dans img
+        cx = int(self.centrepix[0])
+        cy = int(self.centrepix[1])
+        #position fixtive dans limage
+        x0 = 0
+        y0 = 0
+        #coordonée irl
+        xw = 0
+        yw = 0
+        zw = 0
+        while foundx == False or foundy == False:
+                a, _ = cv.projectPoints(
+                    (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
+                x0 = a[0][0][0]
+                y0 = a[0][0][1]
+
+                if x0 > (cx-2) and x0 < (cx+2):
+                    if self.DebugPRojection:
+                        print("foundx")
+                    foundx = True
+                elif x0 > cx:
+                    xw = xw-1
+                else:
+                    xw = xw+1
+
+                if y0 > (cy-2) and y0 < (cy+2):
+                    foundy = True
+                    if self.DebugPRojection:
+                        print("foundy")
+                elif y0 > cy:
+                    yw = yw-1
+                else:
+                    yw = yw+1
+                    if self.DebugPRojection:
+                        print([x0, y0])
+                        print(cx, cy)
+                        print([xw, yw])
+        self.irlcord = (xw, yw)
+
+
+    def update(self):
+        self.getWpos()
+        self.findV()
 
 class IgId():
     '''Tag in game, tag possible d'être perçus par l'app d'uanrt le match'''
@@ -124,6 +216,7 @@ class ImProc:
         self.WcoinsTable = [(0, 0, 0), (0, 2000, 0),
                             (3000, 2000, 0), (3000, 0, 0)]
         self.CcoinsTable = []
+
         for i in cap:
             self.frame.append(None)
             self.cap.append(cv.VideoCapture(
@@ -173,79 +266,9 @@ class ImProc:
     def TriTag(self):
         for i in self.infoMarkers:
             for j,k in enumerate(i[0]):
-                  self.tagin[str(k)+"_"+str(i)]=Tag(k,i[1][j],i)
-      
+                self.tagin.append(Tag(k,i[1][j],i))
         return self.tagin
 
-    def Getplan(self):
-        rvec = []
-        tvec = []
-        for j,i in enumerate(i[0]):
-            rvec.append(None)
-            tvec.append(None)
-            ret, rvec[i], tvec[i] = cv.solvePnP(
-                App.W_Center,""" extraire tag 42 fonction de la cam""", App.MAT[i], App.DIST[i])
-        return [rvec, tvec]
-
-    def projecttablepoint(self):
-        a = self.Getplan()
-        for i, j in enumerate(a[0]):
-            self.planMrot[i], _ = cv.Rodrigues(j[i])
-            self.planTvec[i] = a[1][i].ravel().reshape(3)
-            ########################################
-        for i in self.WcoinsTable:
-            self.planptsimg, _ = cv.projectPoints(
-                i, self.planMrot, self.planTvec, App.CAMERA_MATRIX, App.DIST_COEFFS)
-            b = self.planptsimg[0][0][0]
-            c = self.planptsimg[0][0][1]
-            z = self.gray[0]
-            z = cv.circle(z, (int(b), int(c)), 2, (255, 0, 0),
-                          thickness=3, lineType=cv.FILLED)
-            z = cv.putText(z, str(i), (int(b), int(
-                c)), fontFace=cv.FONT_HERSHEY_DUPLEX, fontScale=3.0, color=(125, 245, 55), thickness=3)
-            self.CcoinsTable.append(b, c)
-
-    def recherchecentreTag(self, plantimg, centrepix, Mrot, Tvec):
-        foundx = False
-        foundy = False
-        #coordonée dans img
-        cx = int(centrepix[0])
-        cy = int(centrepix[1])
-        #position fixtive dans limage
-        x0 = 0
-        y0 = 0
-        #coordonée irl
-        xw = 0
-        yw = 0
-        zw = 0
-        while foundx == False or foundy == False:
-            a, _ = cv.projectPoints(
-                (xw, yw, zw), self.planMrot, self.planTvec, App.CAMERA_MATRIX, App.DIST_COEFFS)
-            x0 = a[0][0][0]
-            y0 = a[0][0][1]
-
-            if x0 > (cx-2) and x0 < (cx+2):
-                if self.DebugPRojection:
-                    print("foundx")
-                foundx = True
-            elif x0 > cx:
-                xw = xw-1
-            else:
-                xw = xw+1
-
-            if y0 > (cy-2) and y0 < (cy+2):
-                foundy = True
-                if self.DebugPRojection:
-                    print("foundy")
-            elif y0 > cy:
-                yw = yw-1
-            else:
-                yw = yw+1
-                if self.DebugPRojection:
-                    print([x0, y0])
-                    print(cx, cy)
-                    print([xw, yw])
-        return[xw, yw]
 
     def Release_All(self):
         for i in self.cap:
@@ -255,16 +278,6 @@ class ImProc:
     def TagWork(self):
         self.SortName()
         self.TriTag()
-        self.projecttablepoint()
-        b = list(self.tagin.keys())
-        b.remove("tag42_{}".format(*))
-        b.remove("tag42_1")
-        for i in b:
-            a = self.recherchecentreTag(
-                self.planptsimg, self.tagin[i].centrepix, self.planMrot, self.planTvec)
-            print(a)
-            self.tagin[i].irlcord = a
-            print(self.tagin[i].Id, self.tagin[i].irlcord)
 
     def FrameWorking(self):
         self.ToGray()
@@ -275,36 +288,6 @@ class ImProc:
         if self.Detect():
             self.TagWork()
 
-
-class Tag:
-    def __init__(self,_id,_corns,_cam):
-        self.Id = _id
-        self.cam = _cam
-        self.tvecs = None
-        self.rvecs = None
-        self.mat_rota = None
-        self.corners = _corns
-        self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
-                          int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
-        self.irlcord = (0, 0)
-        self.debug = False
-       
-
-        if self.Id == IgId.MIDL:
-            self.posRe = (1450, 1200)
-            self.marker_edge = TagIgSize.MIDL
-        elif self.Id in IgId.ROB:
-            self.marker_edge = TagIgSize.ROBOT
-        else:
-            self.marker_edge = TagIgSize.SAMPLE
-        self.update()
-
-    def FindV(self):
-        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
-            self.corners, self.marker_edge, App.CAMERA_MATRIX, App.DIST_COEFFS)
-
-    def update(self):
-        self.FindV()
 
 
 def main() -> string:
