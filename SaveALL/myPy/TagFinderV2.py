@@ -52,6 +52,9 @@ class Capture:
 
 
 class Tag:
+    '''
+    class t
+    '''
     planMrot = [0, 0]
     planTvec = [0, 0]
     def __init__(self,_id,_corns,_cam):
@@ -73,7 +76,6 @@ class Tag:
             self.marker_edge = TagIgSize.ROBOT
         else:
             self.marker_edge = TagIgSize.SAMPLE
-        self.update()
 
     def findV(self):
         self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
@@ -81,7 +83,9 @@ class Tag:
     def getPlan(self): 
 
         ret, rvec, tvec = cv.solvePnP(App.W_Center,self.corners[0], App.MAT[self.cam], App.DIST[self.cam])
+        print(rvec)
         Tag.planMrot[self.cam], _ = cv.Rodrigues(rvec)
+        print( Tag.planMrot[self.cam])
         Tag.planTvec[self.cam] = tvec.ravel().reshape(3)
         
 
@@ -109,8 +113,6 @@ class Tag:
                 y0 = a[0][0][1]
 
                 if x0 > (cx-2) and x0 < (cx+2):
-                    if self.DebugPRojection:
-                        print("foundx")
                     foundx = True
                 elif x0 > cx:
                     xw = xw-1
@@ -119,16 +121,10 @@ class Tag:
 
                 if y0 > (cy-2) and y0 < (cy+2):
                     foundy = True
-                    if self.DebugPRojection:
-                        print("foundy")
                 elif y0 > cy:
                     yw = yw-1
                 else:
                     yw = yw+1
-                    if self.DebugPRojection:
-                        print([x0, y0])
-                        print(cx, cy)
-                        print([xw, yw])
         self.irlcord = (xw, yw)
     def __str__(self):
         return "Tag" + self.id + self.irlcord
@@ -258,15 +254,22 @@ class ImProc:
     def TriTag(self):
         self.tagin.clear()
         for idCam,infoCam in enumerate(self.infoMarkers):
-            for index,id in enumerate(infoCam[1]):
-                self.tagin.append(Tag(id, infoCam[0][index], idCam))
-            
+            try:
+                for index,id in enumerate(infoCam[1]):
+                    self.tagin.append(Tag(id, infoCam[0][index], idCam))
+            except:
+                print("ONE EYE CANT SEE")
     def Tri(self):
         a=[]
         for i ,j in enumerate( self.tagin):
             if j.id == IgId.MIDL:
                 a.append(self.tagin.pop(i))
         self.tagin.insert(0,a)
+
+    def FinPos(self):
+        for i,j in enumerate(self.tagin):
+            j.update()
+
     def Release_All(self):
         for i in self.cap:
             i.release()
@@ -275,6 +278,7 @@ class ImProc:
     def TagWork(self):
         self.TriTag()
         self.Tri()
+        self.FinPos()
         '''
         modif data serv tcp to send
         '''
