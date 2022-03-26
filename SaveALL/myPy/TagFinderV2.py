@@ -104,30 +104,30 @@ class Tag:
         xw = 0
         yw = 0
         zw = 0
-        print(self.id)
-        print(Tag.planMrot[self.cam], Tag.planTvec[self.cam])
         while foundx == False or foundy == False:
                 a, _ = cv.projectPoints(
                     (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
                 x0 = a[0][0][0]
                 y0 = a[0][0][1]
-
-                if x0 > (cx-2) and x0 < (cx+2):
-                    foundx = True
-                elif x0 > cx:
+                
+                if int(x0) > (cx+2):
+                    xw = xw-1
+                elif int(x0) < cx-2:
                     xw = xw-1
                 else:
-                    xw = xw+1
+                   foundx = True
+                   print("xfound")
 
-                if y0 > (cy-2) and y0 < (cy+2):
+                if int(y0) > (cy-20) and int(y0) < (cy+20):
                     foundy = True
+                    print("yfound")
                 elif y0 > cy:
                     yw = yw-1
                 else:
                     yw = yw+1
         self.irlcord = (xw, yw)
     def __str__(self):
-        return "Tag" + self.id + self.irlcord
+        return "Tag" + str(self.id) + str(self.irlcord)
 
     def update(self):
         self.getWpos()
@@ -264,8 +264,9 @@ class ImProc:
         for i ,j in enumerate( self.tagin):
             if j.id == IgId.MIDL:
                 a.append(self.tagin.pop(i))
-        self.tagin.insert(0,a)
-
+        for i in a:
+            self.tagin.insert(0,i)
+        print(self.tagin)
     def FinPos(self):
         for i,j in enumerate(self.tagin):
             j.update()
@@ -278,7 +279,9 @@ class ImProc:
     def TagWork(self):
         self.TriTag()
         self.Tri()
-        self.FinPos()
+        for i ,j in enumerate( self.tagin):
+            if j.id == IgId.MIDL:
+                self.FinPos()
         '''
         modif data serv tcp to send
         '''
