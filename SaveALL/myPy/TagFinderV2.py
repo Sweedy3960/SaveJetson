@@ -113,7 +113,7 @@ class Tag:
                 if int(x0) > (cx+2):
                     xw = xw-1
                 elif int(x0) < cx-2:
-                    xw = xw-1
+                    xw = xw+1
                 else:
                    foundx = True
                    print("xfound")
