@@ -1,0 +1,20 @@
+Added Component: Designator=Q?(SOT90P280X110-6M)
+Add component (AddParameter): Name = "Case/Package"; Value = "SOT23-6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ids max"; Value = "2.7A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ids max P"; Value = "-1.9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-55°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "SMD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "700mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rds on"; Value = "0.13"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rds on P"; Value = "0.27"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock E101"; Value = "25"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "N+P Channel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vds max"; Value = "20V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vgs (Max)"; Value = "8V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vgs(th) (Max) @ Id"; Value = "1.5V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=Q?-2
+Added Pin To Net: NetName=VIN Pin=Q?-3
+Added Pin To Net: NetName=+5V Pin=Q?-4
