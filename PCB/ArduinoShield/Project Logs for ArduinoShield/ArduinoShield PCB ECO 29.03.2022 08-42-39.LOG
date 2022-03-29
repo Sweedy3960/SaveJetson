@@ -1,0 +1,9 @@
+Add Pin To Net: Unknown Pin: Pin K5-1
+Add Pin To Net: Unknown Pin: Pin K5-2
+Add Pin To Net: Unknown Pin: Pin K5-3
+Added Member To Class: ClassName=ArduinoShield Member=Component K1 BC546B
+Added Member To Class: ClassName=ArduinoShield Member=Component K2 BC546B
+Added Member To Class: ClassName=ArduinoShield Member=Component K3 BC546B
+Added Member To Class: ClassName=ArduinoShield Member=Component K4 BC546B
+Add Class Member: Failed to add class member : Component K5 SBC856BLT3G
+Added Room: Name=ArduinoShield

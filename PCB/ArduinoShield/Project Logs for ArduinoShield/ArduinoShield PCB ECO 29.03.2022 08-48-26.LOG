@@ -1,0 +1,7 @@
+Added Component: Designator=X54(to220)
+Add Pin To Net: Unknown Pin: Pin K5-1
+Add Pin To Net: Unknown Pin: Pin K5-2
+Add Pin To Net: Unknown Pin: Pin K5-3
+Added Pin To Net: NetName=VIN Pin=X54-1
+Added Pin To Net: NetName=+5V Pin=X54-2
+Added Pin To Net: NetName=GND Pin=X54-3

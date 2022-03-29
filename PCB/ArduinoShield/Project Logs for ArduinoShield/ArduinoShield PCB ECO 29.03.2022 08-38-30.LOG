@@ -1,0 +1,18 @@
+Added Component: Designator=K?(SOT95P230X110-3M)
+Add component (AddParameter): Name = "Case/Package"; Value = "SOT23-3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ids max"; Value = "200mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "SMD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "320mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Rds on"; Value = "3.9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock E101"; Value = "20"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "N-Channel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vds max"; Value = "60V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vgs (Max)"; Value = "20V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vgs(th) (Max) @ Id"; Value = "2.1V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VIN Pin=K?-1
+Added Pin To Net: NetName=GND Pin=K?-2
+Added Pin To Net: NetName=+5V Pin=K?-3

@@ -1,0 +1,154 @@
+Removed Pin From Net: NetName=GND Pin=R12-2
+Removed Pin From Net: NetName=GND Pin=R13-2
+Removed Pin From Net: NetName=GND Pin=R14-2
+Removed Pin From Net: NetName=GND Pin=R15-2
+Removed Pin From Net: NetName=NetR3_2 Pin=X14-1
+Removed Pin From Net: NetName=GND Pin=X14-2
+Removed Pin From Net: NetName=NetR4_2 Pin=X15-1
+Removed Pin From Net: NetName=GND Pin=X15-2
+Removed Pin From Net: NetName=NetR5_2 Pin=X16-1
+Removed Pin From Net: NetName=GND Pin=X16-2
+Removed Pin From Net: NetName=NetR6_2 Pin=X17-1
+Removed Pin From Net: NetName=GND Pin=X17-2
+Removed Pin From Net: NetName=+5V Pin=X23-2
+Removed Pin From Net: NetName=+5V Pin=X24-2
+Removed Pin From Net: NetName=+5V Pin=X25-2
+Removed Pin From Net: NetName=+5V Pin=X26-2
+Removed Member From Class: ClassName=ArduinoShield Member=X24
+Removed Member From Class: ClassName=ArduinoShield Member=X25
+Removed Member From Class: ClassName=ArduinoShield Member=X26
+Change Component Footprint: Designator=X23 Old Footprint=to220 New Footprint=691210910002
+Change Component Comment : Designator=R3 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R4 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R5 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R6 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R7 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R8 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R9 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R10 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R11 Old Comment=100? New Comment=120R
+Change Component Comment : Designator=R12 Old Comment=220R New Comment=39R
+Change Component Comment : Designator=R13 Old Comment=220R New Comment=39R
+Change Component Comment : Designator=R14 Old Comment=220R New Comment=39R
+Change Component Comment : Designator=R15 Old Comment=220R New Comment=39R
+Change Component Comment : Designator=X23 Old Comment=TO220 New Comment=SCREW_2X1
+Change Managed Component Library Link : Designator=X23 Old VaultGUID= New VaultGUID=732A8742-9F45-45B8-8406-E4DF4CD9B534 Old ItemGUID= New ItemGUID=FF157EE6-BEB0-49D5-9619-720C7B8E6E8D Old RevisionGUID= New RevisionGUID=63FFC6F0-29DD-4F78-8B22-130B6A1B5E8E
+Change component parameters: Designator = "X23" ("X23"); Footprint = "to220"; UniqueID = "\TXLJRCYU" ("\TXLJRCYU")
+Change component parameters (AddParameter): Name = "Application"; Value = "Rising Cage Clamp"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Component Type"; Value = "Standard"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Manufacturer"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.we-online.de"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = "https://katalog.we-online.de/em/datasheet/691210910002.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Design Item ID"; Value = "691210910002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Modularity"; Value = "No"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature"; Value = "-40 to +105degC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packaging"; Value = "Box"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PCB/Cable/Panel"; Value = "PCB"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pin Count"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pin Number"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pitch"; Value = "2.54mm"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published Date"; Value = "Feburary 2021"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Rated Current [UL]"; Value = "6A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Source"; Value = "WR-TBL_Rising Cage Clamp.SchLib"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Type"; Value = "Horizontal"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Working Voltage [UL]"; Value = "150VAC"; VariantName = "[No Variations]"
+Added Component: Designator=K1(TO-92)
+Add component (AddParameter): Name = "Case/Package"; Value = "TO 92"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "hFE"; Value = "400"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ic max"; Value = "100mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-55°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "625mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "NPN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vce sat"; Value = "600mV"; VariantName = "[No Variations]"
+Added Component: Designator=K2(TO-92)
+Add component (AddParameter): Name = "Case/Package"; Value = "TO 92"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "hFE"; Value = "400"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ic max"; Value = "100mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-55°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "625mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "NPN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vce sat"; Value = "600mV"; VariantName = "[No Variations]"
+Added Component: Designator=K3(TO-92)
+Add component (AddParameter): Name = "Case/Package"; Value = "TO 92"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "hFE"; Value = "400"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ic max"; Value = "100mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-55°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "625mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "NPN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vce sat"; Value = "600mV"; VariantName = "[No Variations]"
+Added Component: Designator=K4(TO-92)
+Add component (AddParameter): Name = "Case/Package"; Value = "TO 92"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "hFE"; Value = "400"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ic max"; Value = "100mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "150°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-55°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "THT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pins"; Value = "3"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Power"; Value = "625mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transistor Type"; Value = "NPN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vce sat"; Value = "600mV"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=K1-3
+Added Pin To Net: NetName=GND Pin=K2-3
+Added Pin To Net: NetName=GND Pin=K3-3
+Added Pin To Net: NetName=GND Pin=K4-3
+Added Pin To Net: NetName=+5V Pin=X7-1
+Added Pin To Net: NetName=+5V Pin=X8-1
+Added Pin To Net: NetName=+5V Pin=X10-1
+Added Pin To Net: NetName=+5V Pin=X11-1
+Added Pin To Net: NetName=+5V Pin=X14-1
+Added Pin To Net: NetName=NetR3_2 Pin=X14-2
+Added Pin To Net: NetName=+5V Pin=X15-1
+Added Pin To Net: NetName=NetR4_2 Pin=X15-2
+Added Pin To Net: NetName=+5V Pin=X16-1
+Added Pin To Net: NetName=NetR5_2 Pin=X16-2
+Added Pin To Net: NetName=+5V Pin=X17-1
+Added Pin To Net: NetName=NetR6_2 Pin=X17-2
+Added Pin To Net: NetName=GND Pin=X23-1
+Added Pin To Net: NetName=VIN Pin=X23-2
+Added Pin To Net: NetName=NetK1_1 Pin=K1-1
+Added Pin To Net: NetName=NetK1_1 Pin=R14-2
+Added Pin To Net: NetName=NetK1_1 Pin=R15-2
+Added Net: Name=NetK1_1
+Added Pin To Net: NetName=NetK1_2 Pin=K1-2
+Added Pin To Net: NetName=NetK1_2 Pin=R16-2
+Added Net: Name=NetK1_2
+Added Pin To Net: NetName=NetK2_1 Pin=K2-1
+Added Pin To Net: NetName=NetK2_1 Pin=R12-2
+Added Pin To Net: NetName=NetK2_1 Pin=R13-2
+Added Net: Name=NetK2_1
+Added Pin To Net: NetName=NetK2_2 Pin=K2-2
+Added Pin To Net: NetName=NetK2_2 Pin=R17-2
+Added Net: Name=NetK2_2
+Added Pin To Net: NetName=NetK3_1 Pin=K3-1
+Added Pin To Net: NetName=NetK3_1 Pin=R3-1
+Added Pin To Net: NetName=NetK3_1 Pin=R4-1
+Added Net: Name=NetK3_1
+Added Pin To Net: NetName=NetK3_2 Pin=K3-2
+Added Pin To Net: NetName=NetK3_2 Pin=R18-2
+Added Pin To Net: NetName=NetK3_2 Pin=R20-1
+Added Net: Name=NetK3_2
+Added Pin To Net: NetName=NetK4_1 Pin=K4-1
+Added Pin To Net: NetName=NetK4_1 Pin=R5-1
+Added Pin To Net: NetName=NetK4_1 Pin=R6-1
+Added Net: Name=NetK4_1
+Added Pin To Net: NetName=NetK4_2 Pin=K4-2
+Added Pin To Net: NetName=NetK4_2 Pin=R19-2
+Added Pin To Net: NetName=NetK4_2 Pin=R21-1
+Added Net: Name=NetK4_2
