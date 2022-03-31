@@ -13,11 +13,9 @@ But final: envoyer une tramme contenant la position des robots adverses
 
 - info avancement serv
 
-- validation nouvelle méthode de traitement de liste 
-
-- si validation tester TagFinderv2
-
-- TagFinderV2 version lib(local2) a tester
-
+- problème: GetWpos() infinite searching
 - Test sur TABLE
+
+
+-TestCopi finir et tester(Helper:GitCopilot) 
 
