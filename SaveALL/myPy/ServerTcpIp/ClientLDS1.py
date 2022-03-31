@@ -22,11 +22,11 @@ memoire = 0 # mémoire de l'état de la barrière optique
 Msg = "New"
 Msg = Msg.encode()
 conn.send(Msg)
-time.sleep(10)
+time.sleep(2)
 Msg = "Next"
-Msg = Msg.encode()       
-# si le bouton start = 0 envoie du message fin qui coupe la connexion
-# du serveur et du client
+Msg = Msg.encode()
+conn.send(Msg)
+time.sleep(2)
 Msg = "Off"
 Msg = Msg.encode()
 conn.send(Msg)
