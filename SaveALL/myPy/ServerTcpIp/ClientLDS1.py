@@ -1,7 +1,6 @@
 #//////Client///////
-# Programmeur: Phung Arthur
-# nom du projet: client.py
-# Raspberry à utiliser: Client
+# Programmeur: Dalmas Luca
+# nom du projet: ClientLDS1.py
 
 #importation des librairies
 
@@ -11,7 +10,7 @@ import os
 import time
 
 # adresse IP du serveur et port de communication
-hote = "10.3.141.1"
+hote = "192.168.185.93"
 port = 12800
 
 #Tentative de connexion au serveur
