@@ -56,7 +56,7 @@ class Capture:
 
 
 class Tag:
-    planMrot = [0, 0]
+    planMrot = [0, 0] # id 0 hq, id 1 fisheye
     planTvec = [0, 0]
     def __init__(self,_id,_corns,_cam):
         self.id = _id
@@ -76,10 +76,11 @@ class Tag:
             self.marker_edge = TagIgSize.ROBOT
         else:
             self.marker_edge = TagIgSize.SAMPLE
-        self.update()
+       
 
     def findV(self):
-        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
+        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
+            self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
 
     def getPlan(self): 
 
@@ -106,27 +107,28 @@ class Tag:
         xw = 0
         yw = 0
         zw = 0
-        while foundx != True or foundy != True:
+        while foundx != True or foundy != True: # not(fonownx and foundy)
                 a, _ = cv.projectPoints(
                 (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam],App.MAT[self.cam], App.DIST[self.cam])
                 x0 = a[0][0][0]
                 y0 = a[0][0][1]
-                if x0 > (cx-2) and x0<(cx+2):
-                    foundx=True
+                if x0 > (cx-2) and x0<(cx+2): # (cx - 2) < x0 < (cx + 2):
+                    foundx = True
                 elif x0 > cx:
-                    xw=xw-1
+                    xw = xw-1
                 else:
-                    xw=xw+1
+                    xw = xw+1
 
-                if y0 >(cy-2) and y0<(cy+2):
-                    foundy=True
+                if y0 >(cy-2) and y0<(cy+2): # (cy - 2) < y0 < (cy + 2):
+                    foundy = True
                 elif y0 > cy:
-                    yw=yw-1
+                    yw = yw-1
                 else:
-                    yw=yw+1
+                    yw = yw+1
                 self.irlcord = (xw, yw) 
                 print("image:", cx, cy, "trouvé:", x0, y0, "irl:", xw, yw)
         self.irlcord = (xw, yw)
+
     def __str__(self):
         return "Tag" + str(self.id) + str(self.irlcord)
 
@@ -253,23 +255,28 @@ class ImProc:
         return (self.infoMarkers[listcam][0][posList])
 
     def TriTag(self):
+        '''
+        création des tags dans une liste 
+        '''
         self.tagin.clear()
-        for idCam,infoCam in enumerate(self.infoMarkers):
-            try:
-                for index,id in enumerate(infoCam[1]):
-               
-                    self.tagin.append(Tag(id, infoCam[0][index], idCam))
-            except:    
-                pass
+        for idCam, infoCam in enumerate(self.infoMarkers):
+            if infoCam[1] is not None:
+                for index, id in enumerate(infoCam[1]):
+                    self.tagin.append(Tag(id, infoCam[0][index], idCam)) # ici après on fait update
             
     def Tri(self):
-        a=[]
-        b=[]
-        for i ,j in enumerate( self.tagin):
+        '''
+        obselte
+        tri des tags pour avoir les tags centraux au début de la liste
+        '''
+        a = []
+        b = []
+        for i, j in enumerate(self.tagin):
             if j.id == IgId.MIDL:
                 a.append(self.tagin.pop(i))
         b = a+self.tagin
-        self.tagin=b
+        self.tagin = b
+
     def Release_All(self):
         for i in self.cap:
             i.release()
