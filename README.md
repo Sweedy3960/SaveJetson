@@ -21,3 +21,5 @@ But final: envoyer une tramme contenant la position des robots adverses
 
 - Test sur TABLE
 
+**Resultat:**
+- Bat 20000mAh -> 1h =~10% -> 9h d'autonomie 
