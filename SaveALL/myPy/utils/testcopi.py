@@ -83,11 +83,26 @@ class servTCP:
         self.sock=None
         self.sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.sock.connect((self.ip,self.port))
+    def bind(self,_ip,_port) -> None:
+        """
+        bind la connexion
+        """
+        self.sock.bind((_ip,_port))
+    def listen(self,_n) -> None:
+        """
+        ecoute sur un port
+        """
+        self.sock.listen(_n)
+    def encode(self,_msg) -> bytes:
+        """
+        encode un message
+        """
+        return _msg.encode()
     def send(self,_msg) -> None:
         """
         envoie un message
         """
-        self.sock.send(_msg)
+        self.sock.send(self.encode(_msg))
     def recv(self) -> None:
         """
         recoit un message
@@ -146,6 +161,18 @@ class App:
         Constructeur de la classe
         """
         self.NbCam=2
+        self.ip=""
+        self.port=0
+        self.launchServer()
+    def launchServer(self):
+        """
+        Lance le serveur
+        """
+        serv=servTCP(self.ip,self.port)
+        serv.bind(self.ip,self.port)
+        serv.listen(1)
+    
+        
     def createpipe(self):
         """
         Retourne la liste des pipelines gstreamer
