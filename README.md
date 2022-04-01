@@ -16,6 +16,11 @@ But final: envoyer une tramme contenant la position des robots adverses
 - problème: GetWpos() infinite searching
 - Test sur TABLE
 
+<<<<<<< HEAD
 
 -TestCopi finir et tester(Helper:GitCopilot) 
 
+=======
+**Resultat:**
+- Bat 20000mAh -> 1h =~10% -> 9h d'autonomie 
+>>>>>>> backend-Gitcopilot
