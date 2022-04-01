@@ -8,13 +8,18 @@ import sys
 
 
 class Capture:
-    ''' pipeline de capture video gstreamer
+    '''
+     pipeline de capture video gstreamer
+     probriété:
         résolution:
         3840x2160px,
         id de la caméra,
         orientation
     '''
     def __init__(self, _idCam):
+        """
+        constructeur de la classe
+        """
         self.idCam = _idCam
         if self.idCam == 0:
             self.capture_width = 3840
