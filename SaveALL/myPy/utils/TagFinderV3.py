@@ -4,7 +4,8 @@ Help: Github copilot
 """
 import cv2 as cv
 import numpy as np
-
+import sys
+import socket
 class IgId():
     """
     class list contenant les Tag visible dans une partie
@@ -55,16 +56,13 @@ class Tag:
         self.id=_id
         self.corns=_corns
         self.cam=_cam
-        self.coordImg = (0, 0)
         self.pixelcentralImg =[int((( self.corns[0][0][0]+ self.corns[0][1][0]+ self.corns[0][2][0]+ self.corns[0][3][0])*0.25)),
                           int((( self.corns[0][0][1]+ self.corns[0][1][1]+ self.corns[0][2][1]+ self.corns[0][3][1])*0.25))]
         self.size = self.getSize()
         if self.id == IgId.MIDL:
             self.coordMondeCorns = App.W_Center
             self.PosMonde =(1450, 1200,0)
-            App.PLAN.append(Plan(self.coordMonde,self.coordImg,App.MAT[self.cam], App.DIST[self.cam]))
-        else:
-            self.PosMonde = self.searchWoldPos()
+            App.PLAN.append(Plan(self.coordMondeCorns,self.corns,App.MAT[self.cam], App.DIST[self.cam]))
     def getSize(self):
         """
         retourne la taille du tag
@@ -106,7 +104,13 @@ class Tag:
                 yw += 0.01
             elif y0 < (yc-2): 
                 yw -= 0.01
+        self.PosMonde = (xw, yw, zw)
         return (xw, yw, zw)
+    def __str__(self) -> str:
+        """
+        retourne une chaine de caractère
+        """
+        return "Tag: id: {}, coordMonde: {}".format(self.id, self.PosMonde)
     
 class servTCP:
     """
@@ -151,6 +155,7 @@ class servTCP:
         ferme la connexion
         """
         self.sock.close()
+    
 
 class capture:
     """
@@ -222,7 +227,7 @@ class App:
         """
         Constructeur de la classe
         """
-
+        self.run=True
         self.NbCam=2
         self.ip=""
         self.port=0
@@ -258,6 +263,7 @@ class App:
         """
         for i in self.createcapture():
             i.release()
+        self.run=False
     def togray(self):
         """
         Retourne la liste des images en niveau de gris
@@ -266,15 +272,64 @@ class App:
 
     def tagdetecion(self):
         """
-        Retourne une liste d'objet tags detectés dans chaque image
+        Retourne une liste de tags detectés dans chaque image
         """
         return [cv.aruco.detectMarkers(i, cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_50)) for i in self.togray()]
     def tri(self):
         """
-        Retourne une liste d'objet tags trié
+        crée une liste d'objets tag avec ces info, la trie pour que le tag avec l'id 42 soit au début et la retourne
         """
-        a=self.tagdetecion()
+        a = self.tagdetecion()
+        save=None
+        for i, j in enumerate(a):
+                for k in j[1]:
+                    if k == IgId.MIDL:
+                        save = j.pop(j.index(k))
+                        a.insert(0, save)
+                        break
+        return a
 
-        
+    def listTagCreate(self):
+        """
+        crée une lsite d'objet tag puis la retourne
+        """
+        a = self.tri()
+        b=[]
+        for cam , info in enumerate(a):
+            for value in info:
+                b.append(Tag(info[0][value],info[1][value],cam))
+        return b 
+    def getPos(self):
+        """
+        Retourne la liste des positions des tags
+        """
+        for i in self.listTagCreate():
+            if i.id != IgId.MIDL:
+                i.searchWoldPos() 
+        print(i)
+        #self.serv.send(print(i))
+        #self.serv.send(i.id+i.worldPos)
+
+    def __del__(self):
+        """
+        destructeur de la classe
+        """
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            self.closecapture()
+            cv.destroyAllWindows()
     
-    
+
+def main() -> string:
+    """
+    Fonction principale 
+    """
+    app=App()
+    while app.run:
+        app.getPos()
+    sys.exit(0)
+    return 0
+
+
+if __name__ == "__main__":
+    main()
+   

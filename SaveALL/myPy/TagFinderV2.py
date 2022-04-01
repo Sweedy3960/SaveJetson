@@ -1,6 +1,5 @@
 import enum
 import string
-from cv2 import MIXED_CLONE
 import numpy as np
 import cv2 as cv
 import sys
