@@ -3,6 +3,7 @@ Essai d'une détéction de cordonée d'un tag dans le monde réel, grâce à une
 Help: Github copilot
 """
 import cv2 as cv
+import numpy as np
 
 class IgId():
     """
@@ -55,8 +56,15 @@ class Tag:
         self.corns=_corns
         self.cam=_cam
         self.coordImg = (0, 0)
-        self.coordMonde = (0, 0)
+        self.pixelcentralImg =[int((( self.corns[0][0][0]+ self.corns[0][1][0]+ self.corns[0][2][0]+ self.corns[0][3][0])*0.25)),
+                          int((( self.corns[0][0][1]+ self.corns[0][1][1]+ self.corns[0][2][1]+ self.corns[0][3][1])*0.25))]
         self.size = self.getSize()
+        if self.id == IgId.MIDL:
+            self.coordMondeCorns = App.W_Center
+            self.PosMonde =(1450, 1200,0)
+            App.PLAN.append(Plan(self.coordMonde,self.coordImg,App.MAT[self.cam], App.DIST[self.cam]))
+        else:
+            self.PosMonde = self.searchWoldPos()
     def getSize(self):
         """
         retourne la taille du tag
@@ -69,6 +77,36 @@ class Tag:
             return Size.SAMPLE
         else:
             return None
+    def searchWoldPos(self):
+        """
+        Cherche la position du tag dans le monde
+        utilisation de la foction de projection pour trouver des cordonée dans une image
+        """
+        xw=0
+        yw=0
+        zw=0
+        xc=self.pixelcentralImg[0]
+        yc=self.pixelcentralImg[1]
+        while foundx == False or foundy == False:
+            a, _ = cv.projectPoints(
+                    (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
+            x0 = a[0][0][0]
+            y0 = a[0][0][1]
+
+            if x0 > (xc-2) and x0 < (xc+2):
+                foundx = True
+            elif x0 > (xc+2):
+                xw += 0.01
+            elif x0 < (xc-2):             
+                xw -= 0.01
+            
+            if y0 > (yc-2) and y0 < (yc+2):
+                foundy = True
+            elif y0 > (yc+2):
+                yw += 0.01
+            elif y0 < (yc-2): 
+                yw -= 0.01
+        return (xw, yw, zw)
     
 class servTCP:
     """
@@ -118,16 +156,22 @@ class capture:
     """
     objet de type capture
     """
-    def __init__(self):
+    def __init__(self, _idCam):
         """
-        Constructeur de la classe
+        constructeur de la classe
         """
-        self.idCam=0
-        self.capture_width=3264
-        self.capture_height=1848
-        self.display_width=500
-        self.display_height=500
-        self.flip_method=2
+        self.idCam = _idCam
+        if self.idCam == 0:
+            self.capture_width = 3840
+            self.capture_height = 2160
+            self.display_width = 3840
+            self.display_height = 2160
+        elif self.idCam == 1:
+            self.capture_width = 3264
+            self.capture_height = 2464
+            self.display_width = 3264
+            self.display_height = 2464
+        self.flip_method = 2
        
     def gstreamer_pipeline(self):
         """
@@ -151,15 +195,34 @@ class capture:
                 self.display_height,
             )
         )
-
+class Plan:
+    """
+    class avec les infos plans
+    """
+    def __init__(self,_coord,_coordImg,_mat,_dist) -> None:
+        ret, self.rvec, self.tvec = cv.solvePnP( _coord, _coordImg, _mat, _dist)
+        self.planMrot[self.cam], _ = cv.Rodrigues(self.rvec)
+        self.planTvec[self.cam] = self.tvec.ravel().reshape(3)
 class App:
     """
     objet de type App
     """
+    CALIB_PATH = "SaveALL/myFi/"
+    CAMERA_MATRIX_HQ = np.loadtxt(CALIB_PATH+'cam12matvid.txt', delimiter=',')
+    DIST_COEFFS_HQ = np.loadtxt(CALIB_PATH+'cam12distvid.txt', delimiter=',')
+    CAMERA_MATRIX_FI = np.loadtxt(CALIB_PATH+'FishMat.txt', delimiter=',')
+    DIST_COEFFS_FI = np.loadtxt(CALIB_PATH+'FishDist.txt', delimiter=',')
+    MAT = [CAMERA_MATRIX_HQ, CAMERA_MATRIX_FI]
+    DIST = [DIST_COEFFS_HQ, DIST_COEFFS_FI]
+    #Position [W]ordl des coins du tag du centre
+    W_Center = np.array([(1450, 1200, 530), (1550, 1200, 530),
+                        (1550, 1300, 530), (1450, 1300, 530)], dtype="double")
+    PLAN=[]
     def __init__(self):
         """
         Constructeur de la classe
         """
+
         self.NbCam=2
         self.ip=""
         self.port=0
@@ -177,7 +240,7 @@ class App:
         """
         Retourne la liste des pipelines gstreamer
         """
-        return [capture().gstreamer_pipeline() for i in range(self.NbCam)]
+        return [capture(i).gstreamer_pipeline() for i in range(self.NbCam)]
 
     def createcapture(self):
         """
@@ -203,12 +266,15 @@ class App:
 
     def tagdetecion(self):
         """
-        Retourne la liste info des tags détécter dans les images en niveau de gris
+        Retourne une liste d'objet tags detectés dans chaque image
         """
-        return [cv.aruco.detectMarkers(i,cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)) for i in self.togray()]
-    def tagcreate(self):
+        return [cv.aruco.detectMarkers(i, cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_50)) for i in self.togray()]
+    def tri(self):
         """
-        Créer les objets de type Tag avec les informations des tags détécter en paramètres
+        Retourne une liste d'objet tags trié
         """
-        return [Tag(j[0][0][0],j[0][0][1],i) for i,j in enumerate(self.tagdetecion())]
+        a=self.tagdetecion()
+
+        
+    
     
