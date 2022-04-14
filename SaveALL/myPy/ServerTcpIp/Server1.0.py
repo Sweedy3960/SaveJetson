@@ -2,10 +2,10 @@ import socket
 class Serveur:
     def __init__(self):
         
-        self.hote = 
-        self.port=
+        self.hote = ""
+        self.port=100
         self.adress=(self.hote,self.port)
-        self.MsgToSend =
+        self.MsgToSend ="cc"
         self.MsgRecieve=
         
     def ServerStart(self):
@@ -17,5 +17,5 @@ class Serveur:
     def Listen(self):
         self.ThatServ.listen(1)
         return "listenning"
-    def ClienConnect(self):
-        ThatSe 
+    
+

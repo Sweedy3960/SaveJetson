@@ -4,7 +4,7 @@ import socket
 import select
 #init du port de communication est ip
 hote = ''
-port = 12800
+port = 100
 #tentative de connexion
 try:
     connexion_principale = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -73,3 +73,5 @@ print("Fermeture des connexions")
 for client in clients_connectes:
     client.close()
 connexion_principale.close()
+Msg = Msg.encode()
+conn.send(Msg)

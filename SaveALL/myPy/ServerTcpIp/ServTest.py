@@ -6,7 +6,7 @@ from enum import Enum
 client = None   # Création de la variable vide pour l'instant type vide = cree zone mem vide
 serv = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # Création de l'objet serveur
 data = None
-serv.bind(("",6789))    # Choisi le nom du host et le numéro du port 
+serv.bind(("192.168.0.30",6789))    # Choisi le nom du host et le numéro du port 
 serv.listen(1)  # Passe en mode "réception" ou 
 data =b'' # Définit le type de la variable   
 
