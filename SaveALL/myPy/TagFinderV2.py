@@ -60,6 +60,7 @@ class Tag:
     planTvec = [0, 0]
     def __init__(self,_id,_corns,_cam):
         self.id = _id
+        print(self.id)
         self.cam = _cam
         self.tvecs = None
         self.rvecs = None
@@ -290,7 +291,7 @@ class ImProc:
         '''
         for tag in self.tagin:
             tag.update()
-            print(tag)
+        print(self.tagin)
 
     def FrameWorking(self):
         self.ToGray()
