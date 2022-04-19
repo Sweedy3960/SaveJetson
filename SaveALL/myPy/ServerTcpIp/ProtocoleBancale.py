@@ -1,5 +1,6 @@
 import socket
 import sys
+import time 
 class TCP:
     """
     Serveurttcp ip pour communiquer avec automate et twincat 
@@ -42,10 +43,24 @@ class TCP:
         self.client.close()
         print ('Arret du serveur.')
         self.serveur.close()
-
+    def Deco(self):
+        print ('Fermeture de la connexion avec le client.')
+        self.client.close()
+        self.NewCLi()
+    def NewCLi(self):
+        self.client=None
+        self.ClienAccept()
+        
     def Recieving(self):
         print("recieving")
+        #start_Time=time.time()
+        #print(start_Time)
         self.MsgRe = self.client.recv(1024)
+
+        #Ac_Time=time.time()
+        #print(Ac_Time)
+        #if Ac_Time > start_Time+100:
+        #    self.Deco()
         print(self.MsgRe)
         self.MsgRe =  self.MsgRe.decode()
         print(self.MsgRe)
@@ -55,15 +70,15 @@ class TCP:
                 print("Reçu {}".format( self.MsgRe))
                 # si le message fin est détecté
                 if  self.MsgRe == "pos":
-                    self.Respond("position des robotzs")
+                    self.Respond("position des robots")
                 else:
                     if  self.MsgRe == "mus":
-                        self.Respond("points du musé")
+                        self.Respond("points du muse")
                     else:
                         if  self.MsgRe == "fin":
                             self.Respond("Serveur closed")
-                            self.ServClosed()
-                            self.running=False
+                            self.Deco()
+                            #self.running=False
         self.MsgRe= " "
 
 
