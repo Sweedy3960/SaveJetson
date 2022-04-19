@@ -53,7 +53,7 @@ class TCP:
         
     def Recieving(self):
         print("recieving")
-        self.serveur.settimeout(2)
+       # self.serveur.settimeout(2)
         try:
             self.MsgRe = self.client.recv(1024)
         except (TimeoutError , ConnectionResetError)as e:
@@ -86,6 +86,7 @@ class TCP:
         print ('Fermeture de la connexion avec le client par destructeur.')
         self.client.close()
         self.serveur.close()
+        socket.shutdown(socket.SHUT_RDWR)
 
     def main(self):
         while self.client ==None:
