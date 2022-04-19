@@ -52,3 +52,47 @@ Traceback (most recent call last):
   File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 87, in __del__
     self.client.close()
 AttributeError: 'TCP' object has no attribute 'client'
+--------------------------------------------------------------------------
+fin
+Reçu fin
+Envoi de :Serveur closed
+Envoi ok.
+Fermeture de la connexion avec le client.
+Envoi de :connected
+Envoi ok.
+les clients connectés:<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('192.168.0.30', 6789), raddr=('192.168.0.20', 50189)>
+recieving
+pos
+Reçu pos
+Envoi de :position des robots
+Envoi ok.
+recieving
+fin
+Reçu fin
+Envoi de :Serveur closed
+Envoi ok.
+Fermeture de la connexion avec le client.
+Traceback (most recent call last):
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 115, in <module>
+    main()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 108, in main
+    tcp.main()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 97, in main
+    self.Recieving()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 80, in Recieving
+    self.Deco()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 49, in Deco
+    self.NewCLi()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 52, in NewCLi
+    self.ClienAccept()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 20, in ClienAccept
+    self.client, self.adresseClient = self.serveur.accept()
+  File "/usr/lib/python3.6/socket.py", line 205, in accept
+    fd, addr = self._accept()
+socket.timeout: timed out
+Fermeture de la connexion avec le client par destructeur.
+Exception ignored in: <bound method TCP.__del__ of <__main__.TCP object at 0x7fa67bad30>>
+Traceback (most recent call last):
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 87, in __del__
+    self.client.close()
+AttributeError: 'NoneType' object has no attribute 'close'
