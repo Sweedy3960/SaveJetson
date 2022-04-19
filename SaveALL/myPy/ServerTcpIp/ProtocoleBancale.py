@@ -96,7 +96,7 @@ class TCP:
         while self.running:
             try:
                 self.Recieving()
-            except TimeoutError as e:
+            except TimeoutError or ConnectionResetError as e:
                 print(e)
                 self.Deco()
                 
