@@ -56,15 +56,15 @@ class Capture:
 
 
 class Tag:
-    planMrot = [0, 0]
+    planMrot = [0, 0] # id 0 hq, id 1 fisheye
     planTvec = [0, 0]
     def __init__(self,_id,_corns,_cam):
         self.id = _id
+        print(self.id)
         self.cam = _cam
         self.tvecs = None
         self.rvecs = None
         self.corners = _corns
-        print(self.corners[0])
         self.centrepix = [int((( self.corners[0][0][0]+ self.corners[0][1][0]+ self.corners[0][2][0]+ self.corners[0][3][0])*0.25)),
                           int((( self.corners[0][0][1]+ self.corners[0][1][1]+ self.corners[0][2][1]+ self.corners[0][3][1])*0.25))]
         self.irlcord = (0, 0)
@@ -77,10 +77,11 @@ class Tag:
             self.marker_edge = TagIgSize.ROBOT
         else:
             self.marker_edge = TagIgSize.SAMPLE
-        self.update()
+       
 
     def findV(self):
-        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
+        self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
+            self.corners, self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
 
     def getPlan(self): 
 
@@ -90,6 +91,9 @@ class Tag:
         
 
     def getWpos(self):
+        """
+        trouve la position dans le monde réel du tag
+        """
         if self.id == IgId.MIDL:
             return (1450, 1200)
         foundx = False
@@ -104,38 +108,30 @@ class Tag:
         xw = 0
         yw = 0
         zw = 0
-        print(self.id)
-        print(Tag.planMrot[self.cam], Tag.planTvec[self.cam])
-        while foundx == False or foundy == False:
+        while foundx != True or foundy != True: # not(fonownx and foundy)
                 a, _ = cv.projectPoints(
-                    (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
+                (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam],App.MAT[self.cam], App.DIST[self.cam])
                 x0 = a[0][0][0]
                 y0 = a[0][0][1]
-
-                if x0 > (cx-2) and x0 < (cx+2):
-                    if self.DebugPRojection:
-                        print("foundx")
+                if x0 > (cx-2) and x0<(cx+2): # (cx - 2) < x0 < (cx + 2):
                     foundx = True
                 elif x0 > cx:
                     xw = xw-1
                 else:
                     xw = xw+1
 
-                if y0 > (cy-2) and y0 < (cy+2):
+                if y0 >(cy-2) and y0<(cy+2): # (cy - 2) < y0 < (cy + 2):
                     foundy = True
-                    if self.DebugPRojection:
-                        print("foundy")
                 elif y0 > cy:
                     yw = yw-1
                 else:
                     yw = yw+1
-                    if self.DebugPRojection:
-                        print([x0, y0])
-                        print(cx, cy)
-                        print([xw, yw])
+                self.irlcord = (xw, yw) 
+                print("image:", cx, cy, "trouvé:", x0, y0, "irl:", xw, yw)
         self.irlcord = (xw, yw)
+
     def __str__(self):
-        return "Tag" + self.id + self.irlcord
+        return "Tag" + str(self.id) + str(self.irlcord)
 
     def update(self):
         self.getWpos()
@@ -260,17 +256,28 @@ class ImProc:
         return (self.infoMarkers[listcam][0][posList])
 
     def TriTag(self):
+        '''
+        création des tags dans une liste 
+        '''
         self.tagin.clear()
-        for idCam,infoCam in enumerate(self.infoMarkers):
-            for index,id in enumerate(infoCam[1]):
-                self.tagin.append(Tag(id, infoCam[0][index], idCam))
+        for idCam, infoCam in enumerate(self.infoMarkers):
+            if infoCam[1] is not None:
+                for index, id in enumerate(infoCam[1]):
+                    self.tagin.append(Tag(id, infoCam[0][index], idCam)) # ici après on fait update
             
     def Tri(self):
-        a=[]
-        for i ,j in enumerate( self.tagin):
+        '''
+        obselte
+        tri des tags pour avoir les tags centraux au début de la liste
+        '''
+        a = []
+        b = []
+        for i, j in enumerate(self.tagin):
             if j.id == IgId.MIDL:
                 a.append(self.tagin.pop(i))
-        self.tagin.insert(0,a)
+        b = a+self.tagin
+        self.tagin = b
+
     def Release_All(self):
         for i in self.cap:
             i.release()
@@ -283,7 +290,8 @@ class ImProc:
         modif data serv tcp to send
         '''
         for tag in self.tagin:
-            print(tag)
+            tag.update()
+        print(self.tagin)
 
     def FrameWorking(self):
         self.ToGray()
@@ -293,7 +301,6 @@ class ImProc:
         self.FrameWorking()
         if self.Detect():
             self.TagWork()
-
 
 
 def main() -> string:

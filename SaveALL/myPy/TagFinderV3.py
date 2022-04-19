@@ -80,6 +80,11 @@ class Tag:
         Cherche la position du tag dans le monde
         utilisation de la foction de projection pour trouver des cordonée dans une image
         """
+<<<<<<< HEAD
+=======
+        foundx=False
+        foundy=False
+>>>>>>> Jetdebug
         xw=0
         yw=0
         zw=0
@@ -87,7 +92,11 @@ class Tag:
         yc=self.pixelcentralImg[1]
         while foundx == False or foundy == False:
             a, _ = cv.projectPoints(
+<<<<<<< HEAD
                     (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
+=======
+                    (xw, yw, zw), App.planMrot[self.cam], App.planTvec[self.cam], App.MAT[self.cam], App.DIST[self.cam])
+>>>>>>> Jetdebug
             x0 = a[0][0][0]
             y0 = a[0][0][1]
 
@@ -206,8 +215,13 @@ class Plan:
     """
     def __init__(self,_coord,_coordImg,_mat,_dist) -> None:
         ret, self.rvec, self.tvec = cv.solvePnP( _coord, _coordImg, _mat, _dist)
+<<<<<<< HEAD
         self.planMrot[self.cam], _ = cv.Rodrigues(self.rvec)
         self.planTvec[self.cam] = self.tvec.ravel().reshape(3)
+=======
+        self.planMrot, _ = cv.Rodrigues(self.rvec)
+        self.planTvec = self.tvec.ravel().reshape(3)
+>>>>>>> Jetdebug
 class App:
     """
     objet de type App
@@ -231,7 +245,11 @@ class App:
         self.NbCam=2
         self.ip=""
         self.port=0
+<<<<<<< HEAD
         self.launchServer()
+=======
+        
+>>>>>>> Jetdebug
     def launchServer(self):
         """
         Lance le serveur
@@ -282,9 +300,17 @@ class App:
         a = self.tagdetecion()
         save=None
         for i, j in enumerate(a):
+<<<<<<< HEAD
                 for k in j[1]:
                     if k == IgId.MIDL:
                         save = j.pop(j.index(k))
+=======
+            if j[1] is not None:
+                for k in j[1]:
+                    if k == IgId.MIDL:
+                        save = list(j[1])
+                        save=save.pop(j[1].index(k))
+>>>>>>> Jetdebug
                         a.insert(0, save)
                         break
         return a
@@ -295,10 +321,19 @@ class App:
         """
         a = self.tri()
         b=[]
+<<<<<<< HEAD
         for cam , info in enumerate(a):
             for value in info:
                 b.append(Tag(info[0][value],info[1][value],cam))
         return b 
+=======
+        for idCam,infoCam in enumerate(a):
+            if not None in infoCam:
+                for index,id in enumerate(infoCam[1]):
+                    b.append(Tag(id, infoCam[0][index], idCam))
+        return b
+
+>>>>>>> Jetdebug
     def getPos(self):
         """
         Retourne la liste des positions des tags
@@ -306,7 +341,11 @@ class App:
         for i in self.listTagCreate():
             if i.id != IgId.MIDL:
                 i.searchWoldPos() 
+<<<<<<< HEAD
         print(i)
+=======
+            print(i)
+>>>>>>> Jetdebug
         #self.serv.send(print(i))
         #self.serv.send(i.id+i.worldPos)
 
@@ -319,7 +358,11 @@ class App:
             cv.destroyAllWindows()
     
 
+<<<<<<< HEAD
 def main() -> string:
+=======
+def main():
+>>>>>>> Jetdebug
     """
     Fonction principale 
     """

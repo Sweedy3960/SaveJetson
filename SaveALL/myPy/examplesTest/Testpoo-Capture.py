@@ -68,7 +68,7 @@ if __name__ == "__main__":
             img_cnt+=1
             time.sleep(1)
             imgR.release()
-            imgL.release()
+            imgL.release()qqqqq
             time.sleep(1)
             capture1.setCap(500,500)
             capture2.setCap(500,500)
