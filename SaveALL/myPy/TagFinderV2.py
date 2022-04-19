@@ -3,11 +3,11 @@ import string
 import numpy as np
 import cv2 as cv
 import sys
-
+import ProtocoleBancale as pb
 
 
 class Capture:
-    '''
+    ''' 
      pipeline de capture video gstreamer
      probriété:
         résolution:
@@ -263,20 +263,13 @@ class ImProc:
         for idCam, infoCam in enumerate(self.infoMarkers):
             if infoCam[1] is not None:
                 for index, id in enumerate(infoCam[1]):
-                    self.tagin.append(Tag(id, infoCam[0][index], idCam)) # ici après on fait update
+                    self.tagin.append(Tag(id, infoCam[0][index], idCam))
+        # ici après on fait update
+
             
-    def Tri(self):
-        '''
-        obselte
-        tri des tags pour avoir les tags centraux au début de la liste
-        '''
-        a = []
-        b = []
+    def Updatetag(self):
         for i, j in enumerate(self.tagin):
-            if j.id == IgId.MIDL:
-                a.append(self.tagin.pop(i))
-        b = a+self.tagin
-        self.tagin = b
+            j.update()
 
     def Release_All(self):
         for i in self.cap:
@@ -285,12 +278,10 @@ class ImProc:
 
     def TagWork(self):
         self.TriTag()
-        self.Tri()
+        self.Updatetag()
         '''
         modif data serv tcp to send
         '''
-        for tag in self.tagin:
-            tag.update()
         print(self.tagin)
 
     def FrameWorking(self):
@@ -305,6 +296,7 @@ class ImProc:
 
 def main() -> string:
     app1 = App()
+    serv1 = pb.TCP()
     app1.main()
     sys.exit(0)
 
