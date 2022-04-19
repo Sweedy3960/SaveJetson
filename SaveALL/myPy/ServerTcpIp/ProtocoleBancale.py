@@ -3,7 +3,7 @@ import sys
 import time 
 class TCP:
     """
-    Serveurttcp ip pour communiquer avec automate et twincat 
+    Serveurttcp ip pour communiquer avec automat et twincat 
     """
     def __init__(self):
         self.adr = ''
@@ -29,7 +29,8 @@ class TCP:
             print('Erreur envoi.')
         else:
             print ('Envoi ok.')
-    def Respond(self,_respond): 
+    def Respond(self,_respond):
+        self.running=False
         reponse = _respond
         print ('Envoi de :{}'.format(reponse))
         rep_enc=reponse.encode()
@@ -53,18 +54,17 @@ class TCP:
         
     def Recieving(self):
         print("recieving")
-        #start_Time=time.time()
-        #print(start_Time)
-        self.MsgRe = self.client.recv(1024)
-
-        #Ac_Time=time.time()
-        #print(Ac_Time)
-        #if Ac_Time > start_Time+100:
-        #    self.Deco()
-        print(self.MsgRe)
+        self.serveur.settimeout(1.0)
+        try:
+            self.MsgRe = self.client.recv(1024)
+        except self.serveur.timeout as e:
+            print(e)
+            raise OSError("Timeout")
+        if self.MsgRe == b'':
+            raise OSError("Timeout")
         self.MsgRe =  self.MsgRe.decode()
         print(self.MsgRe)
-            
+        
         if ( self.MsgRe == "pos") | ( self.MsgRe == "mus") | ( self.MsgRe == "fin"):
                 #allume la troisième reçoit un message
                 print("Reçu {}".format( self.MsgRe))
@@ -77,21 +77,30 @@ class TCP:
                     else:
                         if  self.MsgRe == "fin":
                             self.Respond("Serveur closed")
-                            self.Deco()
                             #self.running=False
+                            self.Deco()
+                            
         self.MsgRe= " "
 
 
     def __del__(self):
-        print ('Fermeture de la connexion avec le client.')
+        print ('Fermeture de la connexion avec le client par destructeur.')
         self.client.close()
         print ('Arret du serveur.')
         self.serveur.close()
     def main(self):
         while self.client ==None:
             self.ClienAccept()
+           # self.running=True
         while self.running:
-            self.Recieving()
+            try:
+                self.Recieving()
+            except OSError as e:
+                print(e)
+                self.Deco()
+                
+                 
+
         
 
 def main() :
