@@ -38,3 +38,17 @@ Traceback (most recent call last):
     self.MsgRe = self.client.recv(1024)
 ConnectionResetError: [Errno 104] Connection reset by peer
 Fermeture de la connexion avec le client par destructeur.
+-----------------------------------------------------------------------------------------------------------------------------
+ File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 115, in <module>
+    main()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 107, in main
+    tcp = TCP()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 12, in __init__
+    self.serveur.bind((self.adr,self.port))
+OSError: [Errno 98] Address already in use
+Fermeture de la connexion avec le client par destructeur.
+Exception ignored in: <bound method TCP.__del__ of <__main__.TCP object at 0x7f85771cf8>>
+Traceback (most recent call last):
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 87, in __del__
+    self.client.close()
+AttributeError: 'TCP' object has no attribute 'client'
