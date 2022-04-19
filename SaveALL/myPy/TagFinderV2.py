@@ -3,7 +3,7 @@ import string
 import numpy as np
 import cv2 as cv
 import sys
-import ProtocoleBancale as pb
+import ProtocoleBancal as pb
 
 
 class Capture:
@@ -296,7 +296,6 @@ class ImProc:
 
 def main() -> string:
     app1 = App()
-    serv1 = pb.TCP()
     app1.main()
     sys.exit(0)
 
