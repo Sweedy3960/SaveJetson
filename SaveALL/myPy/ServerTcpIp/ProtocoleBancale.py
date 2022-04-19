@@ -30,7 +30,6 @@ class TCP:
         else:
             print ('Envoi ok.')
     def Respond(self,_respond):
-        self.running=False
         reponse = _respond
         print ('Envoi de :{}'.format(reponse))
         rep_enc=reponse.encode()
@@ -54,10 +53,10 @@ class TCP:
         
     def Recieving(self):
         print("recieving")
-        
+        self.serveur.settimeout(2)
         try:
             self.MsgRe = self.client.recv(1024)
-        except TimeoutError as e:
+        except (TimeoutError , ConnectionResetError)as e:
             print(e)
             raise TimeoutError("Timeout1")
         if self.MsgRe == b'':
@@ -96,8 +95,8 @@ class TCP:
         while self.running:
             try:
                 self.Recieving()
-            except TimeoutError or ConnectionResetError as e:
-                print(e)
+            except( TimeoutError ,ConnectionResetError ):
+                print("error")
                 self.Deco()
                 
                  
