@@ -8,7 +8,7 @@ class TCP:
     def __init__(self):
         self.adr = ''
         self.port = 6789
-        self.serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+        self.serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.serveur.bind((self.adr,self.port))
         self.serveur.listen(5)
         self.client=None
@@ -54,14 +54,14 @@ class TCP:
         
     def Recieving(self):
         print("recieving")
-        self.serveur.settimeout(1.0)
+        
         try:
             self.MsgRe = self.client.recv(1024)
-        except self.serveur.timeout as e:
+        except TimeoutError as e:
             print(e)
-            raise OSError("Timeout")
+            raise TimeoutError("Timeout1")
         if self.MsgRe == b'':
-            raise OSError("Timeout")
+            raise TimeoutError("Timeout2")
         self.MsgRe =  self.MsgRe.decode()
         print(self.MsgRe)
         
@@ -86,8 +86,9 @@ class TCP:
     def __del__(self):
         print ('Fermeture de la connexion avec le client par destructeur.')
         self.client.close()
-        print ('Arret du serveur.')
-        self.serveur.close()
+       
+        #self.serveur.close()
+
     def main(self):
         while self.client ==None:
             self.ClienAccept()
@@ -95,7 +96,7 @@ class TCP:
         while self.running:
             try:
                 self.Recieving()
-            except OSError as e:
+            except TimeoutError as e:
                 print(e)
                 self.Deco()
                 

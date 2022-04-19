@@ -1,0 +1,19 @@
+
+recieving
+Timeout2
+Fermeture de la connexion avec le client.
+Envoi de :connected
+Envoi ok.
+les clients connectés:<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('192.168.0.30', 6789), raddr=('192.168.0.150', 51025)>
+recieving
+Traceback (most recent call last):
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 116, in <module>
+    main()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 109, in main
+    tcp.main()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 98, in main
+    self.Recieving()
+  File "/home/cpnv/Documents/SaveJetson/SaveALL/myPy/ServerTcpIp/ProtocoleBancale.py", line 59, in Recieving
+    self.MsgRe = self.client.recv(1024)
+ConnectionResetError: [Errno 104] Connection reset by peer
+Fermeture de la connexion avec le client par destructeur.
