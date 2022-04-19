@@ -17,7 +17,11 @@ class TCP:
         self.running=True
         print("ecoute")
     def ClienAccept(self):
-        self.client, self.adresseClient = self.serveur.accept()
+        try:
+            self.client, self.adresseClient = self.serveur.accept()
+        except TimeoutError as e:
+            print(e)
+            raise TimeoutError("Timeout3")
         self.ConnectAck()
         print("les clients connectés:{}".format(str(self.client)))
     def ConnectAck(self): 
@@ -85,8 +89,7 @@ class TCP:
     def __del__(self):
         print ('Fermeture de la connexion avec le client par destructeur.')
         self.client.close()
-        self.serveur.close()
-        socket.shutdown(socket.SHUT_RDWR)
+        self.serveur.shutdown(socket.SHUT_RDWR)
 
     def main(self):
         while self.client ==None:
@@ -95,7 +98,7 @@ class TCP:
         while self.running:
             try:
                 self.Recieving()
-            except( TimeoutError ,ConnectionResetError ):
+            except( TimeoutError ,ConnectionError):
                 print("error")
                 self.Deco()
                 
