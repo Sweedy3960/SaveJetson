@@ -85,8 +85,7 @@ class TCP:
     def __del__(self):
         print ('Fermeture de la connexion avec le client par destructeur.')
         self.client.close()
-       
-        #self.serveur.close()
+        self.serveur.close()
 
     def main(self):
         while self.client ==None:
