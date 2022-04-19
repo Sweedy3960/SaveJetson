@@ -10,7 +10,7 @@ class TCP:
         self.port = 6789
         self.serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
         self.serveur.bind((self.adr,self.port))
-        self.serveur.listen(1)
+        self.serveur.listen(5)
         self.client=None
         self.adresseClient=None
         self.MsgRe=None
