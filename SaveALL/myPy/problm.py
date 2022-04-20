@@ -58,10 +58,12 @@ class Capture:
 class Tag:
     planMrot = [0, 0] # id 0 hq, id 1 fisheye
     planTvec = [0, 0]
-    def __init__(self,_id,_corns,_cam):
+    def __init__(self,_id,_corns,_cam,_img):
         self.id = _id
-        print(self.id)
+        #print(self.id)
         self.cam = _cam
+        #print(self.cam)
+        self.img=_img[_cam]
         self.tvecs = None
         self.rvecs = None
         self.corners = _corns
@@ -77,7 +79,8 @@ class Tag:
             self.marker_edge = TagIgSize.ROBOT
         else:
             self.marker_edge = TagIgSize.SAMPLE
-       
+
+        self.rvecs, self.tvecs, markerPoints= cv.aruco.estimatePoseSingleMarkers(self.corners,self.marker_edge, App.MAT[self.cam], App.DIST[self.cam])
 
     def findV(self):
         self.rvecs, self.tvecs, markerPoints = cv.aruco.estimatePoseSingleMarkers(
@@ -113,14 +116,15 @@ class Tag:
                 (xw, yw, zw), Tag.planMrot[self.cam], Tag.planTvec[self.cam],App.MAT[self.cam], App.DIST[self.cam])
                 x0 = a[0][0][0]
                 y0 = a[0][0][1]
-                if x0 > (cx-2) and x0<(cx+2): # (cx - 2) < x0 < (cx + 2):
+                if  (cx - 2) < x0 < (cx + 2):
                     foundx = True
                 elif x0 > cx:
+                    print("la"+str(x0)+"ici"+str(cx))
                     xw = xw-1
                 else:
                     xw = xw+1
 
-                if y0 >(cy-2) and y0<(cy+2): # (cy - 2) < y0 < (cy + 2):
+                if (cy - 2) < y0 < (cy + 2):
                     foundy = True
                 elif y0 > cy:
                     yw = yw-1
@@ -242,14 +246,11 @@ class ImProc:
             self.gray[i] = cv.cvtColor(j, cv.COLOR_BGR2GRAY)
 
     def Detect(self):
+        print(len(self.gray))
         for i, j in enumerate(self.gray):
+            print("la"+str(i))
             self.infoMarkers[i] = cv.aruco.detectMarkers(
                 j, App.DICTIONARY, parameters=App.PARAMETERS)
-            try:
-                if self.infoMarkers[i][1] == None:
-                    return 0
-            except:
-                return 1
 
   
     def SortCorn(self, listcam: int, posList: int):
@@ -263,7 +264,7 @@ class ImProc:
         for idCam, infoCam in enumerate(self.infoMarkers):
             if infoCam is not None:
                 for index, id in enumerate(infoCam[1]):
-                    self.tagin.append(Tag(id, infoCam[0][index], idCam))
+                    self.tagin.append(Tag(id, infoCam[0][index], idCam,self.gray[idCam]))
         # ici après on fait update
 
             
@@ -284,6 +285,9 @@ class ImProc:
         '''
         for i in self.tagin:
             print(i.irlcord)
+            self.gray[i.cam] = cv.aruco.drawAxis(self.gray[i.cam],  App.MAT[i.cam], App.DIST[i.cam], i.rvecs, i.tvecs,0.10)
+        cv.imshow("that.png", self.gray[0])
+        cv.imshow("this.png", self.gray[1])
 
     def FrameWorking(self):
         self.ToGray()
@@ -291,8 +295,8 @@ class ImProc:
     def Update(self):
         self.ReadFrames()
         self.FrameWorking()
-        if self.Detect():
-            self.TagWork()
+        self.Detect()
+        self.TagWork()
 
 
 def main() -> string:
