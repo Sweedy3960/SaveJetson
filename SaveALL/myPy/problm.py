@@ -130,7 +130,6 @@ class Tag:
                     yw = yw-1
                 else:
                     yw = yw+1
-                self.irlcord = (yw, xw) 
                 #print("image:", cx, cy, "trouvé:", x0, y0, "irl:", xw, yw)
         self.irlcord = (xw, yw)
 
@@ -251,6 +250,11 @@ class ImProc:
             print("la"+str(i))
             self.infoMarkers[i] = cv.aruco.detectMarkers(
                 j, App.DICTIONARY, parameters=App.PARAMETERS)
+            try:
+                if self.infoMarkers[i][1] == None:
+                    return 0
+            except:
+                return 1
 
   
     def SortCorn(self, listcam: int, posList: int):
@@ -262,7 +266,7 @@ class ImProc:
         '''
         self.tagin.clear()
         for idCam, infoCam in enumerate(self.infoMarkers):
-            if infoCam is not None:
+            if infoCam != None:
                 for index, id in enumerate(infoCam[1]):
                     self.tagin.append(Tag(id, infoCam[0][index], idCam,self.gray[idCam]))
         # ici après on fait update
@@ -286,8 +290,8 @@ class ImProc:
         for i in self.tagin:
             print(i.irlcord)
             self.gray[i.cam] = cv.aruco.drawAxis(self.gray[i.cam],  App.MAT[i.cam], App.DIST[i.cam], i.rvecs, i.tvecs,0.10)
-        cv.imshow("that.png", self.gray[0])
-        cv.imshow("this.png", self.gray[1])
+        cv.imwrite("that4.png", self.gray[0])
+        cv.imwrite("this4.png", self.gray[1])
 
     def FrameWorking(self):
         self.ToGray()
@@ -297,7 +301,6 @@ class ImProc:
         self.FrameWorking()
         self.Detect()
         self.TagWork()
-
 
 def main() -> string:
     app1 = App()

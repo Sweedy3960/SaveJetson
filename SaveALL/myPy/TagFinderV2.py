@@ -40,7 +40,7 @@ class Capture:
             "video/x-raw(memory:NVMM), "
             "width=(int)%d, height=(int)%d, "
             #Possible modif de framerate si nécéssaire
-            "format=(string)NV12, framerate=(fraction)15/1 !"
+            "format=(string)NV12, framerate=(fraction)1/1 !"
             "nvvidconv flip-method=%d ! "
             "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
             "videoconvert ! "
@@ -170,8 +170,8 @@ class App:
     DICTIONARY = cv.aruco.Dictionary_get(cv.aruco.DICT_4X4_100)
     NB_CAM = 2
     #Position [W]ordl des coins du tag du centre
-    W_Center = np.array([(1450, 1200, 530), (1550, 1200, 530),
-                        (1550, 1300, 530), (1450, 1300, 530)], dtype="double")
+    W_Center = np.array([(1450, 1200, 550 ), (1550, 1200, 550),
+                        (1550, 1300, 550), (1450, 1300, 550)], dtype="double")
     #Chemins d'accès au fichier de calibration (modifie si nécéssaire)
     CALIB_PATH = "/home/cpnv/Documents/SaveJetson/SaveALL/myFi/"
     CAMERA_MATRIX_HQ = np.loadtxt(CALIB_PATH+'cam12matvid.txt', delimiter=',')
