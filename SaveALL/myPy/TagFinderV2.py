@@ -3,6 +3,7 @@ import string
 import numpy as np
 import cv2 as cv
 import sys
+import time 
 #import ProtocoleBancal as pb
 
 
@@ -172,7 +173,7 @@ class App:
     W_Center = np.array([(1450, 1200, 530), (1550, 1200, 530),
                         (1550, 1300, 530), (1450, 1300, 530)], dtype="double")
     #Chemins d'accès au fichier de calibration (modifie si nécéssaire)
-    CALIB_PATH = "SaveALL/myFi/"
+    CALIB_PATH = "/home/cpnv/Documents/SaveJetson/SaveALL/myFi/"
     CAMERA_MATRIX_HQ = np.loadtxt(CALIB_PATH+'cam12matvid.txt', delimiter=',')
     DIST_COEFFS_HQ = np.loadtxt(CALIB_PATH+'cam12distvid.txt', delimiter=',')
     CAMERA_MATRIX_FI = np.loadtxt(CALIB_PATH+'FishMat.txt', delimiter=',')
@@ -199,7 +200,7 @@ class App:
         #------Pour quitter "q"---------
         if cv.waitKey(1) & 0xFF == ord('q'):
             self.img.Release_All()
-            self.running = False
+            self.run = False
 
 
 class ImProc:
@@ -304,4 +305,5 @@ def main() -> string:
 
 
 if __name__ == "__main__":
+    print("New Depart at {}".format(time.time()))
     main()
