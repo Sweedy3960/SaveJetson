@@ -35,7 +35,7 @@ if __name__ == "__main__":
     capture1=capture()
     img_cnt = 0 
     img = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-    out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"MJPG"),10.0,(3840,2160))
+    out= cv.VideoWriter("out.avi",cv.VideoWriter_fourcc(*"XVID"),21.0,(3840,2160))
     while True:
         ret,frame = img.read()
         if ret==True:

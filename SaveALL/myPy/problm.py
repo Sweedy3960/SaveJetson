@@ -119,7 +119,7 @@ class Tag:
                 if  (cx - 2) < x0 < (cx + 2):
                     foundx = True
                 elif x0 > cx:
-                    print("la"+str(x0)+"ici"+str(cx))
+                    #print("la"+str(x0)+"ici"+str(cx))
                     xw = xw-1
                 else:
                     xw = xw+1
@@ -212,6 +212,8 @@ class ImProc:
         self.gray = []
         self.infoMarkers = []
         self.cap = []
+        self.FishSee=False
+        self.MegaSee=False
         self.tagin = []
         self.planMrot = []
         self.planTvec = []
@@ -246,6 +248,7 @@ class ImProc:
 
     def Detect(self):
         print(len(self.gray))
+        """
         for i, j in enumerate(self.gray):
             print("la"+str(i))
             self.infoMarkers[i] = cv.aruco.detectMarkers(
@@ -256,7 +259,23 @@ class ImProc:
             except:
                 return 1
 
-  
+        """
+        self.infoMarkers[0]=cv.aruco.detectMarkers(
+                self.gray[0], App.DICTIONARY, parameters=App.PARAMETERS)
+        self.infoMarkers[1]=cv.aruco.detectMarkers(
+                self.gray[1], App.DICTIONARY, parameters=App.PARAMETERS) 
+        for i in self.infoMarkers:
+            print(i)
+        
+        if self.infoMarkers[0] != None:
+            self.MegaSee=True
+
+        if self.infoMarkers[1] != None:
+            self.FishSee=True
+        print(self.FishSee)
+        print(self.MegaSee)           
+      
+
     def SortCorn(self, listcam: int, posList: int):
         return (self.infoMarkers[listcam][0][posList])
 
@@ -264,14 +283,14 @@ class ImProc:
         '''
         création des tags dans une liste 
         '''
-        self.tagin.clear()
-        for idCam, infoCam in enumerate(self.infoMarkers):
-            if infoCam != None:
-                for index, id in enumerate(infoCam[1]):
-                    self.tagin.append(Tag(id, infoCam[0][index], idCam,self.gray[idCam]))
+        if self.FishSee and self.MegaSee:
+            self.tagin.clear()
+            for idCam, infoCam in enumerate(self.infoMarkers):
+                if infoCam != None:
+                    for index, id in enumerate(infoCam[1]):
+                        self.tagin.append(Tag(id, infoCam[0][index], idCam,self.gray[idCam]))
         # ici après on fait update
-
-            
+        
     def Updatetag(self):
         for i, j in enumerate(self.tagin):
             j.update()

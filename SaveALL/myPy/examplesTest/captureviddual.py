@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-import time
+import datetime
 
 #modification d'un pipeline trouvé sur le net pour test de capture 
 class capture :
@@ -40,45 +40,31 @@ if __name__ == "__main__":
     capture2=capture()
     capture2.idCam=1
     img_cnt = 0 
+    capture1.setCap(3840,2160)
+    capture2.setCap(3264,2464)
+    startime=datetime.datetime.now()
+    print(startime)
+
     imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
     imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
+    outR= cv.VideoWriter("OutR.avi",cv.VideoWriter_fourcc(*"XVID"),21.0,(3840,2160))
+    outL= cv.VideoWriter("OutL.avi",cv.VideoWriter_fourcc(*"XVID"),21.0,(3264,2464))
     while True:
        
         ret,frame = imgL.read()
         ret,frame0=imgR.read()
-        cv.imshow("that",frame)
-        cv.imshow("this",frame0)
-        if cv.waitKey(1) & 0xFF == ord('p'):
-            time.sleep(1)
-            imgL.release()
-            imgR.release()
-            time.sleep(1)
-            capture1.setCap(3840,2160)
-            capture2.setCap(3840,2160)
-            imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-            imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-            ret,frame = imgL.read()
-            ret,frame0=imgR.read()
-            png_name = "mesurecalibR1{}.jpg".format(img_cnt)
-            png_name0 = "mesurecalibL1{}.jpg".format(img_cnt)
-            cv.imwrite(png_name, frame)
-            cv.imwrite(png_name0, frame0)
-
-            print("{} written!".format(png_name))
-            img_cnt+=1
-            time.sleep(1)
-            imgR.release()
-            imgL.release()
-            time.sleep(1)
-            capture1.setCap(500,500)
-            capture2.setCap(500,500)
-            imgR = cv.VideoCapture(capture1.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-            imgL = cv.VideoCapture(capture2.gstreamer_pipeline(),cv.CAP_GSTREAMER)
-
-        if cv.waitKey(1) & 0xFF == ord('q'):
-            imgR.release()
-            imgL.release()
-            break
+        #outR.write(frame)
+        #outL.write(frame0)
+        stoptime=datetime.datetime.now()
+        a=stoptime-startime
+        if a.min == 15:
+            if cv.waitKey(1) & 0xFF == ord('q'):
+                print("stopped")
+                imgR.release()
+                imgL.release()
+                outR.release()
+                outL.release()
+                break
 
 cv.destroyAllWindows()
     
