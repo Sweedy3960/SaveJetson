@@ -4,23 +4,22 @@
 
 
 Approche du projet Eurobot 2021-22 
-But final: envoyer une tramme contenant la position des robots adverses 
+But final: Transmettre au robot aliées le sposition de tout les robots 
 
 
 -- Les sources sont dans le source.txt
 
-**//todo://** 
 
-- info avancement serv
 
-- problème: GetWpos() infinite searching
-- Test sur TABLE
+**Gènéralité**
+Dans le fichier, code 
 
-<<<<<<< HEAD
 
--TestCopi finir et tester(Helper:GitCopilot) 
+
+**//todo://**
+
+
 
 =======
 **Resultat:**
 - Bat 20000mAh -> 1h =~10% -> 9h d'autonomie 
->>>>>>> backend-Gitcopilot
